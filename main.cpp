@@ -1,6 +1,6 @@
-#include "GameManager.hpp"
-#include "MyPlayerFactory.hpp"
-#include "MyTankAlgorithmFactory.hpp"
+#include "Core/GameManager.h"
+#include "Core/MyPlayerFactory.h"
+#include "Core/MyTankAlgorithmFactory.h"
 
 int main(int argc, char **argv)
 {
@@ -11,15 +11,18 @@ int main(int argc, char **argv)
     }
 
     const std::string inputFile = argv[1];
-    GameManager game(MyPlayerFactory(), MyTankAlgorithmFactory());
+    MyTankAlgorithmFactory tankFactory;
+    MyPlayerFactory playerFactory;
 
-    if (!game.readBoard(inputFile))
+    GameManager game{tankFactory, playerFactory};
+    game.processInputFile(inputFile);
+    if (game.readFile(inputFile))
     {
         std::cerr << "Failed to read board from file: " << inputFile << std::endl;
         return 1;
     }
-
-    game.run();
+    std::cout << "Game initialized successfully." << std::endl;
+    game.runGame();
 
     return 0;
 }

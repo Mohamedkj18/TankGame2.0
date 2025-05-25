@@ -1,0 +1,7 @@
+Game step: 0
+Player 1 moved: MoveForward
+Player 2 moved: MoveForward
+Player 1 moved: MoveForward
+Player 2 moved: MoveForward
+Player 1 moved: MoveForward
+Game step: 1

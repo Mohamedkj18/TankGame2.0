@@ -1,20 +1,20 @@
 #pragma once
-#include "Core/Direction.hpp"
+#include "utils/DirectionUtils.h"
 
-class Game; // Forward declaration
+class GameManager; // Forward declaration
 // ========================= CLASS: GameObject =========================
 class GameObject
 {
 protected:
     int x;
     int y;
-    Game *game;
+    GameManager *game;
     Direction direction;
 
 public:
-    GameObject(int x, int y, Direction dir, Game *game) : x(x), y(y), game(game), direction(dir) {}
-    int getX() { return x; }
-    int getY() { return y; }
+    GameObject(int x, int y, Direction dir, GameManager *game);
+    int getX();
+    int getY();
     virtual ~GameObject() = default;
 
     Direction getDirection() { return direction; }

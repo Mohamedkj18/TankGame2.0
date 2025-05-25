@@ -1,11 +1,26 @@
-#include "Core/GameObject.hpp"
-#include "Core/Game.hpp"
-#include "Core/Direction.hpp"
+#include <memory>
+#include "Core/GameObject.h"
+#include "Core/GameManager.h"
+#include "utils/DirectionUtils.h"
 
 // ------------------------ MovingGameObject ------------------------
 
+GameObject::GameObject(int x, int y, Direction dir, GameManager *game)
+    : x(x), y(y), direction(dir), game(game) {}
+
+int GameObject::getX()
+{
+    return x;
+}
+
+int GameObject::getY()
+{
+    return y;
+}
+
 bool GameObject::moveForward()
 {
+    std::string n;
     updatePosition(direction);
     if (checkForAWall())
     {

@@ -1,0 +1,44 @@
+# Build directories
+build/
+obj/
+bin/
+
+# Compiled source files
+*.o
+*.obj
+*.exe
+*.dll
+*.lib
+*.so
+*.a
+*.out
+
+# Visual Studio Code settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# CMake / Make
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+
+# Backup files
+*~
+
+# Core dumps
+core

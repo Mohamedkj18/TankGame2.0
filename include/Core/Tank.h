@@ -1,17 +1,19 @@
 #pragma once
 
-#include "Core/GameObject.hpp"
-#include "Core/Game.hpp"
 #include <string>
 #include <set>
+#include "Core/GameObject.h"
+#include "Core/GameManager.h"
+#include "Common/ActionRequest.h"
 
+class GameManager;
 // ========================= CLASS: Tank =========================
 
-class Tank : public MovingGameObject
+class Tank : public GameObject
 {
 private:
     int playerId;
-    int tabkId;
+    int tankId;
     int artilleryShells;
     bool destroyed;
     int cantShoot;
@@ -21,10 +23,10 @@ private:
     ActionRequest lastMove;
 
 public:
-    Tank(int x, int y, Direction dir, Game *game, int playerId);
+    Tank(int x, int y, Direction dir, GameManager *game, int playerId, int shells, int tankId);
 
     // Position and state
-    int getplayerId();
+    int getPlayerId();
     int getTankId();
     ActionRequest getLastMove();
     bool checkForAWall();
@@ -33,7 +35,7 @@ public:
     void moveBackwards();
     void rotateTank(double angle);
     void setDirection(std::string directionStr);
-    void setLastMove(ActionRequest lastMove);
+    void setLastMove(ActionRequest currentMove);
 
     // Firing
     void fire();

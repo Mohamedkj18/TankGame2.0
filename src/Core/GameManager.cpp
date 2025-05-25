@@ -1,21 +1,23 @@
-#include "Core/GameManager.hpp"
-#include "Core/Tank.hpp"
-#include "Core/Shell.hpp"
-#include "TankAlgorithm/TankChase.hpp"
-#include "TankAlgorithm/TankEvasion.hpp"
-#include "Common/ActionRequest.hpp"
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <memory>
+#include <algorithm>
+#include "Core/GameManager.h"
+#include "Core/Tank.h"
+#include "Core/Shell.h"
+// #include "TankAlgorithm/TankChase.h"
+// #include "TankAlgorithm/TankEvasion.h"
+#include "Common/ActionRequest.h"
 
 std::ofstream visualizationFile("data/visualization.txt");
 std::ofstream outputFile;
 // ------------------------ GameManager ------------------------
 
-GameManager(TankAlgorithmFactory &tank_factory,
-            PlayerFactory &player_factory)
+GameManager::GameManager(TankAlgorithmFactory &tank_factory,
+                         PlayerFactory &player_factory)
+    : tankFactory(tank_factory), playerFactory(player_factory)
 {
-    processInputFile(inputFile);
     gameStep = 0;
     totalShellsRemaining = 0;
 }
@@ -48,19 +50,11 @@ int GameManager::getWallHealth(int wallPos)
     return walls[wallPos].health;
 }
 
-std::unordered_map<int, Tank *> GameManager::getTanks() { return tanks; }
-
-std::unordered_map<int, Shell *> GameManager::getShell() { return Shells; }
-
-std::set<int> &GameManager::getMines() { return mines; }
-
-std::unordered_map<int, Wall> &GameManager::getWalls() { return walls; }
-
 void GameManager::incrementGameStep() { gameStep++; }
 
-void GameManager::addTank(Tank *tank)
+void GameManager::addTank(std::unique_ptr<Tank> tank)
 {
-    tanks[bijection(tank->getX(), tank->getY())] = tank;
+    tanks[bijection(tank->getX(), tank->getY())] = std::move(tank);
 }
 
 int GameManager::bijection(int x, int y)
@@ -77,55 +71,71 @@ std::pair<int, int> GameManager::inverseBijection(int z)
     return {x, y};
 }
 
-Tank *GameManager::getPlayer(int playerId)
-{
-    if (playerId <= 0 || playerId > (int)players.size())
-    {
-        std::cerr << "Invalid player ID: " << playerId << std::endl;
-        return nullptr;
-    }
-    return players[playerId - 1];
-}
+// Tank *GameManager::getPlayer(int playerId)
+// {
+//     if (playerId <= 0 || playerId > (int)players.size())
+//     {
+//         std::cerr << "Invalid player ID: " << playerId << std::endl;
+//         return nullptr;
+//     }
+//     return players[playerId - 1];
+// }
 
-void GameManager::addShell(Shell *Shell)
+void GameManager::addShell(std::unique_ptr<Shell> shell)
 {
-    int newPos = bijection(Shell->getX(), Shell->getY());
-    if (ShellsFired.count(newPos))
+    int newPos = bijection(shell->getX(), shell->getY());
+    if (shells.count(newPos))
+    {
+        outputFile << "Shell already exists at (" << shell->getX() / 2 << ", " << shell->getY() / 2 << ") !\n";
+        return;
+    }
+    shells[newPos] = std::move(shell); // ✔ correct move of ownership
+
+    newPos = bijection(shell->getX(), shell->getY());
+    if (shellsFired.count(newPos))
     {
         shellsToRemove.insert(newPos);
-        outputFile << "Shells collided at (" << Shell->getX() / 2 << ", " << Shell->getY() / 2 << ") !\n";
+        outputFile << "shells collided at (" << shell->getX() / 2 << ", " << shell->getY() / 2 << ") !\n";
     }
-    ShellsFired[newPos] = Shell;
+    shellsFired[newPos] = std::move(shell); // ✔ safe move to secondary storage
 }
 
 void GameManager::advanceShellsRecentlyFired()
 {
+    std::string n;
     for (int shellPos : shellsToRemove)
     {
         removeShell(shellPos);
-        ShellsFired.erase(shellPos);
+        shellsFired.erase(shellPos);
     }
-    for (const auto &pair : ShellsFired)
+    for (const auto &pair : shellsFired)
     {
-        Shell *Shell = pair.second;
-        Shells.erase(pair.first);
-        Shell->moveForward();
-        int newPos = bijection(Shell->getX(), Shell->getY());
-        if (Shells.count(newPos))
+        Shell *shell = pair.second.get();
+        shells.erase(pair.first);
+        std::cout << "Shell at (" << shell->getX() << ", " << shell->getY() << ") is moving forward.\n";
+        std::cin >> n;
+
+        shell->moveForward();
+        int newPos = bijection(shell->getX(), shell->getY());
+
+        if (shells.count(newPos))
+        {
             shellsToRemove.insert(newPos);
+        }
         else if (tanks.count(newPos))
         {
-            Shells[newPos] = Shell;
+            shells[newPos] = std::make_unique<Shell>(*shell);
             tankHitByAShell(newPos);
         }
         else if (walls.count(newPos))
         {
             shellsToRemove.insert(newPos);
-            ShellHitAWall(newPos);
+            shellHitAWall(newPos);
         }
-        Shells[newPos] = Shell;
+        shellsFired[newPos] = std::make_unique<Shell>(*shell);
     }
-    ShellsFired.clear();
+
+    shellsFired.clear();
 }
 
 void GameManager::addMine(int x, int y)
@@ -151,14 +161,13 @@ void GameManager::removeWall(int x)
 
 void GameManager::removeTank(int tankPos)
 {
-    delete tanks[tankPos];
     tanks.erase(tankPos);
 }
 
 void GameManager::removeShell(int ShellPos)
 {
-    delete Shells[ShellPos];
-    Shells.erase(ShellPos);
+
+    shells.erase(ShellPos);
 }
 
 void GameManager::hitTank(int tankId)
@@ -188,128 +197,105 @@ std::vector<std::string> GameManager::splitByComma(const std::string &input)
 
 int GameManager::readFile(std::string fileName)
 {
-    int xAxis = 0;
-    int yAxis = 0;
-    bool foundErrors = false;
-    std::ofstream errorsFile;
-    std::vector<std::string> errorLogs;
-
+    int tankId1 = 0;
+    int tankId2 = 0;
     std::ifstream file(fileName);
-    std::string line;
-
     if (!file.is_open())
     {
-        std::cerr << "Failed to open file!" << std::endl;
+        std::cerr << "Failed to open input file: " << fileName << std::endl;
         return 1;
     }
 
-    getline(file, line);
-    std::vector<std::string> params = splitByComma(line);
-    height = std::stoi(params[0]);
-    width = std::stoi(params[1]);
+    std::string line;
+    std::getline(file, line); // map name/description – ignore
 
-    int declaredHeight = height;
-    int declaredWidth = width;
-
-    while (std::getline(file, line) && yAxis < declaredHeight)
+    auto parseConfigLine = [](const std::string &line, const std::string &key)
     {
-        xAxis = 0;
-        for (char c : line)
-        {
-            if (xAxis >= declaredWidth)
-            {
-                foundErrors = true;
-                errorLogs.push_back("Ignored extra column at row " + std::to_string(yAxis));
-                break;
-            }
+        auto pos = line.find('=');
+        if (pos == std::string::npos)
+            throw std::runtime_error("Invalid config line: " + line);
+        std::string k = line.substr(0, pos);
+        std::string v = line.substr(pos + 1);
+        k.erase(remove_if(k.begin(), k.end(), ::isspace), k.end());
+        v.erase(remove_if(v.begin(), v.end(), ::isspace), v.end());
+        if (k != key)
+            throw std::runtime_error("Expected key: " + key + ", got: " + k);
+        return std::stoi(v);
+    };
 
+    try
+    {
+        std::getline(file, line);
+        maxSteps = parseConfigLine(line, "MaxSteps");
+
+        std::getline(file, line);
+        numShellsPerTank = parseConfigLine(line, "NumShells");
+        std::cout << "Number of shells per tank: " << numShellsPerTank << std::endl;
+
+        std::getline(file, line);
+        height = parseConfigLine(line, "Rows");
+
+        std::getline(file, line);
+        width = parseConfigLine(line, "Cols");
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << "Error parsing config: " << e.what() << std::endl;
+        return 1;
+    }
+    std::cout << "Game configuration: " << width << "x" << height << ", Max Steps: " << maxSteps
+              << ", Shells per Tank: " << numShellsPerTank << std::endl;
+
+    int y = 0;
+    std::string tankChars = "0123456789";
+
+    while (std::getline(file, line) && y < height)
+    {
+        for (int x = 0; x < std::min((int)line.size(), width); ++x)
+        {
+            char c = line[x];
             if (c == '#')
             {
-                addWall(xAxis * 2, yAxis * 2);
+                addWall(x * 2, y * 2);
             }
             else if (c == '@')
             {
-                addMine(xAxis * 2, yAxis * 2);
+                addMine(x * 2, y * 2);
             }
-            else if (c == '1')
+            else if (tankChars.find(c) != std::string::npos)
             {
-                if (players[0] == nullptr)
-                {
-                    totalShellsRemaining += 16;
-                    Tank *player1 = new Tank(xAxis * 2, yAxis * 2, stringToDirection["L"], this, 1);
-                    addTank(player1);
-                    players[0] = player1;
-                }
-                else
-                {
-                    foundErrors = true;
-                    errorLogs.push_back("Ignored extra tank for Player 1 at position (" + std::to_string(xAxis) + "," + std::to_string(yAxis) + ")");
-
-                    Tank *redundantTank = new Tank(xAxis * 2, yAxis * 2, stringToDirection["L"], this, 1);
-                    delete redundantTank; // Prevent memory leak
-                }
+                int playerId = (c == '1') ? 1 : 2; // use 1/2 logic or infer player from symbol set
+                auto tank = std::make_unique<Tank>(x * 2, y * 2,
+                                                   (playerId == 1) ? stringToDirection["L"] : stringToDirection["R"],
+                                                   this, playerId, numShellsPerTank, (playerId == 1) ? tankId1++ : tankId2++);
+                totalShellsRemaining += numShellsPerTank;
+                Tank *tankPtr = tank.get();
+                addTank(std::move(tank));
+                playerTanks[playerId].push_back(tankPtr);
             }
-            else if (c == '2')
-            {
-                if (players[1] == nullptr)
-                {
-                    totalShellsRemaining += 16;
-                    Tank *player2 = new Tank(xAxis * 2, yAxis * 2, stringToDirection["R"], this, 2);
-                    addTank(player2);
-                    players[1] = player2;
-                }
-                else
-                {
-                    foundErrors = true;
-                    errorLogs.push_back("Ignored extra tank for Player 2 at position (" + std::to_string(xAxis) + "," + std::to_string(yAxis) + ")");
-
-                    Tank *redundantTank = new Tank(xAxis * 2, yAxis * 2, stringToDirection["R"], this, 2);
-                    delete redundantTank; // Prevent memory leak
-                }
-            }
-            else if (c != ' ')
-            {
-                foundErrors = true;
-                errorLogs.push_back("Ignored unknown character '" + std::string(1, c) + "' at position (" + std::to_string(xAxis) + "," + std::to_string(yAxis) + ")");
-            }
-
-            xAxis++;
         }
-
-        if (xAxis < declaredWidth)
-        {
-            foundErrors = true;
-            errorLogs.push_back("Missing columns at row " + std::to_string(yAxis));
-        }
-
-        yAxis++;
+        ++y;
     }
 
-    if (yAxis < declaredHeight)
+    if (playerTanks[1].empty() && playerTanks[2].empty())
     {
-        foundErrors = true;
-        errorLogs.push_back("Missing rows after line " + std::to_string(yAxis - 1));
+        std::cerr << "Both players have no tanks, game is a tie at start.\n";
+        return 1;
     }
-
-    file.close();
-
-    if (foundErrors)
+    else if (playerTanks[1].empty())
     {
-        errorsFile.open("data/input_errors.txt");
-        errorsFile << "Recovered errors found in input file:\n";
-        for (const auto &err : errorLogs)
-        {
-            errorsFile << "- " << err << std::endl;
-        }
-        errorsFile.close();
+        std::cerr << "Player 1 has no tanks, Player 2 wins.\n";
+        return 1;
     }
-
-    if (players[0] == nullptr || players[1] == nullptr)
+    else if (playerTanks[2].empty())
     {
+        std::cerr << "Player 2 has no tanks, Player 1 wins.\n";
         return 1;
     }
 
+    file.close();
     printBoard();
+
     return 0;
 }
 
@@ -326,21 +312,22 @@ void GameManager::checkForAMine(int x, int y, int tankId)
 
 void GameManager::tankHitByAShell(int tankPos)
 {
-    if (Shells.count(tankPos) && tanks.count(tankPos))
+    if (shells.count(tankPos) && tanks.count(tankPos))
     {
-        outputFile << "Shell hit tank " << tanks[tankPos]->getId()
-                   << " at (" << Shells[tankPos]->getX() / 2 << ", " << Shells[tankPos]->getY() / 2 << ")\n";
+        outputFile << "Shell hit tank " << tanks[tankPos]->getTankId()
+                   << " at (" << shells[tankPos]->getX() / 2 << ", "
+                   << shells[tankPos]->getY() / 2 << ")\n";
     }
     shellsToRemove.insert(tankPos);
     tanksToRemove.insert(tankPos);
 }
 
-void GameManager::ShellHitAWall(int wallPos)
+void GameManager::shellHitAWall(int wallPos)
 {
-    if (Shells.count(wallPos))
+    if (shells.count(wallPos))
     {
         outputFile << "Shell hit wall at ("
-                   << Shells[wallPos]->getX() / 2 << ", " << Shells[wallPos]->getY() / 2 << ")\n";
+                   << shells[wallPos]->getX() / 2 << ", " << shells[wallPos]->getY() / 2 << ")\n";
     }
     else
     {
@@ -355,126 +342,126 @@ void GameManager::ShellHitAWall(int wallPos)
 
 void GameManager::advanceShells()
 {
-    Shell *Shell;
+    Shell *shell;
     int newPos;
     bool didItMove;
-    for (const auto &pair : Shells)
+    for (const auto &pair : shells)
     {
-        Shell = Shells[pair.first];
-        didItMove = Shell->moveForward();
-        newPos = bijection(Shell->getX(), Shell->getY());
+        shell = shells[pair.first].get();
+        didItMove = shell->moveForward();
+        newPos = bijection(shell->getX(), shell->getY());
         if (didItMove)
-            checkForShellCollision(Shell);
+            checkForShellCollision(*shell);
         else
-            ShellHitAWall(newPos);
+            shellHitAWall(newPos);
     }
-    Shells = secondaryShells;
+    shells = std::move(secondaryShells);
     secondaryShells.clear();
 }
 
-void GameManager::reverseHandler(Tank *tank, ActionRequest move)
+void GameManager::reverseHandler(Tank &tank, ActionRequest move)
 {
-    if (move == MoveForward)
+    if (move == ActionRequest::MoveForward)
     {
-        outputFile << "Tank " << tank->getId() << " canceled reverse!\n";
-        tank->resetReverseState();
-        tank->setLastMove(DoNothing);
+        outputFile << "Tank " << tank.getTankId() << " canceled reverse!\n";
+        tank.resetReverseState();
+        tank.setLastMove(ActionRequest::DoNothing);
     }
-    else if (tank->isReverseQueued())
+    else if (tank.isReverseQueued())
     {
-        outputFile << "Bad step: Tank " << tank->getId() << " waiting to move backwards - move ignored!\n";
-        tank->incrementReverseCharge();
-        if (tank->isReverseReady())
-            tank->executeReverse();
+        outputFile << "Bad step: Tank " << tank.getTankId() << " waiting to move backwards - move ignored!\n";
+        tank.incrementReverseCharge();
+        if (tank.isReverseReady())
+            tank.executeReverse();
     }
 
-    else if (move == MoveBackward)
+    else if (move == ActionRequest::MoveBackward)
     {
-        tank->queueReverse();
-        tank->incrementReverseCharge();
-        outputFile << "Tank " << tank->getId() << " queued reverse!\n";
-        if (tank->isReverseReady())
+        tank.queueReverse();
+        tank.incrementReverseCharge();
+        outputFile << "Tank " << tank.getTankId() << " queued reverse!\n";
+        if (tank.isReverseReady())
         {
-            outputFile << "Tank " << tank->getX() << " moved backwards!\n";
-            tank->executeReverse();
+            outputFile << "Tank " << tank.getX() << " moved backwards!\n";
+            tank.executeReverse();
         }
     }
-    checkForAMine(tank->getX(), tank->getY(), tank->getId());
+    checkForAMine(tank.getX(), tank.getY(), tank.getTankId());
 }
 
-void GameManager::advanceTank(Tank *tank)
+void GameManager::advanceTank(Tank &tank)
 {
-    tank->resetReverseState();
-    tank->moveForward();
-    checkForAMine(tank->getX(), tank->getY(), tank->getId());
+    tank.resetReverseState();
+    tank.moveForward();
+    checkForAMine(tank.getX(), tank.getY(), tank.getTankId());
 }
 
-void GameManager::tankShootingShells(Tank *tank)
+void GameManager::tankShootingShells(Tank &tank)
 {
-    tank->resetReverseState();
-    if (tank->canShoot())
+    tank.resetReverseState();
+    if (tank.canShoot())
     {
-        tank->fire();
+        tank.fire();
         totalShellsRemaining--;
-        outputFile << "Tank " << tank->getId() << " fired!\n";
-        tank->incrementCantShoot();
+        outputFile << "Tank " << tank.getTankId() << " fired!\n";
+        tank.incrementCantShoot();
     }
     else
     {
-        outputFile << "Bad step: Tank " << tank->getId() << " can't shoot!\n";
+        outputFile << "Bad step: Tank " << tank.getTankId() << " can't shoot!\n";
     }
-    tank->setLastMove(DoNothing);
+    tank.setLastMove(ActionRequest::DoNothing);
 }
 
-void GameManager::rotate(Tank *tank)
+void GameManager::rotate(Tank &tank)
 {
-    tank->resetReverseState();
-    ActionRequest move = tank->getLastMove();
-    if (move == RotateLeft90)
-        tank->rotateTank(90);
-    else if (move == RotateRight90)
-        tank->rotateTank(-90);
-    else if (move == RotateLeft45)
-        tank->rotateTank(45);
-    else if (move == RotateRight45)
-        tank->rotateTank(-45);
+    tank.resetReverseState();
+    ActionRequest move = tank.getLastMove();
+    if (move == ActionRequest::RotateLeft90)
+        tank.rotateTank(90);
+    else if (move == ActionRequest::RotateRight90)
+        tank.rotateTank(-90);
+    else if (move == ActionRequest::RotateLeft45)
+        tank.rotateTank(45);
+    else if (move == ActionRequest::RotateRight45)
+        tank.rotateTank(-45);
 
-    tank->setLastMove(DoNothing);
+    tank.setLastMove(ActionRequest::DoNothing);
 }
 
-void GameManager::checkForTankCollision(Tank *tank)
+void GameManager::checkForTankCollision(Tank &tank)
 {
-    int currTankPos = bijection(tank->getX(), tank->getY());
+    int currTankPos = bijection(tank.getX(), tank.getY());
     if (secondaryTanks.count(currTankPos))
     {
-        outputFile << "Losing step: Tank " << secondaryTanks[currTankPos]->getId() << " hit a tank at " << (int)tank->getX() / 2 << ", " << (int)tank->getY() / 2 << "!\n";
+        outputFile << "Losing step: Tank " << secondaryTanks[currTankPos]->getTankId() << " hit a tank at " << (int)tank.getX() / 2 << ", " << (int)tank.getY() / 2 << "!\n";
         tanksToRemove.insert(currTankPos);
     }
-    if (Shells.count(currTankPos))
+    if (shells.count(currTankPos))
     {
         tankHitByAShell(currTankPos);
     }
-    secondaryTanks[currTankPos] = tank;
+    secondaryTanks[currTankPos] = std::make_unique<Tank>(tank);
 }
 
-void GameManager::checkForShellCollision(Shell *Shell)
+void GameManager::checkForShellCollision(Shell &shell)
 {
-    int shellPos = bijection(Shell->getX(), Shell->getY());
+    int shellPos = bijection(shell.getX(), shell.getY());
     if (tanks.count(shellPos))
         tankHitByAShell(shellPos);
     if (secondaryShells.count(shellPos))
         shellsToRemove.insert(shellPos);
-    secondaryShells[shellPos] = Shell;
+    secondaryShells[shellPos] = std::make_unique<Shell>(shell);
 }
 
 void GameManager::executeTanksMoves()
 {
     ActionRequest move;
 
-    for (const auto pair : tanks)
+    for (const auto &pair : tanks)
     {
 
-        Tank *tank = pair.second;
+        Tank *tank = pair.second.get(); // pointer from unique_ptr
 
         move = tank->getLastMove();
         if (tank->getCantShoot())
@@ -483,23 +470,28 @@ void GameManager::executeTanksMoves()
             if (tank->getCantShoot() == 8)
                 tank->resetCantShoot();
         }
-        if ((tank->isReverseQueued() || move == MoveBackward))
-        {
-            reverseHandler(tank, move);
-        }
-        else if (move == MoveForward)
-            advanceTank(tank);
-        else if (move == Shoot)
-            tankShootingShells(tank);
 
+        if (tank->isReverseQueued() || move == ActionRequest::MoveBackward)
+        {
+            reverseHandler(*tank, move); // pass by reference
+        }
+        else if (move == ActionRequest::MoveForward)
+        {
+            advanceTank(*tank);
+        }
+        else if (move == ActionRequest::Shoot)
+        {
+            tankShootingShells(*tank);
+        }
         else
         {
-            rotate(tank);
+            rotate(*tank);
         }
-        checkForTankCollision(tank);
+
+        checkForTankCollision(*tank);
     }
 
-    tanks = secondaryTanks;
+    tanks = std::move(secondaryTanks);
     secondaryTanks.clear();
 }
 
@@ -541,7 +533,7 @@ bool GameManager::checkForAWinner()
 {
     if (tanks.size() == 1)
     {
-        outputFile << "Game Over! Player " << tanks.begin()->second->getId() << " wins!\n";
+        outputFile << "Game Over! Player " << tanks.begin()->second->getTankId() << " wins!\n";
         return true;
     }
     return false;
@@ -559,7 +551,8 @@ bool GameManager::isItATie()
 
 void GameManager::outputTankMove(int playerNum, std::string move)
 {
-    outputFile << "Player " << playerNum << " moved: " << moveMap[move] << std::endl;
+
+    outputFile << "Player " << playerNum << " moved: " << move << std::endl;
 }
 
 void GameManager::runGame()
@@ -567,19 +560,38 @@ void GameManager::runGame()
 
     int count = 0;
     std::string move, n;
-    TankChase *tankChase = new TankChase(this, 8);
-    TankEvasion *tankEvasion = new TankEvasion(this, 8);
+    // TankChase *tankChase = new TankChase(this, 8);
+    // TankEvasion *tankEvasion = new TankEvasion(this, 8);
+    std::unordered_map<std::string, ActionRequest> stringToActionRequest = {
+        {"MoveForward", ActionRequest::MoveForward},
+        {"MoveBackward", ActionRequest::MoveBackward},
+        {"RotateLeft90", ActionRequest::RotateLeft90},
+        {"RotateRight90", ActionRequest::RotateRight90},
+        {"RotateLeft45", ActionRequest::RotateLeft45},
+        {"RotateRight45", ActionRequest::RotateRight45},
+        {"Shoot", ActionRequest::Shoot},
+        {"DoNothing", ActionRequest::DoNothing}};
 
     while (true)
     {
 
         outputFile << "Game step: " << gameStep << std::endl;
-        move = tankChase->getNextMove(1, 2);
-        getPlayer(1)->setLastMove(move);
-        outputTankMove(1, move);
-        move = tankEvasion->getNextMove(2, 1);
-        getPlayer(2)->setLastMove(move);
-        outputTankMove(2, move);
+        // move = tankChase.getNextMove(1, 2);
+        // getPlayer(1).setLastMove(move);
+        // outputTankMove(1, move);
+        //  move = tankEvasion.getNextMove(2, 1);
+        // getPlayer(2).setLastMove(move);
+        // outputTankMove(2, move);
+
+        for (const auto &pair : tanks)
+        {
+            std::cout << tanks.size() << " tanks remaining.\n";
+            Tank *tank = pair.second.get();
+            std::cout << "Insert move for tank " << tank->getPlayerId() << ": ";
+            std::cin >> move;
+            tank->setLastMove(stringToActionRequest[move]);
+            outputTankMove(tank->getPlayerId(), move);
+        }
 
         advanceShells();
         removeShells();
@@ -588,14 +600,21 @@ void GameManager::runGame()
 
         executeTanksMoves();
         advanceShellsRecentlyFired();
+        std::cin >> n;
         removeTanks();
+        std::cin >> n;
         removeShells();
+        std::cin >> n;
         executeTanksMoves();
+        std::cin >> n;
         removeObjectsFromTheBoard();
 
         advanceShells();
+        std::cin >> n;
         removeShells();
+        std::cin >> n;
         advanceShells();
+        std::cin >> n;
         removeObjectsFromTheBoard();
 
         if (checkForAWinner())
@@ -643,9 +662,9 @@ void GameManager::printBoard()
         board[y][x] = '@';
     }
 
-    for (const auto &pair : Shells)
+    for (const auto &pair : shells)
     {
-        Shell *a = pair.second;
+        Shell *a = pair.second.get();
         int x = a->getX() / 2;
         int y = a->getY() / 2;
         board[y][x] = '*';
@@ -653,10 +672,10 @@ void GameManager::printBoard()
 
     for (const auto &pair : tanks)
     {
-        Tank *tank = pair.second;
+        Tank *tank = pair.second.get();
         int x = tank->getX() / 2;
         int y = tank->getY() / 2;
-        char symbol = '0' + (tank->getId() % 10);
+        char symbol = '0' + (tank->getPlayerId() % 10);
         board[y][x] = symbol;
     }
 

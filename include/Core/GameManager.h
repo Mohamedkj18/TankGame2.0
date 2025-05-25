@@ -5,15 +5,20 @@
 #include <string>
 #include <set>
 #include <utility>
-#include "Core/Direction.hpp"
+#include "utils/DirectionUtils.h"
 #include <fstream>
+#include <memory>
+#include "Core/Tank.h"
+#include "Core/Shell.h"
+#include "Common/PlayerFactory.h"
+#include "Common/TankAlgorithmFactory.h"
+#include "Common/ActionRequest.h"
 
 class Tank;
-class Artillery;
-class TankChase;
+class Shell;
 
 extern std::ofstream outputFile;
-// ========================= CLASS: GameManager =========================
+
 class GameManager
 {
 private:
@@ -21,22 +26,23 @@ private:
     int height;
     int gameStep;
     int totalShellsRemaining;
+    int maxSteps;
+    int numShellsPerTank;
 
-    std::array<Tank *, 2> players;
-    std::unordered_map<int, Tank *> tanks;
-    std::unordered_map<int, Shell *> shells;
+    std::unordered_map<int, std::vector<Tank *>> playerTanks;
+    std::unordered_map<int, std::unique_ptr<Tank>> tanks;
+    std::unordered_map<int, std::unique_ptr<Shell>> shells;
     std::set<int> mines;
     std::unordered_map<int, Wall> walls;
     std::set<int> wallsToRemove;
     std::set<int> tanksToRemove;
     std::set<int> shellsToRemove;
-    std::unordered_map<int, Shell *> secondaryshells;
-    std::unordered_map<int, Tank *> secondaryTanks;
-    std::unordered_map<int, Shell *> shellsFired;
+    std::unordered_map<int, std::unique_ptr<Shell>> secondaryShells;
+    std::unordered_map<int, std::unique_ptr<Tank>> secondaryTanks;
+    std::unordered_map<int, std::unique_ptr<Shell>> shellsFired;
     TankAlgorithmFactory &tankFactory;
     PlayerFactory &playerFactory;
 
-protected:
 public:
     GameManager(TankAlgorithmFactory &tank_factory,
                 PlayerFactory &player_factory);
@@ -45,19 +51,19 @@ public:
     int getHeight();
     int getGameStep();
     int bijection(int x, int y);
+
     std::pair<int, int> inverseBijection(int z);
-    Tank *getPlayer(int playerId);
-    std::unordered_map<int, Tank *> getTanks();
-    std::unordered_map<int, Shell *> getShell();
-    std::set<int> &getMines();
-    std::unordered_map<int, Wall> &getWalls();
     void processInputFile(const std::string &inputFilePath);
 
+    std::unordered_map<int, Wall> &getWalls() { return walls; }
+    std::unordered_map<int, std::unique_ptr<Tank>> &getTanks() { return tanks; }
+    std::unordered_map<int, std::unique_ptr<Shell>> &getShells() { return shells; }
+    std::set<int> &getMines() { return mines; }
     void getPlayersInput(std::ofstream &file);
     int getWallHealth(int wallPos);
     void incrementGameStep();
-    void addTank(Tank *tank);
-    void addShell(Shell *shell);
+    void addTank(std::unique_ptr<Tank> tank);
+    void addShell(std::unique_ptr<Shell> shell);
     void addMine(int x, int y);
     void addWall(int x, int y);
 
@@ -66,7 +72,7 @@ public:
     void removeTank(int tankId);
     void removeShell(int ShellPos);
     void removeTanks();
-    void removeshells();
+    void removeShells();
     void removeWalls();
 
     void hitWall(int x, int y);
@@ -81,14 +87,14 @@ public:
     void advanceShellsRecentlyFired();
     void executeTanksMoves();
     void removeObjectsFromTheBoard();
-    void reverseHandler(Tank *tank, std::string move);
-    void advanceTank(Tank *tank);
-    void tankShootingShells(Tank *tank);
-    void rotate(Tank *tank);
-    void checkForTankCollision(Tank *tank);
-    void checkForShellCollision(Shell *shell);
+    void reverseHandler(Tank &tank, ActionRequest move);
+    void advanceTank(Tank &tank);
+    void tankShootingShells(Tank &tank);
+    void rotate(Tank &tank);
+    void checkForTankCollision(Tank &tank);
+    void checkForShellCollision(Shell &shell);
     void tankHitByAShell(int tankPos);
-    void ShellHitAWall(int shellPos);
+    void shellHitAWall(int shellPos);
 
     bool checkForAWinner();
     bool isItATie();
