@@ -40,5 +40,3 @@ Makefile
 # Backup files
 *~
 
-# Core dumps
-core
