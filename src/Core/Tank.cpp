@@ -79,12 +79,16 @@ void Tank::rotateTank(double angle)
 
 void Tank::fire()
 {
-    artilleryShells -= 1;
-    if (artilleryShells >= 0)
+    if (artilleryShells > 0)
     {
+        artilleryShells--;
         auto shell = std::make_unique<Shell>(x, y, direction, game);
         shell->moveForward();
         game->addShell(std::move(shell));
+    }
+    else
+    {
+        outputFile << "Bad step: Tank " << tankId << " doesn't have more shells to fire!\n";
     }
 }
 

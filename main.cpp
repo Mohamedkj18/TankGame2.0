@@ -16,10 +16,16 @@ int main(int argc, char **argv)
 
     GameManager game{tankFactory, playerFactory};
     game.processInputFile(inputFile);
-    if (game.readFile(inputFile))
+    int rval = game.readFile(inputFile);
+    if (rval == -1)
     {
         std::cerr << "Failed to read board from file: " << inputFile << std::endl;
         return 1;
+    }
+    else if (rval == 1)
+    {
+        std::cout << "Game Ended before step 0." << std::endl;
+        return 0;
     }
     std::cout << "Game initialized successfully." << std::endl;
     game.runGame();

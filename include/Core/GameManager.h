@@ -1,6 +1,8 @@
 #pragma once
 
 #include <unordered_map>
+#include <unordered_set>
+
 #include <vector>
 #include <string>
 #include <set>
@@ -29,7 +31,7 @@ private:
     int maxSteps;
     int numShellsPerTank;
 
-    std::unordered_map<int, std::vector<Tank *>> playerTanks;
+    std::unordered_map<int, int> playerTanksCount;
     std::unordered_map<int, std::unique_ptr<Tank>> tanks;
     std::unordered_map<int, std::unique_ptr<Shell>> shells;
     std::set<int> mines;
@@ -39,7 +41,7 @@ private:
     std::set<int> shellsToRemove;
     std::unordered_map<int, std::unique_ptr<Shell>> secondaryShells;
     std::unordered_map<int, std::unique_ptr<Tank>> secondaryTanks;
-    std::unordered_map<int, std::unique_ptr<Shell>> shellsFired;
+    std::unordered_set<int> shellsFired;
     TankAlgorithmFactory &tankFactory;
     PlayerFactory &playerFactory;
 

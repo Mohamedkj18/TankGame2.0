@@ -1,7 +1,27 @@
 Game step: 0
-Player 1 moved: MoveForward
-Player 2 moved: MoveForward
-Player 1 moved: MoveForward
-Player 2 moved: MoveForward
-Player 1 moved: MoveForward
+Player 1 moved: Shoot
+Player 2 moved: Shoot
+Player 1 moved: Shoot
+Player 2 moved: Shoot
+Player 1 moved: Shoot
+Shell at 0, 2hit a wall!
+Unknown Shell hit a wall at unknown position.
 Game step: 1
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Shell at 0, 8hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 2
+Player 1 moved: DoNothing
+Player 2 moved: MoveBackward
+Player 1 moved: RotateRight45
+Player 2 moved: 
+Player 1 moved: 
+Shell at 38, 2hit a wall!
+Unknown Shell hit a wall at unknown position.
+Tank 1 queued reverse!
+Bad step: Tank 1 waiting to move backwards - move ignored!
+Game step: 3
