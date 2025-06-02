@@ -5,6 +5,7 @@
 #include "Core/GameObject.h"
 #include "Core/GameManager.h"
 #include "Common/ActionRequest.h"
+#include "Common/TankAlgorithm.h"
 
 class GameManager;
 // ========================= CLASS: Tank =========================
@@ -20,6 +21,7 @@ private:
     int reverseCharge = 0;
     bool reverseQueued = false;
     bool reverseReady = false;
+    TankAlgorithm *tankAlgorithm;
     ActionRequest lastMove;
 
 public:
@@ -36,6 +38,8 @@ public:
     void rotateTank(double angle);
     void setDirection(std::string directionStr);
     void setLastMove(ActionRequest currentMove);
+    TankAlgorithm *getTankAlgorithm();
+    void setTankAlgorithm(TankAlgorithm *algorithm);
 
     // Firing
     void fire();

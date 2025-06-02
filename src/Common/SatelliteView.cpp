@@ -2,7 +2,7 @@
 #include "Core/MySatelliteView.h"
 #include "utils/DirectionUtils.h"
 
-char MySatelliteView::getObjectAt(size_t x, size_t y)
+char MySatelliteView::getObjectAt(size_t x, size_t y) const
 {
     int bijectionIndex = bijection(x, y);
     if (bijectionIndex == tankPos)

@@ -31,6 +31,7 @@ private:
     int maxSteps;
     int numShellsPerTank;
 
+    std::unordered_map<int, std::unique_ptr<Player>> players;
     std::unordered_map<int, int> playerTanksCount;
     std::unordered_map<int, std::unique_ptr<Tank>> tanks;
     std::unordered_map<int, std::unique_ptr<Shell>> shells;
@@ -86,6 +87,7 @@ public:
     void advanceShells();
     void advanceShellsRecentlyFired();
     void executeTanksMoves();
+    void executeBattleInfoRequests();
     void removeObjectsFromTheBoard();
     void reverseHandler(Tank &tank, ActionRequest move);
     void advanceTank(Tank &tank);
@@ -97,6 +99,5 @@ public:
     void shellHitAWall(int shellPos);
 
     bool checkForAWinner();
-    bool isItATie();
     void outputTankMove(int playerNum, std::string move);
 };

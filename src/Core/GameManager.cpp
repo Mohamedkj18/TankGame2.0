@@ -8,7 +8,9 @@
 #include "Core/Shell.h"
 // #include "TankAlgorithm/TankChase.h"
 // #include "TankAlgorithm/TankEvasion.h"
+#include "Core/MySatelliteView.h"
 #include "Common/ActionRequest.h"
+#include "Core/MyPlayer.h"
 
 std::ofstream visualizationFile("data/visualization.txt");
 std::ofstream outputFile;
@@ -171,6 +173,7 @@ int GameManager::readFile(std::string fileName)
 {
     int tankId1 = 0;
     int tankId2 = 0;
+
     std::ifstream file(fileName);
     if (!file.is_open())
     {
@@ -253,10 +256,14 @@ int GameManager::readFile(std::string fileName)
         outputFile.close();
         return 1;
     }
+
     std::cout << playerTanksCount[1] << " tanks for Player 1, "
               << playerTanksCount[2] << " tanks for Player 2.\n";
     file.close();
     printBoard();
+
+    players[1] = playerFactory.create(1, height, width, maxSteps, numShellsPerTank);
+    players[2] = playerFactory.create(2, height, width, maxSteps, numShellsPerTank);
 
     return 0;
 }
@@ -456,6 +463,22 @@ void GameManager::executeTanksMoves()
     secondaryTanks.clear();
 }
 
+void GameManager::executeBattleInfoRequests()
+{
+    for (const auto &pair : tanks)
+    {
+        Tank *tank = pair.second.get();
+
+        if (tank->getLastMove() == ActionRequest::GetBattleInfo)
+        {
+            TankAlgorithm *tankAlgorithm = tank->getTankAlgorithm();
+            MySatelliteView satelliteView(bijection(tank->getX(), tank->getY()), tanks, shells, mines, walls);
+            players[tank->getPlayerId()]->updateTankWithBattleInfo(*tankAlgorithm, satelliteView);
+            tank->setLastMove(ActionRequest::DoNothing);
+        }
+    }
+}
+
 void GameManager::removeTanks()
 {
     for (int object : tanksToRemove)
@@ -511,16 +534,6 @@ bool GameManager::checkForAWinner()
     return false;
 }
 
-bool GameManager::isItATie()
-{
-    if (tanks.empty())
-    {
-        outputFile << "Game Over! It's a tie!\n";
-        return true;
-    }
-    return false;
-}
-
 void GameManager::outputTankMove(int playerNum, std::string move)
 {
 
@@ -563,7 +576,7 @@ void GameManager::runGame()
             tank->setLastMove(stringToActionRequest[move]);
             outputTankMove(tank->getPlayerId(), move);
         }
-
+        executeBattleInfoRequests();
         advanceShells();
         removeShells();
         advanceShells();
@@ -587,11 +600,7 @@ void GameManager::runGame()
             outputFile.close();
             return;
         }
-        else if (isItATie())
-        {
-            outputFile.close();
-            return;
-        }
+
         else if (totalShellsRemaining <= 0)
         {
             count++;
