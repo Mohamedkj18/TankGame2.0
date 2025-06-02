@@ -52,9 +52,7 @@ public:
     int getWidth();
     int getHeight();
     int getGameStep();
-    int bijection(int x, int y);
 
-    std::pair<int, int> inverseBijection(int z);
     void processInputFile(const std::string &inputFilePath);
 
     std::unordered_map<int, Wall> &getWalls() { return walls; }

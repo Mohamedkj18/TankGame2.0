@@ -51,3 +51,7 @@ extern std::unordered_map<Direction, std::string> directionToString;
 extern std::array<Direction, 8> directions;
 
 Direction &operator+=(Direction &dir, double angle);
+
+// =========================== UTILS =============================
+int bijection(int x, int y);
+std::pair<int, int> inverseBijection(int z);

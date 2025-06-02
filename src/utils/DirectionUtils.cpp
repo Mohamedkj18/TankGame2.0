@@ -53,3 +53,17 @@ Direction operator-(Direction dir, double angle)
     dir -= angle;
     return dir;
 }
+
+int bijection(int x, int y)
+{
+    return ((int)((x + y) * (x + y + 1)) * 0.5) + y;
+}
+
+std::pair<int, int> inverseBijection(int z)
+{
+    int w = static_cast<int>(std::floor((std::sqrt(8 * z + 1) - 1) / 2));
+    int t = (w * w + w) / 2;
+    int y = z - t;
+    int x = w - y;
+    return {x, y};
+}

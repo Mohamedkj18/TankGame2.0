@@ -59,6 +59,7 @@
         "vector": "cpp",
         "xhash": "cpp",
         "algorithm": "cpp",
-        "optional": "cpp"
+        "optional": "cpp",
+        "unordered_set": "cpp"
     }
 }
