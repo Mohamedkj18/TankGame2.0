@@ -1,43 +1,45 @@
 #include "include/Algorithms/MyTankAlgorithm.h"
+#include "utils/DirectionUtils.h"
 
-TankAlgorithm::TankAlgorithm(Game *game, int numOfMovesPerPath, int range)
+
+MyTankAlgorithm::MyTankAlgorithm(int numOfMovesPerPath, int range)
 {
     this->range = range;
     this->moveToAdd = 0;
     this->moveNumToBeExecuted = numOfMovesPerPath;
-    this->game = game;
     this->numOfMovesPerPath = numOfMovesPerPath;
 };
 
 std::pair<int, int> MyTankAlgorithm::move(std::pair<int, int> current, Direction direction)
 {
     auto offset = stringToIntDirection[direction];
-    return {(current.first + offset[0] + game->getWidth()) % game->getWidth(), (current.second + offset[1] + game->getHeight()) % game->getHeight()};
+    return {(current.first + offset[0] + gameWidth) % gameWidth, (current.second + offset[1] + gameHeight) % gameHeight};
 }
 
-void TankAlgorithm::setTheMovesToBeExecuted(int playerNum, int playerToChase)
+void MyTankAlgorithm::setTheMovesToBeExecuted(MyBattleInfo &info)
 {
     int i = 0;
     moveNumToBeExecuted = 0;
     std::string directionOfMove;
-    Tank *tank = game->getPlayer(playerToChase);
-    std::pair<int, int> target = {tank->getX() / 2, tank->getY() / 2};
-    tank = game->getPlayer(playerNum);
-    std::pair<int, int> start = {tank->getX() / 2, tank->getY() / 2};
-    std::string directionOfTank = directionToString[tank->getDirection()];
+    std::pair<int, int> target = {i,i};
+    std::pair<int, int> start = {info.getMyXPosition() / 2, info.getMyYPosition() / 2};
+    std::string directionOfTank = directionToString[currentDirection];
     std::vector<std::pair<int, int>> positionsToGetTo = getPath(start, target);
     while (moveToAdd < numOfMovesPerPath)
     {
         if (i >= (int)positionsToGetTo.size())
         {
-            movesToBeExecuted[moveToAdd++] = "n";
+            movesToBeExecuted[moveToAdd++] = ActionRequest::DoNothing;
             continue;
         }
+        if(isTheEnemyInRange(info))movesToBeExecuted[moveToAdd++] = ActionRequest::Shoot; 
         directionOfMove = getDirectionFromPosition(start, positionsToGetTo[i]);
-        if (directionOfMove != directionOfTank)
-            getMovesToRotateTank(directionOfMove, directionOfTank);
+        if(moveToAdd < numOfMovesPerPath){
+            if (directionOfMove != directionOfTank)
+                getMovesToRotateTank(directionOfMove, directionOfTank);
+        }
         if (moveToAdd < numOfMovesPerPath)
-            movesToBeExecuted[moveToAdd++] = "w";
+            movesToBeExecuted[moveToAdd++] = ActionRequest::MoveForward;
         start = positionsToGetTo[i];
         directionOfTank = directionOfMove;
         i++;
@@ -45,49 +47,49 @@ void TankAlgorithm::setTheMovesToBeExecuted(int playerNum, int playerToChase)
     moveToAdd = 0;
 }
 
-void TankAlgorithm::addMoveToBeExecuted(double angle)
+void MyTankAlgorithm::addMoveToBeExecuted(double angle)
 {
     if (angle == 0.125)
-        movesToBeExecuted[moveToAdd++] = "e";
+        movesToBeExecuted[moveToAdd++] = ActionRequest::RotateRight45;
     else if (angle == 0.25)
-        movesToBeExecuted[moveToAdd++] = "d";
+        movesToBeExecuted[moveToAdd++] = ActionRequest::RotateRight90;
     else if (angle == 0.375)
     {
-        movesToBeExecuted[moveToAdd++] = "d";
+        movesToBeExecuted[moveToAdd++] = ActionRequest::RotateRight90;
         if (moveToAdd >= numOfMovesPerPath)
             return;
-        movesToBeExecuted[moveToAdd++] = "e";
+        movesToBeExecuted[moveToAdd++] = ActionRequest::RotateRight45;
     }
     else if (angle == 0.5)
     {
-        movesToBeExecuted[moveToAdd++] = "d";
+        movesToBeExecuted[moveToAdd++] = ActionRequest::RotateRight90;
         if (moveToAdd >= numOfMovesPerPath)
             return;
-        movesToBeExecuted[moveToAdd++] = "d";
+        movesToBeExecuted[moveToAdd++] = ActionRequest::RotateRight90;
     }
     else if (angle == 0.625)
     {
-        movesToBeExecuted[moveToAdd++] = "a";
+        movesToBeExecuted[moveToAdd++] = ActionRequest::RotateLeft90;
         if (moveToAdd >= numOfMovesPerPath)
             return;
-        movesToBeExecuted[moveToAdd++] = "q";
+        movesToBeExecuted[moveToAdd++] = ActionRequest::RotateLeft45;
     }
     else if (angle == 0.75)
-        movesToBeExecuted[moveToAdd++] = "a";
+        movesToBeExecuted[moveToAdd++] = ActionRequest::RotateLeft90;
     else if (angle == 0.875)
-        movesToBeExecuted[moveToAdd++] = "q";
+        movesToBeExecuted[moveToAdd++] = ActionRequest::RotateLeft45;
 }
 
-std::string TankAlgorithm::getDirectionFromPosition(std::pair<int, int> current, std::pair<int, int> target)
+std::string MyTankAlgorithm::getDirectionFromPosition(std::pair<int, int> current, std::pair<int, int> target)
 {
     int xDiff = target.first - current.first;
-    xDiff = xDiff > 1 || xDiff == -1 ? -1 : (xDiff + game->getWidth()) % game->getWidth();
+    xDiff = xDiff > 1 || xDiff == -1 ? -1 : (xDiff + gameWidth) % gameWidth;
     int yDiff = target.second - current.second;
-    yDiff = yDiff > 1 || yDiff == -1 ? -1 : (yDiff + game->getHeight()) % game->getHeight();
+    yDiff = yDiff > 1 || yDiff == -1 ? -1 : (yDiff + gameHeight) % gameHeight;
     return pairToDirections[{xDiff, yDiff}];
 }
 
-int TankAlgorithm::getMovesToRotateTank(std::string directionToRotateTo, std::string currentDirection)
+int MyTankAlgorithm::getMovesToRotateTank(std::string directionToRotateTo, std::string currentDirection)
 {
     int i, movesToRotate = 0;
     double rotate = 0.125, angle;
@@ -114,50 +116,36 @@ int TankAlgorithm::getMovesToRotateTank(std::string directionToRotateTo, std::st
     return movesToRotate;
 }
 
-bool TankAlgorithm::isThereAMineOrAWall(int x, int y)
+bool MyTankAlgorithm::isThereAMineOrAWall(int x, int y,MyBattleInfo &info)
 {
-    int currPos = game->bijection(2 * x, 2 * y);
-    return game->getMines().count(currPos) || game->getWalls().count(currPos);
+    return info.isMine(x,y) || info.isWall(x,y);
 }
 
-bool TankAlgorithm::isTheEnemyInRange(int playerNum, int playerToChase)
+bool MyTankAlgorithm::isTheEnemyInRange(MyBattleInfo &info)
 {
     int i, width, height;
-    width = game->getWidth();
-    height = game->getHeight();
-    Tank *tank = game->getPlayer(playerToChase);
-    std::pair<int, int> target = {tank->getX() / 2, tank->getY() / 2};
-    tank = game->getPlayer(playerNum);
-    std::pair<int, int> start = {tank->getX() / 2, tank->getY() / 2};
-    std::array<int, 2> offset = stringToIntDirection[tank->getDirection()];
+    std::pair<int, int> start = {info.getMyXPosition() / 2, info.getMyYPosition() / 2};
+    std::array<int, 2> offset = stringToIntDirection[currentDirection];
     for (i = 1; i < range + 1; i++)
     {
-        std::pair<int, int> newPos = {(start.first + offset[0] * i + width * i) % width, (start.second + offset[1] * i + height * i) % height};
-        if (newPos == target)
-            return true;
+        std::pair<int, int> newPos = {(start.first + offset[0] * i + gameWidth * i) % gameWidth, (start.second + offset[1] * i + gameHeight * i) % gameHeight};
+        if (((MyBattleInfo)info).isEnemyTank(newPos.first, newPos.second))return true;
     }
     return false;
 }
 
-int TankAlgorithm::isTheSquareSafe(int x, int y, int rangeToCheck)
+int MyTankAlgorithm::isTheSquareSafe(int x, int y, int rangeToCheck, MyBattleInfo &info)
 {
     int xPos, yPos, currPos;
-    Artillery *artillery;
+    Shell *shell;
     for (int i = -rangeToCheck; i <= rangeToCheck; ++i)
     {
         for (Direction dir : directions)
         {
-            xPos = (x + i * (stringToIntDirection[dir][0] + game->getWidth())) % game->getWidth();
-            yPos = (y + i * (stringToIntDirection[dir][1] + game->getHeight())) % game->getHeight();
-            currPos = game->bijection(2 * xPos, 2 * yPos);
-            if (game->getArtillery().count(currPos))
-            {
-                artillery = game->getArtillery()[currPos];
-                if (directionToString[artillery->getDirection()] == directionToString[reverseDirection[dir]])
-                {
-                    return currPos;
-                }
-            }
+            xPos = (x + i * (stringToIntDirection[dir][0] + gameWidth)) % gameWidth;
+            yPos = (y + i * (stringToIntDirection[dir][1] + gameHeight)) % gameHeight;
+            currPos = bijection(2 * xPos, 2 * yPos);
+            if (info.isShell(xPos, yPos))return currPos;
         }
     }
     return -1;
@@ -165,5 +153,60 @@ int TankAlgorithm::isTheSquareSafe(int x, int y, int rangeToCheck)
 
 void MyTankAlgorithm::updateBattleInfo(BattleInfo &info)
 {
-    setMovesToBeExecuted();
+    gameWidth = static_cast<MyBattleInfo&>(info).getWidth();
+    gameHeight = static_cast<MyBattleInfo&>(info).getHeight();
+    setTheMovesToBeExecuted(static_cast<MyBattleInfo&>(info));
 }
+
+ActionRequest MyTankAlgorithm::getAction()
+{
+    if (moveNumToBeExecuted == -1)return ActionRequest::GetBattleInfo;
+    if(numOfMovesPerPath == moveNumToBeExecuted){
+        moveNumToBeExecuted = 0;
+        return ActionRequest::GetBattleInfo;
+    }
+    return movesToBeExecuted[moveNumToBeExecuted++];
+}
+
+
+
+std::vector<std::pair<int,int>> MyTankAlgorithm::getPathToClosestTarget(
+    std::pair<int,int> start,
+    const std::vector<std::pair<int,int>>& targets, MyBattleInfo &info) 
+{
+    std::unordered_set<std::pair<int, int>, pair_hash> targetSet(targets.begin(), targets.end());
+    std::queue<std::pair<int, int>> queue;
+    std::unordered_map<std::pair<int, int>, bool, pair_hash> visited;
+    std::unordered_map<std::pair<int, int>, std::pair<int, int>, pair_hash> parent;
+
+    queue.push(start);
+    visited[start] = true;
+
+    while (!queue.empty()) {
+        auto current = queue.front();
+        queue.pop();
+
+        if (targetSet.find(current) != targetSet.end()) {
+            std::vector<std::pair<int,int>> path;
+            while (current != start) {
+                path.push_back(current);
+                current = parent[current];
+            }
+            std::reverse(path.begin(), path.end());
+            return path;
+        }
+
+        for (const auto& dir : directions) {
+            auto next = move(current, dir);
+            if (!visited[next] && !isThereAMineOrAWall(next.first, next.second,info)) {
+                visited[next] = true;
+                parent[next] = current;
+                queue.push(next);
+            }
+        }
+    }
+
+    return {}; // No path to any target
+}
+
+

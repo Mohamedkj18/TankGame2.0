@@ -2,6 +2,12 @@
 #include "Core/Tank.h"
 #include <set>
 #include "Core/GameObject.h"
+#include <optional>
+#include <unordered_set>
+#include <queue>
+#include <unordered_map>
+#include <vector>
+#include <algorithm>
 
 class MyBattleInfo : public BattleInfo
 {
@@ -14,6 +20,7 @@ private:
     std::set<int> mines;
     std::set<int> walls;
     std::set<int> shells;
+    std::pair<int,int> closestEnemyTank;
 
 public:
     MyBattleInfo(int width, int height,
@@ -32,9 +39,12 @@ public:
     std::set<int> &getWalls();
     std::set<int> &getShells();
 
+    int getMyXPosition();
+    int getMyYPosition();
     bool isMine(int x, int y);
     bool isWall(int x, int y);
     bool isShell(int x, int y);
     bool isFriendlyTank(int x, int y);
     bool isEnemyTank(int x, int y);
+    std::optional<std::pair<int, int>> getClosestTarget(std::pair<int, int> start,const std::vector<std::pair<int, int>>& targets);
 };

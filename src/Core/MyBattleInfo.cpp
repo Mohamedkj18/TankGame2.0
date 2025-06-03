@@ -37,3 +37,5 @@ bool MyBattleInfo::isEnemyTank(int x, int y)
 {
     return enemyTanks.count(bijection(x, y)) > 0;
 }
+
+
