@@ -2,32 +2,25 @@
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall -Wextra -pedantic -Iinclude
 
-# Source and object directories
-SRC_DIRS = src/Common src/Core src/utils
-OBJ_DIR = obj
+# Source file discovery
+SRC = $(wildcard src/Common/*.cpp src/Core/*.cpp src/utils/*.cpp src/Algorithms/*.cpp) main.cpp
 
-# Source and object files
-SRC = $(wildcard $(SRC_DIRS:%=%/*.cpp)) main.cpp
-OBJ = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
+# Object file mapping
+OBJ = $(SRC:%.cpp=obj/%.o)
 
-# Final executable
+# Final executable name
 TARGET = tanks_game
 
 # Default target
 all: $(TARGET)
 
-# Link the final executable
+# Link object files into executable
 $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-# Compile source files to obj/<structure>.o
-$(OBJ_DIR)/%.o: %.cpp
-	@if not exist "$(subst /,\\,$(dir $@))" mkdir "$(subst /,\\,$(dir $@))"
+# Compile .cpp to .o with automatic folder creation
+obj/%.o: %.cpp
+	@if not exist "$(subst /,\,$(dir $@))" mkdir "$(subst /,\,$(dir $@))"
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean up
-clean:
-	@if exist $(OBJ_DIR) rmdir /s /q $(OBJ_DIR)
-	@if exist $(TARGET) del $(TARGET)
-
-.PHONY: all clean

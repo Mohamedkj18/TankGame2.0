@@ -2,6 +2,7 @@
 
 #include "TankAlgorithm.h"
 #include "SatelliteView.h"
+#include <cstddef>
 
 class Player
 {

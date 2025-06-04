@@ -243,6 +243,7 @@ int GameManager::readFile(std::string fileName)
                 auto tank = std::make_unique<Tank>(x * 2, y * 2,
                                                    (playerId == 1) ? stringToDirection["L"] : stringToDirection["R"],
                                                    this, playerId, numShellsPerTank, (playerId == 1) ? tankId1++ : tankId2++);
+
                 playerTanksCount[playerId]++;
                 totalShellsRemaining += numShellsPerTank;
                 addTank(std::move(tank));
@@ -257,8 +258,6 @@ int GameManager::readFile(std::string fileName)
         return 1;
     }
 
-    std::cout << playerTanksCount[1] << " tanks for Player 1, "
-              << playerTanksCount[2] << " tanks for Player 2.\n";
     file.close();
     printBoard();
 
@@ -409,7 +408,7 @@ void GameManager::checkForTankCollision(Tank &tank)
     {
         tankHitByAShell(currTankPos);
     }
-    secondaryTanks[currTankPos] = std::make_unique<Tank>(tank);
+    secondaryTanks[currTankPos] = std::make_unique<Tank>(std::move(tank));
 }
 
 void GameManager::checkForShellCollision(Shell &shell)
@@ -425,7 +424,6 @@ void GameManager::checkForShellCollision(Shell &shell)
 void GameManager::executeTanksMoves()
 {
     ActionRequest move;
-
     for (const auto &pair : tanks)
     {
 
@@ -472,11 +470,17 @@ void GameManager::executeBattleInfoRequests()
         if (tank->getLastMove() == ActionRequest::GetBattleInfo)
         {
             TankAlgorithm *tankAlgorithm = tank->getTankAlgorithm();
-            MySatelliteView satelliteView(bijection(tank->getX(), tank->getY()), tanks, shells, mines, walls);
+            int pos = bijection(tank->getX(), tank->getY());
+            MySatelliteView satelliteView(pos, tanks, shells, mines, walls);
             players[tank->getPlayerId()]->updateTankWithBattleInfo(*tankAlgorithm, satelliteView);
             tank->setLastMove(ActionRequest::DoNothing);
         }
     }
+}
+
+int GameManager::bijection(int x, int y)
+{
+    return ((x + y) * (x + y + 1)) / 2 + y;
 }
 
 void GameManager::removeTanks()
@@ -534,10 +538,10 @@ bool GameManager::checkForAWinner()
     return false;
 }
 
-void GameManager::outputTankMove(int playerNum, std::string move)
+void GameManager::outputTankMove(int playerNum, ActionRequest move)
 {
 
-    outputFile << "Player " << playerNum << " moved: " << move << std::endl;
+    outputFile << "Player " << playerNum << " moved: " << to_string(move) << std::endl;
 }
 
 void GameManager::runGame()
@@ -545,35 +549,23 @@ void GameManager::runGame()
 
     int count = 0;
     std::string move;
-    // TankChase *tankChase = new TankChase(this, 8);
-    // TankEvasion *tankEvasion = new TankEvasion(this, 8);
-    std::unordered_map<std::string, ActionRequest> stringToActionRequest = {
-        {"MoveForward", ActionRequest::MoveForward},
-        {"MoveBackward", ActionRequest::MoveBackward},
-        {"RotateLeft90", ActionRequest::RotateLeft90},
-        {"RotateRight90", ActionRequest::RotateRight90},
-        {"RotateLeft45", ActionRequest::RotateLeft45},
-        {"RotateRight45", ActionRequest::RotateRight45},
-        {"Shoot", ActionRequest::Shoot},
-        {"DoNothing", ActionRequest::DoNothing}};
 
+    for (const auto &pair : tanks)
+    {
+        Tank *tank = pair.second.get();
+        std::unique_ptr<TankAlgorithm> algo = tankFactory.create(tank->getPlayerId(), tank->getTankId());
+        tank->setTankAlgorithm(std::move(algo));
+    }
     while (true)
     {
-
         outputFile << "Game step: " << gameStep << std::endl;
-        // move = tankChase.getNextMove(1, 2);
-        // getPlayer(1).setLastMove(move);
-        // outputTankMove(1, move);
-        //  move = tankEvasion.getNextMove(2, 1);
-        // getPlayer(2).setLastMove(move);
-        // outputTankMove(2, move);
 
         for (const auto &pair : tanks)
         {
             Tank *tank = pair.second.get();
-            std::cout << "Insert move for tank " << tank->getPlayerId() << ": ";
-            std::cin >> move;
-            tank->setLastMove(stringToActionRequest[move]);
+            TankAlgorithm *algo = tank->getTankAlgorithm();
+            ActionRequest move = algo->getAction();
+            tank->setLastMove(move);
             outputTankMove(tank->getPlayerId(), move);
         }
         executeBattleInfoRequests();

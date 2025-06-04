@@ -1,6 +1,6 @@
 #include "Core/GameManager.h"
 #include "Core/MyPlayerFactory.h"
-#include "Core/MyTankAlgorithmFactory.h"
+#include "Algorithms/MyTankAlgorithmFactory.h"
 
 int main(int argc, char **argv)
 {

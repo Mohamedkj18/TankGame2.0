@@ -21,7 +21,7 @@ private:
     int reverseCharge = 0;
     bool reverseQueued = false;
     bool reverseReady = false;
-    TankAlgorithm *tankAlgorithm;
+    std::unique_ptr<TankAlgorithm> tankAlgorithm;
     ActionRequest lastMove;
 
 public:
@@ -39,7 +39,7 @@ public:
     void setDirection(std::string directionStr);
     void setLastMove(ActionRequest currentMove);
     TankAlgorithm *getTankAlgorithm();
-    void setTankAlgorithm(TankAlgorithm *algorithm);
+    void setTankAlgorithm(std::unique_ptr<TankAlgorithm> algorithm);
 
     // Firing
     void fire();

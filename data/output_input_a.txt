@@ -1,27 +1,4359 @@
 Game step: 0
-Player 1 moved: Shoot
-Player 2 moved: Shoot
-Player 1 moved: Shoot
-Player 2 moved: Shoot
-Player 1 moved: Shoot
-Shell at 0, 2hit a wall!
-Unknown Shell hit a wall at unknown position.
+Player 1 moved: GetBattleInfo
+Player 2 moved: GetBattleInfo
+Player 1 moved: GetBattleInfo
+Player 2 moved: GetBattleInfo
+Player 1 moved: GetBattleInfo
 Game step: 1
+Player 1 moved: MoveForward
+Player 2 moved: RotateRight45
 Player 1 moved: DoNothing
 Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 2
+Player 1 moved: RotateLeft45
+Player 2 moved: Shoot
+Player 1 moved: Shoot
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Shell hit tank 1 at (10, 6)
+Game step: 3
+Player 1 moved: DoNothing
 Player 1 moved: DoNothing
 Player 2 moved: DoNothing
 Player 1 moved: DoNothing
 Shell at 0, 8hit a wall!
 Unknown Shell hit a wall at unknown position.
-Game step: 2
-Player 1 moved: DoNothing
-Player 2 moved: MoveBackward
+Game step: 4
 Player 1 moved: RotateRight45
-Player 2 moved: 
-Player 1 moved: 
-Shell at 38, 2hit a wall!
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 5
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Bad step: Tank 1 can't shoot!
+Game step: 6
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 7
+Player 1 moved: DoNothing
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 8
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 9
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: RotateLeft90
+Shell at 0, 8hit a wall!
 Unknown Shell hit a wall at unknown position.
-Tank 1 queued reverse!
-Bad step: Tank 1 waiting to move backwards - move ignored!
-Game step: 3
+Game step: 10
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: RotateRight90
+Player 1 moved: DoNothing
+Bad step: Tank 1 can't shoot!
+Game step: 11
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Game step: 12
+Player 1 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 13
+Player 1 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 14
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 15
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 16
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Shell at 36, 8hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 17
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Bad step: Tank 1 can't shoot!
+Game step: 18
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 19
+Player 1 moved: DoNothing
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 0!
+Game step: 20
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 21
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 22
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Shell at 36, 8hit a wall!
+Unknown Shell hit a wall at unknown position.
+Bad step: Tank 1 can't shoot!
+Game step: 23
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 24
+Player 1 moved: GetBattleInfo
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 25
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 26
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 27
+Player 1 moved: RotateRight45
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 28
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: GetBattleInfo
+Tank 0 hit a wall at 15, 9!
+Game step: 29
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Bad step: Tank 1 can't shoot!
+Game step: 30
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 31
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Shell at 24, 8hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 32
+Player 1 moved: RotateRight90
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 33
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Bad step: Tank 1 can't shoot!
+Game step: 34
+Player 1 moved: RotateRight90
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 35
+Player 1 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 36
+Player 1 moved: RotateLeft90
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Shell at 24, 8hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 37
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Game step: 38
+Player 1 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 39
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 40
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Bad step: Tank 1 can't shoot!
+Game step: 41
+Player 1 moved: RotateRight45
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 42
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Shell at 22, 8hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 43
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 44
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Bad step: Tank 1 can't shoot!
+Game step: 45
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 46
+Player 1 moved: RotateRight90
+Player 1 moved: GetBattleInfo
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Game step: 47
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Shell at 22, 8hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 48
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 49
+Player 1 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 50
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 51
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Bad step: Tank 1 can't shoot!
+Game step: 52
+Player 1 moved: RotateRight45
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 53
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 54
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 55
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Bad step: Tank 1 can't shoot!
+Shell at 14, 8hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 56
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 57
+Player 1 moved: RotateRight90
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 58
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 59
+Player 1 moved: RotateLeft90
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 60
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Shell at 14, 8hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 61
+Player 1 moved: GetBattleInfo
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Bad step: Tank 1 can't shoot!
+Game step: 62
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 63
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 64
+Player 1 moved: RotateRight45
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 65
+Player 1 moved: DoNothing
+Player 1 moved: RotateRight90
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 66
+Player 1 moved: DoNothing
+Player 1 moved: Shoot
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Bad step: Tank 1 can't shoot!
+Game step: 67
+Player 1 moved: DoNothing
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 68
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 69
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 70
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 71
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 72
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 73
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 74
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 75
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 76
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 77
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 78
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 79
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 80
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 81
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 82
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 83
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 84
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 85
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 86
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 87
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 88
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 89
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 90
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 91
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 92
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 93
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 94
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 95
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 96
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 97
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 98
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 99
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 100
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 101
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 102
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 103
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 104
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 105
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 106
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 107
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 108
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 109
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 110
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 111
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 112
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 113
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 114
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 115
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 116
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 117
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 118
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 119
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 120
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 121
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 122
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 123
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 124
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 125
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 126
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 127
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 128
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 129
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 130
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 131
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 132
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 133
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 134
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 135
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 136
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 137
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 138
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 139
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 140
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 141
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 142
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 143
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 144
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 145
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 146
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 147
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 148
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 149
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 150
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 151
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 152
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 153
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 154
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 155
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 156
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 157
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 158
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 159
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 160
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 161
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 162
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 163
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 164
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 165
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 166
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 167
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 168
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 169
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 170
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 171
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 172
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 173
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 174
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 175
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 176
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 177
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 178
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 179
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 180
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 181
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 182
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 183
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 184
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 185
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 186
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 187
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 188
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 189
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 190
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 191
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 192
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 193
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 194
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 195
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 196
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 197
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 198
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 199
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 200
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 201
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 202
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 203
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 204
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 205
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 206
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 207
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 208
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 209
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 210
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 211
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 212
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 213
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 214
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 215
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 216
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 217
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 218
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 219
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 220
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 221
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 222
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 223
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 224
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 225
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 226
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 227
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 228
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 229
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 230
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 231
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 232
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 233
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 234
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 235
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 236
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 237
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 238
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 239
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 240
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 241
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 242
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 243
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 244
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 245
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 246
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 247
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 248
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 249
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 250
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 251
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 252
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 253
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 254
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 255
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 256
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 257
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 258
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 259
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 260
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 261
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 262
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 263
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 264
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 265
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 266
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 267
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 268
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 269
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 270
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 271
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 272
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 273
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 274
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 275
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 276
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 277
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 278
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 279
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 280
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 281
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 282
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 283
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 284
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 285
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 286
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 287
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 288
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 289
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 290
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 291
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 292
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 293
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 294
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 295
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 296
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 297
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 298
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 299
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 300
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 301
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 302
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 303
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 304
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 305
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 306
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 307
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 308
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 309
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 310
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 311
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 312
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 313
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 314
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 315
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 316
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 317
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 318
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 319
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 320
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 321
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 322
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 323
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 324
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 325
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 326
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 327
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 328
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 329
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 330
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 331
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 332
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 333
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 334
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 335
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 336
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 337
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 338
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 339
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 340
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 341
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 342
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 343
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 344
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 345
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 346
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 347
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 348
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 349
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 350
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 351
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 352
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 353
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 354
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 355
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 356
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 357
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 358
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 359
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 360
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 361
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 362
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 363
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 364
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 365
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 366
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 367
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 368
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 369
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 370
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 371
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 372
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 373
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 374
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 375
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 376
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 377
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 378
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 379
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 380
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 381
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 382
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 383
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 384
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 385
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 386
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 387
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 388
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 389
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 390
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 391
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 392
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 393
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 394
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 395
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 396
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 397
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 398
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 399
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 400
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 401
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 402
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 403
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 404
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 405
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 406
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 407
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 408
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 409
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 410
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 411
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 412
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 413
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 414
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 415
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 416
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 417
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 418
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 419
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 420
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 421
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 422
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 423
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 424
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 425
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 426
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 427
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 428
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 429
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 430
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 431
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 432
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 433
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 434
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 435
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 436
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 437
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 438
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 439
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 440
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 441
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 442
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 443
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 444
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 445
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 446
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 447
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 448
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 449
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 450
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 451
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 452
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 453
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 454
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 455
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 456
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 457
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 458
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 459
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 460
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 461
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 462
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 463
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 464
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 465
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 466
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 467
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 468
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 469
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 470
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 471
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 472
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 473
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 474
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 475
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 476
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 477
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 478
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 479
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 480
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 481
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 482
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 483
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 484
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 485
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 486
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 487
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 488
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 489
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 490
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 491
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 492
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 493
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 494
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 495
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 496
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 497
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 498
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 499
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 500
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 501
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 502
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 503
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 504
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 505
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 506
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 507
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 508
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 509
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 510
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 511
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 512
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 513
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 514
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 515
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 516
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 517
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 518
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 519
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 520
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 521
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 522
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 523
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 524
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 525
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 526
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 527
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 528
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 529
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 530
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 531
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 532
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 533
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 534
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 535
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 536
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 537
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 538
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 539
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 540
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 541
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 542
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 543
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 544
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 545
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 546
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 547
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 548
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 549
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 550
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 551
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 552
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 553
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 554
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 555
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 556
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 557
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 558
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 559
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 560
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 561
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 562
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 563
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 564
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 565
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 566
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 567
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 568
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 569
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 570
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 571
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 572
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 573
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 574
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 575
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 576
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 577
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 578
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 579
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 580
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 581
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 582
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 583
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 584
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 585
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 586
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 587
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 588
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 589
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 590
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 591
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 592
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 593
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 594
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 595
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 596
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 597
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 598
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 599
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 600
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 601
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 602
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 603
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 604
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 605
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 606
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 607
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 608
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 609
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 610
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 611
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 612
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 613
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 614
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 615
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 616
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 617
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 618
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 619
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 620
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 621
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 622
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 623
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 624
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 625
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 626
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 627
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 628
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 629
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 630
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 631
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 632
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 633
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 634
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 635
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 636
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 637
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 638
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 639
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 640
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 641
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 642
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 643
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 644
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 645
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 646
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 647
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 648
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 649
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 650
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 651
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 652
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 653
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 654
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 655
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 656
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 657
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 658
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 659
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 660
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 661
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 662
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 663
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 664
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 665
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 666
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 667
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 668
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 669
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 670
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 671
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 672
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 673
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 674
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 675
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 676
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 677
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 678
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 679
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 680
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 681
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 682
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 683
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 684
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 685
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 686
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 687
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 688
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 689
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 690
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 691
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 692
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 693
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 694
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 695
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 696
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 697
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 698
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 699
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 700
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 701
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 702
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 703
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 704
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 705
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 706
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 707
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 708
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 709
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 710
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 711
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 712
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 713
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 714
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 715
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 716
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 717
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 718
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 719
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 720
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 721
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 722
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 723
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 724
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 725
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 726
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 727
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 728
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 729
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 730
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 731
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 732
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 733
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 734
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 735
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 736
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 737
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 738
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 739
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 740
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 741
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 742
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 743
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 744
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 745
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 746
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 747
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 748
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 749
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 750
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 751
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 752
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 753
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 754
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 755
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 756
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 757
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 758
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 759
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 760
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 761
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 762
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 763
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 764
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 765
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 766
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 767
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 768
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 769
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 770
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 771
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 772
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 773
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 774
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 775
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 776
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 777
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 778
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 779
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 780
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 781
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 782
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 783
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 784
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 785
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 786
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 787
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 788
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 789
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 790
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 791
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 792
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 793
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 794
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 795
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 796
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 797
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 798
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 799
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 800
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 801
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 802
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 803
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 804
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 805
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 806
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 807
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 808
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 809
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 810
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 811
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 812
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 813
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 814
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 815
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 816
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 817
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 818
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 819
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 820
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 821
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 822
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 823
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 824
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 825
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 826
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 827
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 828
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 829
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 830
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 831
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 832
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 833
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 834
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 835
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 836
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 837
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 838
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 839
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 840
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 841
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 842
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 843
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 844
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 845
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 846
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 847
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 848
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 849
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 850
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 851
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 852
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 853
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 854
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 855
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 856
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 857
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 858
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 859
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 860
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 861
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 862
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 863
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 864
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 865
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 866
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 867
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 868
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 869
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 870
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 871
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 872
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 873
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 874
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 875
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 876
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 877
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 878
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 879
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 880
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 881
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 882
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 883
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 884
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 885
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 886
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 887
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 888
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 889
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 890
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 891
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 892
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 893
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 894
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 895
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 896
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 897
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 898
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 899
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 900
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 901
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 902
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 903
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 904
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 905
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 906
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 907
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 908
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 909
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 910
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 911
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 912
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 913
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 914
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 915
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 916
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 917
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 918
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 919
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 920
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 921
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 922
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 923
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 924
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 925
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 926
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 927
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 928
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 929
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 930
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 931
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 932
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 933
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 934
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 935
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 936
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 937
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 938
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 939
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 940
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 941
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 942
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 943
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 944
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 945
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 946
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 947
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 948
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 949
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 950
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 951
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 952
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 953
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 954
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 955
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 956
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 957
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 958
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 959
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 960
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 961
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 962
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 963
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 964
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 965
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 966
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 967
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 968
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 969
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 970
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 971
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 972
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 973
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 974
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 975
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 976
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 977
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 978
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 979
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 980
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 981
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 982
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 983
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 984
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 985
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 986
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 987
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 988
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 989
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 990
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 991
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 992
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 993
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 994
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 995
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 996
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 997
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 998
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 999
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 1000
+Player 1 moved: RotateRight45
+Player 2 moved: RotateRight45
+Player 1 moved: GetBattleInfo
+Game step: 1001
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: RotateRight90
+Tank 0 hit a wall at 15, 5!
+Game step: 1002
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1003
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 1004
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1005
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1006
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1007
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1008
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 1009
+Player 1 moved: GetBattleInfo
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 1010
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 1011
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1012
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 1013
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 1014
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1015
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateLeft90
+Game step: 1016
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1017
+Player 1 moved: RotateRight90
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 1018
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: DoNothing
+Game step: 1019
+Player 1 moved: RotateLeft90
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 1020
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1021
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1022
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1023
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1024
+Player 1 moved: RotateRight45
+Player 2 moved: DoNothing
+Player 1 moved: GetBattleInfo
+Game step: 1025
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: RotateRight90
+Game step: 1026
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing
+Game step: 1027
+Player 1 moved: DoNothing
+Player 2 moved: RotateRight45
+Player 1 moved: RotateLeft90
+Game step: 1028
+Player 1 moved: DoNothing
+Player 2 moved: MoveForward
+Player 1 moved: DoNothing
+Tank 0 hit a wall at 15, 5!
+Game step: 1029
+Player 1 moved: RotateRight90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1030
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1031
+Player 1 moved: RotateLeft90
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1032
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1033
+Player 1 moved: GetBattleInfo
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1034
+Player 1 moved: DoNothing
+Player 2 moved: DoNothing
+Player 1 moved: DoNothing
+Game step: 1035
+Player 1 moved: DoNothing
+Player 2 moved: GetBattleInfo
+Player 1 moved: DoNothing

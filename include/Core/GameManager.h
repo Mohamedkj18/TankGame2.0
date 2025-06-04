@@ -97,7 +97,8 @@ public:
     void checkForShellCollision(Shell &shell);
     void tankHitByAShell(int tankPos);
     void shellHitAWall(int shellPos);
+    int bijection(int x, int y);
 
     bool checkForAWinner();
-    void outputTankMove(int playerNum, std::string move);
+    void outputTankMove(int playerNum, ActionRequest move);
 };

@@ -1,3 +1,4 @@
+#include <cmath>
 #include "utils/DirectionUtils.h"
 
 std::unordered_map<Direction, std::array<int, 2>> stringToIntDirection = {

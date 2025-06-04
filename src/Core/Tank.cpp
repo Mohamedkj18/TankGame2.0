@@ -139,3 +139,13 @@ void Tank::executeReverse()
     setLastMove(ActionRequest::MoveBackward);
     reverseReady = true;
 }
+
+TankAlgorithm *Tank::getTankAlgorithm()
+{
+    return this->tankAlgorithm.get();
+}
+
+void Tank::setTankAlgorithm(std::unique_ptr<TankAlgorithm> algorithm)
+{
+    this->tankAlgorithm = std::move(algorithm);
+}

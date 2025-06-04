@@ -2,13 +2,22 @@
 #include "Core/MySatelliteView.h"
 #include "utils/DirectionUtils.h"
 
+#include "Core/MySatelliteView.h"
+
+MySatelliteView::MySatelliteView(int tankPos,
+                                 const std::unordered_map<int, std::unique_ptr<Tank>> &tanks,
+                                 const std::unordered_map<int, std::unique_ptr<Shell>> &shells,
+                                 const std::set<int> &mines,
+                                 const std::unordered_map<int, Wall> &walls)
+    : tankPos(tankPos), tanks(tanks), shells(shells), mines(mines), walls(walls) {}
+
 char MySatelliteView::getObjectAt(size_t x, size_t y) const
 {
-    int bijectionIndex = bijection(x, y);
+    int bijectionIndex = bijection(y, x);
     if (bijectionIndex == tankPos)
         return '%'; // Current Tank
     if (tanks.count(bijectionIndex))
-        return (char)('0' + tanks[bijectionIndex]->getPlayerId()); // Tank
+        return (char)('0' + tanks.at(bijectionIndex)->getPlayerId());
     if (shells.count(bijectionIndex))
         return '*'; // Shell
     if (mines.count(bijectionIndex))
