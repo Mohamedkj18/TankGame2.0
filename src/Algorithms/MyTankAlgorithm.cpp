@@ -24,7 +24,11 @@ void MyTankAlgorithm::updateBattleInfo(BattleInfo &info)
 ActionRequest MyTankAlgorithm::getAction()
 {
     if (moveIndex >= (int)plannedMoves.size())
+    {
+        ;
         return ActionRequest::GetBattleInfo;
+    }
+
     return plannedMoves[moveIndex++];
 }
 
@@ -33,8 +37,6 @@ void MyTankAlgorithm::prepareActions()
     plannedMoves.clear();
     std::string currentDirStr = directionToString[currentDirection];
     int steps = 0;
-    std::cout << "Planned moves for tank " << tankId << " at position (" << currentPos.first << ", " << currentPos.second
-              << ") facing " << directionToString[currentDirection] << std::endl;
     for (auto &nextPos : bfsPath)
     {
         if (steps >= maxMovesPerUpdate)
@@ -73,11 +75,6 @@ void MyTankAlgorithm::prepareActions()
 
     while ((int)plannedMoves.size() < maxMovesPerUpdate)
         plannedMoves.push_back(ActionRequest::DoNothing);
-
-    for (auto &action : plannedMoves)
-    {
-        std::cout << to_string(action) << std::endl;
-    }
 }
 
 int MyTankAlgorithm::rotateTowards(std::string desiredDir, int step)
@@ -102,6 +99,8 @@ int MyTankAlgorithm::rotateTowards(std::string desiredDir, int step)
     }
     else if (angle == 0.5)
     {
+
+        std::cout << "[DEBUG] Rotating " << tankId << " 180 degrees from " << directionToString[currentDirection] << " to " << desiredDir << std::endl;
         plannedMoves.push_back(ActionRequest::RotateRight90);
         step++;
         if (step >= maxMovesPerUpdate)
@@ -177,7 +176,17 @@ bool MyTankAlgorithm::shouldShoot()
 
 double MyTankAlgorithm::getAngleFromDirections(const std::string &directionStr, const std::string &desiredDir)
 {
-    std::unordered_map<std::string, double> stringToAngle = {
-        {"U", 0.0}, {"UR", 0.125}, {"R", 0.25}, {"DR", 0.375}, {"D", 0.5}, {"DL", 0.625}, {"L", 0.75}, {"UL", 0.875}};
-    return ((static_cast<int>((stringToAngle[desiredDir] - stringToAngle[directionStr]) * 8 + 8)) % 8) / 8.0;
+    Direction orgDir = stringToDirection[directionStr], desDir = stringToDirection[desiredDir], dirToCheck;
+    double angle, rotate = 0.125;
+    for (int i = 0; i < 8; ++i)
+    {
+        angle = i * rotate;
+        dirToCheck = orgDir;
+        dirToCheck += (angle);
+        if (dirToCheck == desDir)
+        {
+            std::cout << "[DEBUG] Angle from " << directionStr << " to " << desiredDir << " is " << angle << std::endl;
+            return angle;
+        }
+    }
 }

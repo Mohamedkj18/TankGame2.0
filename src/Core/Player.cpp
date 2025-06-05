@@ -10,17 +10,17 @@
 
 MyPlayer::MyPlayer(int player_index, size_t x, size_t y, size_t max_steps, size_t num_shells)
     : Player(player_index, x, y, max_steps, num_shells),
-      player_index(player_index), x(x), y(y), max_steps(max_steps), num_shells(num_shells) {}
+      player_index(player_index), playerGameWidth(x), playerGameHeight(y), max_steps(max_steps), num_shells(num_shells) {}
 
 void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &satellite_view)
 {
     std::set<int> friendlyTanks, enemyTanks, mines, walls, shells;
 
     int myX = -1, myY = -1;
-    lastSatellite.assign(y, std::vector<char>(x, ' '));
-    for (int i = 0; i < static_cast<int>(y); ++i)
+    lastSatellite.assign(playerGameHeight, std::vector<char>(playerGameWidth, ' '));
+    for (int i = 0; i < static_cast<int>(playerGameHeight); ++i)
     {
-        for (int j = 0; j < static_cast<int>(x); ++j)
+        for (int j = 0; j < static_cast<int>(playerGameWidth); ++j)
         {
             char object = satellite_view.getObjectAt(2 * j, 2 * i);
             int id = bijection(j, i);
@@ -28,8 +28,8 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
             if (object == '%')
             {
                 friendlyTanks.insert(id);
-                myX = i * 2;
-                myY = j * 2;
+                myX = j;
+                myY = i;
             }
             else if (object == '@')
             {
@@ -59,7 +59,7 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
         }
     }
 
-    MyBattleInfo info(x, y, friendlyTanks, enemyTanks, mines, walls, shells);
+    MyBattleInfo info(playerGameWidth, playerGameHeight, friendlyTanks, enemyTanks, mines, walls, shells);
 
     info.setMyXPosition(myX);
     info.setMyYPosition(myY);
@@ -74,6 +74,10 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
     std::pair<int, int> target = getTargetForTank(tankId);
     std::vector<std::pair<int, int>> path = getPath(myPos, target);
     info.setBFSPath(path);
+    for (const auto &pos : path)
+    {
+        std::cout << "[DEBUG] Tank " << tankId << "Player " << player_index << " path position: (" << pos.first << ", " << pos.second << ")\n";
+    }
 
     plannedPositions[tankId] = path;
 
@@ -91,7 +95,7 @@ void MyPlayer::updatePlannedPositions()
 
 bool MyPlayer::isSquareValid(int x, int y, int step)
 {
-    if (x < 0 || y < 0 || x >= static_cast<int>(this->x) || y >= static_cast<int>(this->y))
+    if (x < 0 || y < 0 || x >= static_cast<int>(playerGameWidth) || y >= static_cast<int>(playerGameHeight))
         return false;
     char cell = lastSatellite[y][x];
     if (cell == '#' || cell == '@')
@@ -111,8 +115,8 @@ std::pair<int, int> MyPlayer::findFirstLegalLocationToFlee(int x, int y)
 {
     for (Direction dir : directions)
     {
-        int nx = (x + stringToIntDirection[dir][0] + this->x) % this->x;
-        int ny = (y + stringToIntDirection[dir][1] + this->y) % this->y;
+        int nx = (x + stringToIntDirection[dir][0] + playerGameWidth) % playerGameWidth;
+        int ny = (y + stringToIntDirection[dir][1] + playerGameHeight) % playerGameHeight;
         if (isSquareValid(nx, ny, 0))
             return {nx, ny};
     }
@@ -123,8 +127,8 @@ std::pair<int, int> MyPlayer::moveTank(std::pair<int, int> pos, Direction dir)
 {
     auto offset = stringToIntDirection[dir];
     return {
-        (pos.first + offset[0] + static_cast<int>(x)) % static_cast<int>(x),
-        (pos.second + offset[1] + static_cast<int>(y)) % static_cast<int>(y)};
+        (pos.first + offset[0] + static_cast<int>(playerGameWidth)) % static_cast<int>(playerGameWidth),
+        (pos.second + offset[1] + static_cast<int>(playerGameHeight)) % static_cast<int>(playerGameHeight)};
 }
 
 std::string MyPlayer::assignRole(int tankId)
@@ -138,9 +142,9 @@ std::string MyPlayer::assignRole(int tankId)
 
 std::pair<int, int> MyPlayer::getTargetForTank(int /*tankId*/)
 {
-    for (int i = 0; i < static_cast<int>(x); ++i)
+    for (int i = 0; i < static_cast<int>(playerGameWidth); ++i)
     {
-        for (int j = 0; j < static_cast<int>(y); ++j)
+        for (int j = 0; j < static_cast<int>(playerGameHeight); ++j)
         {
             char obj = lastSatellite[j][i];
             if (obj >= '0' && obj <= '9' && (obj - '0') != player_index)

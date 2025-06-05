@@ -15,7 +15,7 @@ class MyPlayer : public Player
 {
 protected:
     int player_index;
-    size_t x, y;
+    size_t playerGameWidth, playerGameHeight;
     size_t max_steps, num_shells;
 
     std::unordered_map<int, std::vector<std::pair<int, int>>> plannedPositions;

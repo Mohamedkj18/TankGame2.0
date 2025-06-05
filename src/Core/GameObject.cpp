@@ -24,9 +24,13 @@ bool GameObject::moveForward()
     updatePosition(direction);
     if (checkForAWall())
     {
+        std::cout << "[DEBUG] Blocked by wall at (" << x << "," << y << ")\n";
+
         updatePosition(reverseDirection[direction]);
         return false;
     }
+    std::cout << "[DEBUG] Moved to (" << x << "," << y << ")\n";
+
     return true;
 }
 
