@@ -63,7 +63,6 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
 
     info.setMyXPosition(myX);
     info.setMyYPosition(myY);
-    info.setMyDirection(Direction::U); // default unless tracked elsewhere
 
     MyTankAlgorithm *algo = dynamic_cast<MyTankAlgorithm *>(&tank);
     int tankId = algo ? algo->getTankId() : 0;
@@ -75,6 +74,8 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
     std::pair<int, int> target = getTargetForTank(tankId);
     std::vector<std::pair<int, int>> path = getPath(myPos, target);
     info.setBFSPath(path);
+
+    plannedPositions[tankId] = path;
 
     tank.updateBattleInfo(info);
 }
@@ -128,10 +129,9 @@ std::pair<int, int> MyPlayer::moveTank(std::pair<int, int> pos, Direction dir)
 
 std::string MyPlayer::assignRole(int tankId)
 {
-    std::cout << "Assigning role for tank ID: " << tankId << std::endl;
     if (tankRoles.count(tankId))
         return tankRoles[tankId];
-    std::string role = (tankId % 2 == 0) ? "chaser" : "sniper";
+    std::string role = (tankId % 2 == 0) ? "chaser" : "chaser";
     tankRoles[tankId] = role;
     return role;
 }
@@ -176,6 +176,7 @@ std::vector<std::pair<int, int>> Player1::getPath(std::pair<int, int> start, std
                 current = parent[current];
             }
             std::reverse(path.begin(), path.end());
+
             return path;
         }
 
@@ -221,6 +222,7 @@ std::vector<std::pair<int, int>> Player2::getPath(std::pair<int, int> start, std
                 current = parent[current];
             }
             std::reverse(path.begin(), path.end());
+
             return path;
         }
 

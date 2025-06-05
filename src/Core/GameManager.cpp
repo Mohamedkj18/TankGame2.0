@@ -261,8 +261,8 @@ int GameManager::readFile(std::string fileName)
     file.close();
     printBoard();
 
-    players[1] = playerFactory.create(1, height, width, maxSteps, numShellsPerTank);
-    players[2] = playerFactory.create(2, height, width, maxSteps, numShellsPerTank);
+    players[1] = playerFactory.create(1, width, height, maxSteps, numShellsPerTank);
+    players[2] = playerFactory.create(2, width, height, maxSteps, numShellsPerTank);
 
     return 0;
 }
@@ -428,7 +428,8 @@ void GameManager::executeTanksMoves()
     {
 
         Tank *tank = pair.second.get(); // pointer from unique_ptr
-
+        std::cout << "[DEBUG]" << "Processing tank: " << tank->getTankId() << " at position (" << tank->getX() / 2 << ", " << tank->getY() / 2 << ")" << "move: " << to_string(tank->getLastMove()) << std::endl;
+        std::cout << "[DEBUG]" << "Player ID: " << tank->getPlayerId() << std::endl;
         move = tank->getLastMove();
         if (tank->getCantShoot())
         {
@@ -569,13 +570,13 @@ void GameManager::runGame()
             outputTankMove(tank->getPlayerId(), move);
         }
         executeBattleInfoRequests();
+
         advanceShells();
         removeShells();
         advanceShells();
         removeObjectsFromTheBoard();
 
         executeTanksMoves();
-
         advanceShellsRecentlyFired();
         removeTanks();
         removeShells();
@@ -592,7 +593,18 @@ void GameManager::runGame()
             outputFile.close();
             return;
         }
-
+        else if (gameStep >= maxSteps)
+        {
+            outputFile << "Game Over! It's a tie due to max steps reached!\n";
+            outputFile.close();
+            return;
+        }
+        else if (totalShellsRemaining <= 0 && gameStep >= maxSteps / 2)
+        {
+            outputFile << "Game Over! It's a tie due to no shells remaining!\n";
+            outputFile.close();
+            return;
+        }
         else if (totalShellsRemaining <= 0)
         {
             count++;

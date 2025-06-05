@@ -29,7 +29,7 @@ private:
     std::pair<int, int> currentPos;
 
 public:
-    MyTankAlgorithm(int player_index, int tank_index, int numMovesPerUpdate, int range);
+    MyTankAlgorithm(int player_index, int tank_index, int numMovesPerUpdate, int range, Direction initialDirection);
 
     ActionRequest getAction() override;
     void updateBattleInfo(BattleInfo &info) override;
@@ -37,8 +37,9 @@ public:
     // Execution logic
     std::pair<int, int> move(std::pair<int, int> current, Direction direction);
     std::string getDirectionFromPosition(std::pair<int, int> current, std::pair<int, int> target);
-    void rotateTowards(std::string desiredDir);
+    int rotateTowards(std::string desiredDir, int step);
     void prepareActions();
+    double getAngleFromDirections(const std::string &directionStr, const std::string &desiredDir);
 
     bool isThreatAhead();
     bool isFriendlyTooClose();
@@ -47,6 +48,8 @@ public:
     int getTankId() const { return tankId; };
     void setPlayerId(int id) { playerId = id; };
     int getPlayerId() const { return playerId; };
+    Direction getCurrentDirection() const { return currentDirection; }
+    void setCurrentDirection(Direction dir) { currentDirection = dir; }
 
 private:
     int range;

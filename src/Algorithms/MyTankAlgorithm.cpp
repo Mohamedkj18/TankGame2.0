@@ -1,8 +1,8 @@
 #include "Algorithms/MyTankAlgorithm.h"
 #include "utils/DirectionUtils.h"
 
-MyTankAlgorithm::MyTankAlgorithm(int player_index, int tank_index, int numMovesPerUpdate, int range)
-    : playerId(player_index), tankId(tank_index), moveIndex(0), range(range), maxMovesPerUpdate(numMovesPerUpdate) {}
+MyTankAlgorithm::MyTankAlgorithm(int player_index, int tank_index, int numMovesPerUpdate, int range, Direction initialDirection)
+    : playerId(player_index), tankId(tank_index), moveIndex(0), range(range), maxMovesPerUpdate(numMovesPerUpdate), currentDirection(initialDirection) {}
 
 void MyTankAlgorithm::updateBattleInfo(BattleInfo &info)
 {
@@ -16,7 +16,6 @@ void MyTankAlgorithm::updateBattleInfo(BattleInfo &info)
     gameWidth = myInfo.getWidth();
     gameHeight = myInfo.getHeight();
     currentPos = {myInfo.getMyXPosition() / 2, myInfo.getMyYPosition() / 2};
-    currentDirection = myInfo.getMyDirection();
 
     prepareActions();
     moveIndex = 0;
@@ -34,20 +33,14 @@ void MyTankAlgorithm::prepareActions()
     plannedMoves.clear();
     std::string currentDirStr = directionToString[currentDirection];
     int steps = 0;
-
+    std::cout << "Planned moves for tank " << tankId << " at position (" << currentPos.first << ", " << currentPos.second
+              << ") facing " << directionToString[currentDirection] << std::endl;
     for (auto &nextPos : bfsPath)
     {
         if (steps >= maxMovesPerUpdate)
             break;
 
         std::string targetDir = getDirectionFromPosition(currentPos, nextPos);
-        if (targetDir != currentDirStr)
-        {
-            rotateTowards(targetDir);
-            currentDirStr = targetDir;
-            currentDirection = stringToDirection[targetDir];
-        }
-
         if (role == "sniper" && shouldShoot())
         {
             plannedMoves.push_back(ActionRequest::Shoot);
@@ -56,7 +49,16 @@ void MyTankAlgorithm::prepareActions()
                 break;
         }
 
-        if (!isThreatAhead() && !isFriendlyTooClose())
+        if (targetDir != currentDirStr)
+        {
+
+            steps = rotateTowards(targetDir, steps);
+
+            currentDirStr = targetDir;
+            currentDirection = stringToDirection[targetDir];
+        }
+        // && !isThreatAhead() && !isFriendlyTooClose()
+        if (steps < maxMovesPerUpdate)
         {
             plannedMoves.push_back(ActionRequest::MoveForward);
             currentPos = nextPos;
@@ -71,31 +73,66 @@ void MyTankAlgorithm::prepareActions()
 
     while ((int)plannedMoves.size() < maxMovesPerUpdate)
         plannedMoves.push_back(ActionRequest::DoNothing);
+
+    for (auto &action : plannedMoves)
+    {
+        std::cout << to_string(action) << std::endl;
+    }
 }
 
-void MyTankAlgorithm::rotateTowards(std::string desiredDir)
+int MyTankAlgorithm::rotateTowards(std::string desiredDir, int step)
 {
     Direction desired = stringToDirection[desiredDir];
-    double angle = (desired - currentDirection + 8) % 8 * 0.125;
+
+    double angle = getAngleFromDirections(directionToString[currentDirection], desiredDir);
+
     if (angle == 0.125)
         plannedMoves.push_back(ActionRequest::RotateRight45);
+
     else if (angle == 0.25)
         plannedMoves.push_back(ActionRequest::RotateRight90);
-    else if (angle == 0.875)
+
+    else if (angle == 0.375)
+    {
+        plannedMoves.push_back(ActionRequest::RotateRight45);
+        step++;
+        if (step >= maxMovesPerUpdate)
+            return step;
+        plannedMoves.push_back(ActionRequest::RotateRight90);
+    }
+    else if (angle == 0.5)
+    {
+        plannedMoves.push_back(ActionRequest::RotateRight90);
+        step++;
+        if (step >= maxMovesPerUpdate)
+            return step;
+        plannedMoves.push_back(ActionRequest::RotateRight90);
+    }
+    else if (angle == 0.625)
+    {
+        plannedMoves.push_back(ActionRequest::RotateLeft90);
+        step++;
+        if (step >= maxMovesPerUpdate)
+            return step;
         plannedMoves.push_back(ActionRequest::RotateLeft45);
+    }
     else if (angle == 0.75)
         plannedMoves.push_back(ActionRequest::RotateLeft90);
+    else if (angle == 0.875)
+        plannedMoves.push_back(ActionRequest::RotateLeft45);
     else
-        plannedMoves.push_back(ActionRequest::DoNothing); // fallback
+        plannedMoves.push_back(ActionRequest::DoNothing);
+
+    return step++;
 }
 
 std::string MyTankAlgorithm::getDirectionFromPosition(std::pair<int, int> current, std::pair<int, int> target)
 {
-    int dx = (target.first - current.first + gameWidth) % gameWidth;
-    int dy = (target.second - current.second + gameHeight) % gameHeight;
-    dx = (dx == gameWidth - 1) ? -1 : (dx == 1 ? 1 : 0);
-    dy = (dy == gameHeight - 1) ? -1 : (dy == 1 ? 1 : 0);
-    return pairToDirections[{dx, dy}];
+    int xDiff = target.first - current.first;
+    xDiff = xDiff > 1 || xDiff == -1 ? -1 : (xDiff + gameWidth) % gameWidth;
+    int yDiff = target.second - current.second;
+    yDiff = yDiff > 1 || yDiff == -1 ? -1 : (yDiff + gameHeight) % gameHeight;
+    return pairToDirections[{xDiff, yDiff}];
 }
 
 std::pair<int, int> MyTankAlgorithm::move(std::pair<int, int> pos, Direction dir)
@@ -136,4 +173,11 @@ bool MyTankAlgorithm::shouldShoot()
             return false; // don't friendly fire
     }
     return true;
+}
+
+double MyTankAlgorithm::getAngleFromDirections(const std::string &directionStr, const std::string &desiredDir)
+{
+    std::unordered_map<std::string, double> stringToAngle = {
+        {"U", 0.0}, {"UR", 0.125}, {"R", 0.25}, {"DR", 0.375}, {"D", 0.5}, {"DL", 0.625}, {"L", 0.75}, {"UL", 0.875}};
+    return ((static_cast<int>((stringToAngle[desiredDir] - stringToAngle[directionStr]) * 8 + 8)) % 8) / 8.0;
 }

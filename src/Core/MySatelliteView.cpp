@@ -13,7 +13,7 @@ MySatelliteView::MySatelliteView(int tankPos,
 
 char MySatelliteView::getObjectAt(size_t x, size_t y) const
 {
-    int bijectionIndex = bijection(y, x);
+    int bijectionIndex = bijection(x, y);
     if (bijectionIndex == tankPos)
         return '%'; // Current Tank
     if (tanks.count(bijectionIndex))

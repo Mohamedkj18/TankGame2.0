@@ -58,7 +58,7 @@ bool Tank::checkForAWall()
     updatePosition(direction);
     if (game->getWalls().count(game->bijection(x, y)) == 1)
     {
-        outputFile << "Tank " << tankId << " hit a wall at " << (int)x / 2 << ", " << (int)y / 2 << "!\n";
+        outputFile << "Player " << playerId << ": Tank " << tankId << " hit a wall at " << (int)x / 2 << ", " << (int)y / 2 << "!\n";
         updatePosition(reverseDirection[direction]);
         lastMove = ActionRequest::DoNothing;
 

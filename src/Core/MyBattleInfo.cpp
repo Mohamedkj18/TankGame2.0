@@ -9,7 +9,7 @@ MyBattleInfo::MyBattleInfo(int width, int height,
     : width(width), height(height),
       friendlyTanks(friendlyTanks), enemyTanks(enemyTanks),
       mines(mines), walls(walls), shells(shells),
-      myX(0), myY(0), myDirection(Direction::U) {}
+      myX(0), myY(0) {}
 
 int MyBattleInfo::getWidth() const { return width; }
 int MyBattleInfo::getHeight() const { return height; }
@@ -22,11 +22,9 @@ std::set<int> &MyBattleInfo::getShells() { return shells; }
 
 void MyBattleInfo::setMyXPosition(int x) { myX = x; }
 void MyBattleInfo::setMyYPosition(int y) { myY = y; }
-void MyBattleInfo::setMyDirection(Direction dir) { myDirection = dir; }
 
 int MyBattleInfo::getMyXPosition() const { return myX; }
 int MyBattleInfo::getMyYPosition() const { return myY; }
-Direction MyBattleInfo::getMyDirection() const { return myDirection; }
 
 void MyBattleInfo::setBFSPath(std::vector<std::pair<int, int>> &path)
 {

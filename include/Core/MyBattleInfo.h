@@ -14,7 +14,6 @@ class MyBattleInfo : public BattleInfo
 private:
     int width, height;
     int myX, myY;
-    Direction myDirection;
     std::string role;
     std::set<int> friendlyTanks;
     std::set<int> enemyTanks;
@@ -44,9 +43,6 @@ public:
     void setMyYPosition(int y);
     int getMyXPosition() const;
     int getMyYPosition() const;
-
-    void setMyDirection(Direction dir);
-    Direction getMyDirection() const;
 
     void setRole(const std::string &role);
     std::string getRole() const;
