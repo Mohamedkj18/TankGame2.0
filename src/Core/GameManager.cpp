@@ -385,13 +385,13 @@ void GameManager::rotate(Tank &tank)
     tank.resetReverseState();
     ActionRequest move = tank.getLastMove();
     if (move == ActionRequest::RotateLeft90)
-        tank.rotateTank(90);
+        tank.rotateTank(-0.25);
     else if (move == ActionRequest::RotateRight90)
-        tank.rotateTank(-90);
+        tank.rotateTank(0.25);
     else if (move == ActionRequest::RotateLeft45)
-        tank.rotateTank(45);
+        tank.rotateTank(-0.125);
     else if (move == ActionRequest::RotateRight45)
-        tank.rotateTank(-45);
+        tank.rotateTank(0.125);
 
     tank.setLastMove(ActionRequest::DoNothing);
 }
