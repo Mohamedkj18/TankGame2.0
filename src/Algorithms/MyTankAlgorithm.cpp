@@ -25,7 +25,6 @@ ActionRequest MyTankAlgorithm::getAction()
 {
     if (moveIndex >= (int)plannedMoves.size())
     {
-        ;
         return ActionRequest::GetBattleInfo;
     }
 
@@ -37,12 +36,16 @@ void MyTankAlgorithm::prepareActions()
     plannedMoves.clear();
     std::string currentDirStr = directionToString[currentDirection];
     int steps = 0;
+    std::cout << "[DEBUG]" << " Player ID: " << playerId << ", Tank ID: " << tankId << ", Current Position: (" 
+              << currentPos.first << ", " << currentPos.second << "), Current Direction: " 
+              << currentDirStr << std::endl;
     for (auto &nextPos : bfsPath)
     {
         if (steps >= maxMovesPerUpdate)
             break;
 
         std::string targetDir = getDirectionFromPosition(currentPos, nextPos);
+        
         if (role == "sniper" && shouldShoot())
         {
             plannedMoves.push_back(ActionRequest::Shoot);
@@ -72,7 +75,10 @@ void MyTankAlgorithm::prepareActions()
             steps++;
         }
     }
-
+    std::cout<< "[DEBUG] " << "Player ID: " << playerId << ", Tank ID: " << tankId << std::endl;
+    for(auto &plannedMove : plannedMoves){
+        std::cout<< "[DEBUG]" << "Planned Move: " << to_string(plannedMove) << std::endl;
+    }
     while ((int)plannedMoves.size() < maxMovesPerUpdate)
         plannedMoves.push_back(ActionRequest::DoNothing);
 }
@@ -100,7 +106,6 @@ int MyTankAlgorithm::rotateTowards(std::string desiredDir, int step)
     else if (angle == 0.5)
     {
 
-        std::cout << "[DEBUG] Rotating " << tankId << " 180 degrees from " << directionToString[currentDirection] << " to " << desiredDir << std::endl;
         plannedMoves.push_back(ActionRequest::RotateRight90);
         step++;
         if (step >= maxMovesPerUpdate)
@@ -184,9 +189,7 @@ double MyTankAlgorithm::getAngleFromDirections(const std::string &directionStr, 
         dirToCheck = orgDir;
         dirToCheck += (angle);
         if (dirToCheck == desDir)
-        {
-            std::cout << "[DEBUG] Angle from " << directionStr << " to " << desiredDir << " is " << angle << std::endl;
             return angle;
-        }
+        
     }
 }

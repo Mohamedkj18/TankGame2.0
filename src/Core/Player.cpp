@@ -28,8 +28,8 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
             if (object == '%')
             {
                 friendlyTanks.insert(id);
-                myX = j;
-                myY = i;
+                myX = 2*j;
+                myY = 2*i;
             }
             else if (object == '@')
             {
@@ -74,10 +74,7 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
     std::pair<int, int> target = getTargetForTank(tankId);
     std::vector<std::pair<int, int>> path = getPath(myPos, target);
     info.setBFSPath(path);
-    for (const auto &pos : path)
-    {
-        std::cout << "[DEBUG] Tank " << tankId << "Player " << player_index << " path position: (" << pos.first << ", " << pos.second << ")\n";
-    }
+    
 
     plannedPositions[tankId] = path;
 

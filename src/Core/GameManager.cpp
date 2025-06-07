@@ -428,8 +428,6 @@ void GameManager::executeTanksMoves()
     {
 
         Tank *tank = pair.second.get(); // pointer from unique_ptr
-        std::cout << "[DEBUG]" << "Processing tank: " << tank->getTankId() << " at position (" << tank->getX() / 2 << ", " << tank->getY() / 2 << ")" << "move: " << to_string(tank->getLastMove()) << std::endl;
-        std::cout << "[DEBUG]" << "Player ID: " << tank->getPlayerId() << std::endl;
         move = tank->getLastMove();
         if (tank->getCantShoot())
         {
@@ -539,10 +537,10 @@ bool GameManager::checkForAWinner()
     return false;
 }
 
-void GameManager::outputTankMove(int playerNum, ActionRequest move)
+void GameManager::outputTankMove(int playerNum, ActionRequest move, int tankId)
 {
 
-    outputFile << "Player " << playerNum << " moved: " << to_string(move) << std::endl;
+    outputFile << "Player " << playerNum << " tank " << tankId <<" moved: " << to_string(move) << std::endl;
 }
 
 void GameManager::runGame()
@@ -567,7 +565,7 @@ void GameManager::runGame()
             TankAlgorithm *algo = tank->getTankAlgorithm();
             ActionRequest move = algo->getAction();
             tank->setLastMove(move);
-            outputTankMove(tank->getPlayerId(), move);
+            outputTankMove(tank->getPlayerId(), move, tank->getTankId());
         }
         executeBattleInfoRequests();
 
