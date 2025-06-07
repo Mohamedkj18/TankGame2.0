@@ -18,9 +18,11 @@ all: $(TARGET)
 $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-# Compile .cpp to .o with automatic folder creation
+# Compile .cpp to .o with automatic folder creation (POSIX-compatible)
 obj/%.o: %.cpp
-	@if not exist "$(subst /,\,$(dir $@))" mkdir "$(subst /,\,$(dir $@))"
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean up
+# Clean target
+clean:
+	rm -rf obj $(TARGET)

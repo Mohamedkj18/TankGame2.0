@@ -70,7 +70,7 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
     std::string role = assignRole(tankId);
     info.setRole(role);
 
-    std::pair<int, int> myPos = {myX / 2, myY / 2};
+    std::pair<int, int> myPos = {myX , myY };
     std::pair<int, int> target = getTargetForTank(tankId);
     std::vector<std::pair<int, int>> path = getPath(myPos, target);
     info.setBFSPath(path);

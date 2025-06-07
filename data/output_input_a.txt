@@ -1,114 +1,95 @@
 Game step: 0
-Player 1 moved: GetBattleInfo
-Player 2 moved: GetBattleInfo
-Player 1 moved: GetBattleInfo
-Player 2 moved: GetBattleInfo
-Player 1 moved: GetBattleInfo
+Player 1 tank 2 moved: GetBattleInfo
+Player 2 tank 1 moved: GetBattleInfo
+Player 2 tank 0 moved: GetBattleInfo
+Player 1 tank 1 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
 Game step: 1
-Player 1 moved: RotateRight45
-Player 2 moved: RotateLeft45
-Player 1 moved: RotateLeft90
-Player 2 moved: RotateRight45
-Player 1 moved: RotateLeft90
+Player 1 tank 2 moved: MoveForward
+Player 2 tank 1 moved: RotateLeft90
+Player 2 tank 0 moved: MoveForward
+Player 1 tank 1 moved: RotateRight45
+Player 1 tank 0 moved: RotateRight90
 Game step: 2
-Player 1 moved: RotateRight90
-Player 2 moved: MoveForward
-Player 1 moved: RotateLeft45
-Player 2 moved: MoveForward
-Player 1 moved: RotateLeft45
+Player 1 tank 2 moved: RotateRight45
+Player 2 tank 1 moved: MoveForward
+Player 2 tank 0 moved: DoNothing
+Player 1 tank 1 moved: RotateRight90
+Player 1 tank 0 moved: RotateRight90
 Game step: 3
-Player 1 moved: MoveForward
-Player 2 moved: DoNothing
-Player 1 moved: MoveForward
-Player 2 moved: DoNothing
-Player 1 moved: MoveForward
-Player 1: Tank 2 hit a wall at 8, 7!
+Player 1 tank 2 moved: MoveForward
+Player 2 tank 1 moved: DoNothing
+Player 2 tank 0 moved: DoNothing
+Player 1 tank 1 moved: MoveForward
+Player 1 tank 0 moved: MoveForward
 Game step: 4
-Player 1 moved: RotateRight90
-Player 2 moved: DoNothing
-Player 1 moved: RotateLeft45
-Player 2 moved: DoNothing
-Player 1 moved: RotateLeft45
+Player 1 tank 2 moved: RotateRight90
+Player 2 tank 1 moved: DoNothing
+Player 2 tank 0 moved: DoNothing
+Player 1 tank 0 moved: MoveForward
+Player 1 tank 1 moved: RotateRight45
 Game step: 5
-Player 1 moved: MoveForward
-Player 2 moved: DoNothing
-Player 1 moved: MoveForward
-Player 2 moved: DoNothing
-Player 1 moved: MoveForward
-Player 1: Tank 2 hit a wall at 8, 7!
-Player 1: Tank 0 hit a wall at 0, 1!
+Player 1 tank 2 moved: MoveForward
+Player 2 tank 1 moved: DoNothing
+Player 2 tank 0 moved: DoNothing
+Player 1 tank 0 moved: MoveForward
+Player 1 tank 1 moved: MoveForward
 Game step: 6
-Player 2 moved: DoNothing
-Player 1 moved: MoveForward
-Player 1 moved: MoveForward
-Player 2 moved: DoNothing
-Player 1 moved: MoveForward
-Player 1: Tank 2 hit a wall at 8, 7!
-Player 1: Tank 1 hit a wall at 0, 4!
-Player 1: Tank 0 hit a wall at 0, 1!
+Player 1 tank 2 moved: MoveForward
+Player 2 tank 1 moved: DoNothing
+Player 2 tank 0 moved: DoNothing
+Player 1 tank 0 moved: RotateRight45
+Player 1 tank 1 moved: RotateRight45
 Game step: 7
-Player 2 moved: DoNothing
-Player 1 moved: RotateLeft90
-Player 1 moved: MoveForward
-Player 2 moved: DoNothing
-Player 1 moved: MoveForward
-Player 1: Tank 1 hit a wall at 0, 4!
-Player 1: Tank 0 hit a wall at 0, 1!
+Player 1 tank 2 moved: RotateRight45
+Player 1 tank 1 moved: MoveForward
+Player 2 tank 1 moved: DoNothing
+Player 2 tank 0 moved: DoNothing
+Player 1 tank 0 moved: MoveForward
 Game step: 8
-Player 2 moved: DoNothing
-Player 1 moved: MoveForward
-Player 1 moved: RotateRight45
-Player 2 moved: DoNothing
-Player 1 moved: RotateRight45
-Player 1: Tank 2 hit a wall at 8, 7!
+Player 1 tank 2 moved: MoveForward
+Player 1 tank 1 moved: MoveForward
+Player 1 tank 0 moved: RotateLeft45
+Player 2 tank 1 moved: DoNothing
+Player 2 tank 0 moved: DoNothing
 Game step: 9
-Player 2 moved: GetBattleInfo
-Player 1 moved: RotateRight90
-Player 1 moved: MoveForward
-Player 2 moved: GetBattleInfo
-Player 1 moved: MoveForward
+Player 1 tank 2 moved: RotateRight45
+Player 1 tank 1 moved: RotateLeft90
+Player 1 tank 0 moved: MoveForward
+Player 2 tank 1 moved: GetBattleInfo
+Player 2 tank 0 moved: GetBattleInfo
 Game step: 10
-Player 2 moved: RotateRight45
-Player 1 moved: MoveForward
-Player 1 moved: MoveForward
-Player 2 moved: RotateRight45
-Player 1 moved: RotateLeft45
-Player 1: Tank 2 hit a wall at 8, 7!
+Player 1 tank 2 moved: MoveForward
+Player 1 tank 1 moved: MoveForward
+Player 2 tank 1 moved: MoveForward
+Player 2 tank 0 moved: MoveForward
+Player 1 tank 0 moved: RotateRight45
 Game step: 11
-Player 2 moved: MoveForward
-Player 1 moved: MoveForward
-Player 1 moved: RotateLeft90
-Player 2 moved: MoveForward
-Player 1 moved: MoveForward
-Player 1: Tank 2 hit a wall at 8, 7!
-Player 2: Tank 0 hit a wall at 14, 9!
-Player 1: Tank 0 hit a wall at 1, 9!
+Player 1 tank 1 moved: RotateRight90
+Player 2 tank 1 moved: DoNothing
+Player 2 tank 0 moved: DoNothing
+Player 1 tank 2 moved: GetBattleInfo
+Player 1 tank 0 moved: MoveForward
 Game step: 12
-Player 2 moved: DoNothing
-Player 1 moved: GetBattleInfo
-Player 1 moved: MoveForward
-Player 2 moved: DoNothing
-Player 1 moved: RotateRight45
+Player 1 tank 1 moved: MoveForward
+Player 2 tank 0 moved: DoNothing
+Player 1 tank 2 moved: RotateLeft90
+Player 2 tank 1 moved: DoNothing
+Player 1 tank 0 moved: MoveForward
 Game step: 13
-Player 2 moved: DoNothing
-Player 1 moved: GetBattleInfo
-Player 1 moved: RotateLeft45
-Player 2 moved: DoNothing
-Player 1 moved: MoveForward
-Player 1: Tank 0 hit a wall at 1, 9!
+Player 1 tank 1 moved: MoveForward
+Player 1 tank 2 moved: RotateLeft45
+Player 2 tank 0 moved: DoNothing
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 1 moved: DoNothing
+Losing step: Tank 2 hit a tank at 10, 6!
 Game step: 14
-Player 2 moved: DoNothing
-Player 1 moved: RotateRight45
-Player 1 moved: MoveForward
-Player 2 moved: DoNothing
-Player 1 moved: GetBattleInfo
-Player 1: Tank 2 hit a wall at 8, 7!
+Player 2 tank 0 moved: DoNothing
+Player 1 tank 0 moved: RotateLeft45
+Player 2 tank 1 moved: DoNothing
 Game step: 15
-Player 2 moved: DoNothing
-Player 1 moved: MoveForward
-Player 1 moved: RotateLeft45
-Player 2 moved: DoNothing
-Player 1 moved: MoveForward
-Player 1: Tank 1 hit a wall at 1, 0!
-Player 1: Tank 0 hit a wall at 1, 9!
+Player 2 tank 0 moved: DoNothing
+Player 1 tank 0 moved: MoveForward
+Player 2 tank 1 moved: DoNothing
+Losing step: Tank 1 hit a tank at 10, 4!
 Game Over! It's a tie due to max steps reached!

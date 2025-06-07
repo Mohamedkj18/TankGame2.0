@@ -36,16 +36,12 @@ void MyTankAlgorithm::prepareActions()
     plannedMoves.clear();
     std::string currentDirStr = directionToString[currentDirection];
     int steps = 0;
-    std::cout << "[DEBUG]" << " Player ID: " << playerId << ", Tank ID: " << tankId << ", Current Position: (" 
-              << currentPos.first << ", " << currentPos.second << "), Current Direction: " 
-              << currentDirStr << std::endl;
     for (auto &nextPos : bfsPath)
     {
         if (steps >= maxMovesPerUpdate)
             break;
 
         std::string targetDir = getDirectionFromPosition(currentPos, nextPos);
-        
         if (role == "sniper" && shouldShoot())
         {
             plannedMoves.push_back(ActionRequest::Shoot);
@@ -75,10 +71,7 @@ void MyTankAlgorithm::prepareActions()
             steps++;
         }
     }
-    std::cout<< "[DEBUG] " << "Player ID: " << playerId << ", Tank ID: " << tankId << std::endl;
-    for(auto &plannedMove : plannedMoves){
-        std::cout<< "[DEBUG]" << "Planned Move: " << to_string(plannedMove) << std::endl;
-    }
+
     while ((int)plannedMoves.size() < maxMovesPerUpdate)
         plannedMoves.push_back(ActionRequest::DoNothing);
 }
@@ -188,8 +181,8 @@ double MyTankAlgorithm::getAngleFromDirections(const std::string &directionStr, 
         angle = i * rotate;
         dirToCheck = orgDir;
         dirToCheck += (angle);
-        if (dirToCheck == desDir)
+        if (dirToCheck == desDir){
             return angle;
-        
+    }
     }
 }
