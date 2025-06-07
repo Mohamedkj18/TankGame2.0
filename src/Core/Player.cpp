@@ -28,8 +28,8 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
             if (object == '%')
             {
                 friendlyTanks.insert(id);
-                myX = 2*j;
-                myY = 2*i;
+                myX = j;
+                myY = i;
             }
             else if (object == '@')
             {

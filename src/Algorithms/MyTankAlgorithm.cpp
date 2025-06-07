@@ -15,7 +15,7 @@ void MyTankAlgorithm::updateBattleInfo(BattleInfo &info)
 
     gameWidth = myInfo.getWidth();
     gameHeight = myInfo.getHeight();
-    currentPos = {myInfo.getMyXPosition() / 2, myInfo.getMyYPosition() / 2};
+    currentPos = {myInfo.getMyXPosition(), myInfo.getMyYPosition()};
 
     prepareActions();
     moveIndex = 0;
