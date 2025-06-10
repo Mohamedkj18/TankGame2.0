@@ -87,25 +87,29 @@ void GameManager::addShell(std::unique_ptr<Shell> shell)
 
 void GameManager::advanceShellsRecentlyFired()
 {
+    std::unordered_set<int> newFired;
+
     for (int oldPos : shellsFired)
     {
         auto it = shells.find(oldPos);
         if (it == shells.end())
             continue;
 
-        Shell *shell = it->second.get();
-        bool didItMove = shell->moveForward();
+        std::unique_ptr<Shell> &shell = it->second;
+        shell->moveForward();
         int newPos = bijection(shell->getX(), shell->getY());
 
         if (shells.count(newPos))
+        {
             shellsToRemove.insert(newPos); // handle collision
-        shells[newPos] = std::move(it->second);
+        }
 
-        if (!didItMove)
-            shellHitAWall(newPos);
+        shells[newPos] = std::move(shell); // move it in the map
+        newFired.insert(newPos);
         shells.erase(oldPos);
     }
-    shellsFired.clear();
+
+    shellsFired = std::move(newFired);
 }
 
 void GameManager::addMine(int x, int y)
@@ -288,6 +292,16 @@ void GameManager::tankHitByAShell(int tankPos)
 
 void GameManager::shellHitAWall(int wallPos)
 {
+    if (shells.count(wallPos))
+    {
+        outputFile << "Shell hit wall at ("
+                   << shells[wallPos]->getX() / 2 << ", " << shells[wallPos]->getY() / 2 << ")\n";
+    }
+    else
+    {
+        outputFile << "Unknown Shell hit a wall at unknown position.\n";
+    }
+
     if (getWallHealth(wallPos) <= 0)
     {
         wallsToRemove.insert(wallPos);
@@ -388,7 +402,6 @@ void GameManager::checkForTankCollision(Tank &tank)
     if (secondaryTanks.count(currTankPos))
     {
         outputFile << "Losing step: Tank " << secondaryTanks[currTankPos]->getTankId() << " hit a tank at " << (int)tank.getX() / 2 << ", " << (int)tank.getY() / 2 << "!\n";
-        playerTanksCount[secondaryTanks[currTankPos]->getPlayerId()]--;
         tanksToRemove.insert(currTankPos);
     }
     if (shells.count(currTankPos))
@@ -452,6 +465,7 @@ void GameManager::executeBattleInfoRequests()
     for (const auto &pair : tanks)
     {
         Tank *tank = pair.second.get();
+
         if (tank->getLastMove() == ActionRequest::GetBattleInfo)
         {
             TankAlgorithm *tankAlgorithm = tank->getTankAlgorithm();
@@ -526,7 +540,7 @@ bool GameManager::checkForAWinner()
 void GameManager::outputTankMove(int playerNum, ActionRequest move, int tankId)
 {
 
-    outputFile << "Player " << playerNum << " tank " << tankId << " moved: " << to_string(move) << std::endl;
+    outputFile << "Player " << playerNum << " tank " << tankId <<" moved: " << to_string(move) << std::endl;
 }
 
 void GameManager::runGame()
@@ -543,17 +557,8 @@ void GameManager::runGame()
     }
     while (true)
     {
-        // std::cout << "gameStep: " << gameStep << "\n";
         outputFile << "Game step: " << gameStep << std::endl;
-        // for (const auto &pair : players)
-        // {
-        //     int id = pair.first;
-        //     MyPlayer *player = dynamic_cast<MyPlayer *>(pair.second.get());
-        //     for (int i = 0; i < playerTanksCount[id]; ++i)
-        //     {
-        //         std::cout << "Player " << id << " tank " << i << " role: " << player->getRoleName(i) << std::endl;
-        //     }
-        // }
+
         for (const auto &pair : tanks)
         {
             Tank *tank = pair.second.get();
@@ -562,7 +567,6 @@ void GameManager::runGame()
             tank->setLastMove(move);
             outputTankMove(tank->getPlayerId(), move, tank->getTankId());
         }
-
         executeBattleInfoRequests();
 
         advanceShells();
@@ -584,7 +588,6 @@ void GameManager::runGame()
 
         if (checkForAWinner())
         {
-            printBoard(true);
             outputFile.close();
             return;
         }
@@ -592,14 +595,12 @@ void GameManager::runGame()
         {
             outputFile << "Game Over! It's a tie due to max steps reached!\n";
             outputFile.close();
-            visualizationFile.close();
             return;
         }
         else if (totalShellsRemaining <= 0 && gameStep >= maxSteps / 2)
         {
             outputFile << "Game Over! It's a tie due to no shells remaining!\n";
             outputFile.close();
-            visualizationFile.close();
             return;
         }
         else if (totalShellsRemaining <= 0)
@@ -609,7 +610,6 @@ void GameManager::runGame()
             {
                 outputFile << "Game Over! It's a tie due to time out!\n";
                 outputFile.close();
-                visualizationFile.close();
                 return;
             }
         }
@@ -654,15 +654,8 @@ void GameManager::printBoard(bool final)
         char symbol = '0' + (tank->getPlayerId() % 10);
         board[y][x] = symbol;
     }
-    if (final)
-    {
-        visualizationFile << "\n=== Final Board ===\n";
-    }
-    else
-    {
-        visualizationFile << "\n=== Game Step " << gameStep << " ===\n";
-    }
 
+    visualizationFile << "\n=== Game Step " << gameStep << " ===\n";
     for (int y = 0; y < height; ++y)
     {
         for (int x = 0; x < width; ++x)

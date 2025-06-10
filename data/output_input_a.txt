@@ -23,6 +23,7 @@ Player 1 tank 1 moved: GetBattleInfo
 Player 1 tank 3 moved: GetBattleInfo
 Player 2 tank 4 moved: RotateLeft90
 Shell at 0, 2hit a wall!
+Unknown Shell hit a wall at unknown position.
 Game step: 2
 Player 1 tank 0 moved: GetBattleInfo
 Player 2 tank 1 moved: RotateRight90
