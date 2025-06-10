@@ -1,6 +1,8 @@
 #pragma once
 
 #include <unordered_map>
+#include <map>
+
 #include <unordered_set>
 
 #include <vector>
@@ -33,7 +35,7 @@ private:
 
     std::unordered_map<int, std::unique_ptr<Player>> players;
     std::unordered_map<int, int> playerTanksCount;
-    std::unordered_map<int, std::unique_ptr<Tank>> tanks;
+    std::map<int, std::unique_ptr<Tank>> tanks;
     std::unordered_map<int, std::unique_ptr<Shell>> shells;
     std::set<int> mines;
     std::unordered_map<int, Wall> walls;
@@ -41,7 +43,7 @@ private:
     std::set<int> tanksToRemove;
     std::set<int> shellsToRemove;
     std::unordered_map<int, std::unique_ptr<Shell>> secondaryShells;
-    std::unordered_map<int, std::unique_ptr<Tank>> secondaryTanks;
+    std::map<int, std::unique_ptr<Tank>> secondaryTanks;
     std::unordered_set<int> shellsFired;
     TankAlgorithmFactory &tankFactory;
     PlayerFactory &playerFactory;
@@ -57,7 +59,7 @@ public:
     void processInputFile(const std::string &inputFilePath);
 
     std::unordered_map<int, Wall> &getWalls() { return walls; }
-    std::unordered_map<int, std::unique_ptr<Tank>> &getTanks() { return tanks; }
+    std::map<int, std::unique_ptr<Tank>> &getTanks() { return tanks; }
     std::unordered_map<int, std::unique_ptr<Shell>> &getShells() { return shells; }
     std::set<int> &getMines() { return mines; }
     void getPlayersInput(std::ofstream &file);

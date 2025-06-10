@@ -58,6 +58,7 @@ class Player1 : public MyPlayer
 {
 public:
     using MyPlayer::MyPlayer;
+    virtual ~Player1();
     // void assignRole(int tankId) override;
 };
 
@@ -66,5 +67,6 @@ class Player2 : public MyPlayer
 {
 public:
     using MyPlayer::MyPlayer;
+    virtual ~Player2();
     // void assignRole(int tankId) override;
 };

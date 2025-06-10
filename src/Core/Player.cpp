@@ -240,5 +240,6 @@ bool MyPlayer::isInOpen(int x, int y) const
 }
 
 // ------------------------ Player 1 ------------------------
-
+Player1::~Player1() = default;
+Player2::~Player2() = default;
 // ------------------------ Player 2 ------------------------

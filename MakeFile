@@ -2,23 +2,30 @@
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall -Wextra -pedantic -Iinclude
 
+# Final executable name
+TARGET = tanks_game
+
 # Platform detection
 ifeq ($(OS),Windows_NT)
     RM = del /Q /F
     MKDIR_P = if not exist "$(subst /,\,$(dir $@))" mkdir "$(subst /,\,$(dir $@))"
     EXEC = $(TARGET).exe
 else
-    RM = rm -rf
-    MKDIR_P = mkdir -p $(dir $@)
-    EXEC = $(TARGET)
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Darwin)
+        RM = rm -rf
+        MKDIR_P = mkdir -p $(dir $@)
+        EXEC = $(TARGET)  # macOS: no .exe
+    else
+        RM = rm -rf
+        MKDIR_P = mkdir -p $(dir $@)
+        EXEC = $(TARGET)  # Linux or others
+    endif
 endif
 
 # Source files
 SRC = $(wildcard src/Common/*.cpp src/Core/*.cpp src/utils/*.cpp src/Algorithms/*.cpp src/Algorithms/Roles/*.cpp) main.cpp
 OBJ = $(SRC:%.cpp=obj/%.o)
-
-# Final executable name
-TARGET = tanks_game
 
 # Default target
 all: $(EXEC)
@@ -34,13 +41,12 @@ obj/%.o: %.cpp
 
 .PHONY: all clean
 
+# Clean target
 clean:
 ifeq ($(OS),Windows_NT)
 	@if exist obj rmdir /S /Q obj
 	@if exist $(TARGET).exe del /Q /F $(TARGET).exe
-	@if exist tanks_game del /Q /F tanks_game
+	@if exist $(TARGET) del /Q /F $(TARGET)
 else
 	$(RM) obj $(TARGET) $(TARGET).exe
 endif
-
-
