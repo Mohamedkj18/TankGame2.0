@@ -6,21 +6,26 @@
 #include <set>
 #include <vector>
 #include <string>
+#include <memory>
 #include "Common/BattleInfo.h"
 #include "utils/DirectionUtils.h"
+#include "Algorithms/Roles/Role.h"
+
+class Role;
 
 class MyBattleInfo : public BattleInfo
 {
 private:
     int width, height;
     int myX, myY;
-    std::string role;
+    std::unique_ptr<Role> role;
+    bool shouldKeepRole = false;
     std::set<int> friendlyTanks;
     std::set<int> enemyTanks;
     std::set<int> mines;
     std::set<int> walls;
     std::set<int> shells;
-    std::vector<std::pair<int, int>> bfsPath;
+    std::vector<std::pair<int, int>> path;
 
 public:
     MyBattleInfo(int width, int height,
@@ -43,12 +48,11 @@ public:
     void setMyYPosition(int y);
     int getMyXPosition() const;
     int getMyYPosition() const;
+    std::vector<std::pair<int, int>> getPath();
+    void setPath(int tankId, const std::vector<std::pair<int, int>> &path);
 
-    void setRole(const std::string &role);
-    std::string getRole() const;
-
-    void setBFSPath(std::vector<std::pair<int, int>> &path);
-    std::vector<std::pair<int, int>> getBFSPath();
+    void setRole(std::unique_ptr<Role> &&newRole);
+    const Role &getRole() const;
 
     bool isMine(int x, int y) const;
     bool isWall(int x, int y) const;
@@ -58,6 +62,10 @@ public:
     bool isFriendlyTank(int x, int y) const;
 
     int bijection(int x, int y) const;
+
+    std::unique_ptr<Role> extractRole();
+    bool getShouldKeepRole() const { return shouldKeepRole; }
+    void setShouldKeepRole(bool value) { shouldKeepRole = value; }
 };
 
 #endif

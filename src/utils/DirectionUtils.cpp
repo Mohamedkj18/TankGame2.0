@@ -15,8 +15,8 @@ std::unordered_map<Direction, std::string> directionToString = {
 
 std::array<Direction, 8> directions = {U, UR, R, DR, D, DL, L, UL};
 
-std::unordered_map<std::pair<int, int>, std::string, pair_hash> pairToDirections = {
-    {{0, -1}, "U"}, {{1, -1}, "UR"}, {{1, 0}, "R"}, {{1, 1}, "DR"}, {{0, 1}, "D"}, {{-1, 1}, "DL"}, {{-1, 0}, "L"}, {{-1, -1}, "UL"}};
+std::unordered_map<std::pair<int, int>, Direction, pair_hash> pairToDirections = {
+    {{0, -1}, U}, {{1, -1}, UR}, {{1, 0}, R}, {{1, 1}, DR}, {{0, 1}, D}, {{-1, 1}, DL}, {{-1, 0}, L}, {{-1, -1}, UL}};
 
 std::unordered_map<std::string, double> stringToAngle = {{"a", -0.25}, {"d", 0.25}, {"q", -0.125}, {"e", 0.125}, {"x", 0}};
 

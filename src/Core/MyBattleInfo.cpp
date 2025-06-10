@@ -26,18 +26,24 @@ void MyBattleInfo::setMyYPosition(int y) { myY = y; }
 int MyBattleInfo::getMyXPosition() const { return myX; }
 int MyBattleInfo::getMyYPosition() const { return myY; }
 
-void MyBattleInfo::setBFSPath(std::vector<std::pair<int, int>> &path)
+void MyBattleInfo::setPath(int tankId, const std::vector<std::pair<int, int>> &path)
 {
-    bfsPath = path;
+    this->path = path; // Store moves for the tank
 }
-std::vector<std::pair<int, int>> MyBattleInfo::getBFSPath()
+std::vector<std::pair<int, int>> MyBattleInfo::getPath()
 {
-    return bfsPath;
+    return path;
 }
 
-void MyBattleInfo::setRole(const std::string &r) { role = r; }
-std::string MyBattleInfo::getRole() const { return role; }
+void MyBattleInfo::setRole(std::unique_ptr<Role> &&newRole)
+{
+    role = std::move(newRole);
+}
 
+const Role &MyBattleInfo::getRole() const
+{
+    return *role;
+}
 bool MyBattleInfo::isMine(int x, int y) const
 {
     return mines.count(bijection(x, y)) > 0;
@@ -66,4 +72,9 @@ bool MyBattleInfo::isFriendlyTank(int x, int y) const
 int MyBattleInfo::bijection(int x, int y) const
 {
     return ((x + y) * (x + y + 1)) / 2 + y;
+}
+
+std::unique_ptr<Role> MyBattleInfo::extractRole()
+{
+    return std::move(role); // Transfers ownership
 }

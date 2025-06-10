@@ -83,7 +83,7 @@ public:
     std::vector<std::string> splitByComma(const std::string &input);
     void checkForAMine(int x, int y, int tankId);
     void runGame();
-    void printBoard();
+    void printBoard(bool final = false);
     void advanceShells();
     void advanceShellsRecentlyFired();
     void executeTanksMoves();

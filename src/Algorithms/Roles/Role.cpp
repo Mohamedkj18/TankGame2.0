@@ -1,0 +1,81 @@
+#include "Algorithms/Roles/Role.h"
+
+int Role::rotateTowards(Direction desiredDir, int step)
+{
+    double angle = getAngleFromDirections(currentDirection, desiredDir);
+
+    if (angle == 0.125)
+        nextMoves.push_back(ActionRequest::RotateRight45);
+
+    else if (angle == 0.25)
+        nextMoves.push_back(ActionRequest::RotateRight90);
+
+    else if (angle == 0.375)
+    {
+        nextMoves.push_back(ActionRequest::RotateRight45);
+        step++;
+        if (step >= maxMovesPerUpdate)
+            return step;
+        nextMoves.push_back(ActionRequest::RotateRight90);
+    }
+    else if (angle == 0.5)
+    {
+        nextMoves.push_back(ActionRequest::RotateRight90);
+        step++;
+        if (step >= maxMovesPerUpdate)
+            return step;
+        nextMoves.push_back(ActionRequest::RotateRight90);
+    }
+    else if (angle == 0.625)
+    {
+        nextMoves.push_back(ActionRequest::RotateLeft90);
+        step++;
+        if (step >= maxMovesPerUpdate)
+            return step;
+        nextMoves.push_back(ActionRequest::RotateLeft45);
+    }
+    else if (angle == 0.75)
+        nextMoves.push_back(ActionRequest::RotateLeft90);
+    else if (angle == 0.875)
+        nextMoves.push_back(ActionRequest::RotateLeft45);
+    else
+        nextMoves.push_back(ActionRequest::DoNothing);
+
+    return step++;
+}
+
+Direction Role::getDirectionFromPosition(std::pair<int, int> current, std::pair<int, int> target)
+{
+    int xDiff = target.first - current.first;
+    xDiff = xDiff > 1 || xDiff == -1 ? -1 : (xDiff + gameWidth) % gameWidth;
+    int yDiff = target.second - current.second;
+    yDiff = yDiff > 1 || yDiff == -1 ? -1 : (yDiff + gameHeight) % gameHeight;
+    return pairToDirections[{xDiff, yDiff}];
+}
+
+double Role::getAngleFromDirections(Direction &orgDir, Direction &desiredDir)
+{
+    Direction dirToCheck;
+    double angle, rotate = 0.125;
+    for (int i = 0; i < 8; ++i)
+    {
+        angle = i * rotate;
+        dirToCheck = orgDir;
+        dirToCheck += (angle);
+        if (dirToCheck == desiredDir)
+        {
+            return angle;
+        }
+    }
+}
+
+ActionRequest Role::getNextAction()
+{
+    if (nextMoves.empty())
+    {
+        return ActionRequest::GetBattleInfo;
+    }
+    ActionRequest action = nextMoves.front();
+    nextMoves.erase(nextMoves.begin());
+    return action;
+}

@@ -1,5 +1,8 @@
+#include <queue>
+#include <memory>
 #include "Algorithms/MyTankAlgorithm.h"
 #include "utils/DirectionUtils.h"
+#include "Algorithms/Roles/ChaserRole.h"
 
 MyTankAlgorithm::MyTankAlgorithm(int player_index, int tank_index, int numMovesPerUpdate, int range, Direction initialDirection)
     : playerId(player_index), tankId(tank_index), moveIndex(0), range(range), maxMovesPerUpdate(numMovesPerUpdate), currentDirection(initialDirection) {}
@@ -8,128 +11,32 @@ void MyTankAlgorithm::updateBattleInfo(BattleInfo &info)
 {
     auto &myInfo = static_cast<MyBattleInfo &>(info);
 
-    bfsPath = myInfo.getBFSPath();
-    role = myInfo.getRole();
+    if (!myInfo.getShouldKeepRole() || !role)
+        setRole(std::move(myInfo.extractRole()));
+
     threats = myInfo.getEnemyTanks();
     nearbyFriendlies = myInfo.getFriendlyTanks();
+    mines = myInfo.getMines();
+    walls = myInfo.getWalls();
 
     gameWidth = myInfo.getWidth();
     gameHeight = myInfo.getHeight();
     currentPos = {myInfo.getMyXPosition(), myInfo.getMyYPosition()};
+    std::pair<int, int> target = getTargetForTank();
 
-    prepareActions();
+    bfsPath = role->prepareActions(*this);
+    myInfo.setPath(tankId, bfsPath);
     moveIndex = 0;
 }
 
 ActionRequest MyTankAlgorithm::getAction()
 {
-    if (moveIndex >= (int)plannedMoves.size())
+    if (!role)
     {
         return ActionRequest::GetBattleInfo;
     }
 
-    return plannedMoves[moveIndex++];
-}
-
-void MyTankAlgorithm::prepareActions()
-{
-    plannedMoves.clear();
-    std::string currentDirStr = directionToString[currentDirection];
-    int steps = 0;
-    for (auto &nextPos : bfsPath)
-    {
-        if (steps >= maxMovesPerUpdate)
-            break;
-
-        std::string targetDir = getDirectionFromPosition(currentPos, nextPos);
-        if (role == "sniper" && shouldShoot())
-        {
-            plannedMoves.push_back(ActionRequest::Shoot);
-            steps++;
-            if (steps >= maxMovesPerUpdate)
-                break;
-        }
-
-        if (targetDir != currentDirStr)
-        {
-
-            steps = rotateTowards(targetDir, steps);
-
-            currentDirStr = targetDir;
-            currentDirection = stringToDirection[targetDir];
-        }
-        // && !isThreatAhead() && !isFriendlyTooClose()
-        if (steps < maxMovesPerUpdate)
-        {
-            plannedMoves.push_back(ActionRequest::MoveForward);
-            currentPos = nextPos;
-            steps++;
-        }
-        else
-        {
-            plannedMoves.push_back(ActionRequest::DoNothing);
-            steps++;
-        }
-    }
-
-    while ((int)plannedMoves.size() < maxMovesPerUpdate)
-        plannedMoves.push_back(ActionRequest::DoNothing);
-}
-
-int MyTankAlgorithm::rotateTowards(std::string desiredDir, int step)
-{
-    Direction desired = stringToDirection[desiredDir];
-
-    double angle = getAngleFromDirections(directionToString[currentDirection], desiredDir);
-
-    if (angle == 0.125)
-        plannedMoves.push_back(ActionRequest::RotateRight45);
-
-    else if (angle == 0.25)
-        plannedMoves.push_back(ActionRequest::RotateRight90);
-
-    else if (angle == 0.375)
-    {
-        plannedMoves.push_back(ActionRequest::RotateRight45);
-        step++;
-        if (step >= maxMovesPerUpdate)
-            return step;
-        plannedMoves.push_back(ActionRequest::RotateRight90);
-    }
-    else if (angle == 0.5)
-    {
-
-        plannedMoves.push_back(ActionRequest::RotateRight90);
-        step++;
-        if (step >= maxMovesPerUpdate)
-            return step;
-        plannedMoves.push_back(ActionRequest::RotateRight90);
-    }
-    else if (angle == 0.625)
-    {
-        plannedMoves.push_back(ActionRequest::RotateLeft90);
-        step++;
-        if (step >= maxMovesPerUpdate)
-            return step;
-        plannedMoves.push_back(ActionRequest::RotateLeft45);
-    }
-    else if (angle == 0.75)
-        plannedMoves.push_back(ActionRequest::RotateLeft90);
-    else if (angle == 0.875)
-        plannedMoves.push_back(ActionRequest::RotateLeft45);
-    else
-        plannedMoves.push_back(ActionRequest::DoNothing);
-
-    return step++;
-}
-
-std::string MyTankAlgorithm::getDirectionFromPosition(std::pair<int, int> current, std::pair<int, int> target)
-{
-    int xDiff = target.first - current.first;
-    xDiff = xDiff > 1 || xDiff == -1 ? -1 : (xDiff + gameWidth) % gameWidth;
-    int yDiff = target.second - current.second;
-    yDiff = yDiff > 1 || yDiff == -1 ? -1 : (yDiff + gameHeight) % gameHeight;
-    return pairToDirections[{xDiff, yDiff}];
+    return role->getNextAction();
 }
 
 std::pair<int, int> MyTankAlgorithm::move(std::pair<int, int> pos, Direction dir)
@@ -164,25 +71,190 @@ bool MyTankAlgorithm::shouldShoot()
     {
         look = move(look, currentDirection);
         int id = bijection(look.first, look.second);
-        if (threats.count(id))
-            return false; // don't shoot toward mines
         if (nearbyFriendlies.count(id))
             return false; // don't friendly fire
     }
     return true;
 }
 
-double MyTankAlgorithm::getAngleFromDirections(const std::string &directionStr, const std::string &desiredDir)
+bool MyTankAlgorithm::isSquareValid(int x, int y, int step)
 {
-    Direction orgDir = stringToDirection[directionStr], desDir = stringToDirection[desiredDir], dirToCheck;
-    double angle, rotate = 0.125;
-    for (int i = 0; i < 8; ++i)
+    if (x < 0 || y < 0 || x >= static_cast<int>(gameWidth) || y >= static_cast<int>(gameHeight))
+        return false;
+
+    int pos = bijection(x, y);
+    if (mines.count(pos) > 0 || walls.count(pos) > 0)
+        return false;
+
+    return true;
+}
+
+std::pair<int, int> MyTankAlgorithm::findFirstLegalLocationToFlee(int x, int y)
+{
+    for (Direction dir : directions)
     {
-        angle = i * rotate;
-        dirToCheck = orgDir;
-        dirToCheck += (angle);
-        if (dirToCheck == desDir){
-            return angle;
+        int nx = (x + stringToIntDirection[dir][0] + gameWidth) % gameWidth;
+        int ny = (y + stringToIntDirection[dir][1] + gameHeight) % gameHeight;
+        if (isSquareValid(nx, ny, 0))
+            return {nx, ny};
     }
+    return {x, y};
+}
+
+std::pair<int, int> MyTankAlgorithm::moveTank(std::pair<int, int> pos, Direction dir)
+{
+    auto offset = stringToIntDirection[dir];
+    return {
+        (pos.first + offset[0] + static_cast<int>(gameWidth)) % static_cast<int>(gameWidth),
+        (pos.second + offset[1] + static_cast<int>(gameHeight)) % static_cast<int>(gameHeight)};
+}
+
+std::pair<int, int> MyTankAlgorithm::getTargetForTank()
+{
+    // In case of equal distance, prefer the one with lower rotation cost
+    std::pair<int, int> myPos = currentPos;
+    std::pair<int, int> bestTarget = {-1, -1};
+    int minDist = INT_MAX;
+
+    for (int y = 0; y < static_cast<int>(gameHeight); ++y)
+    {
+        for (int x = 0; x < static_cast<int>(gameWidth); ++x)
+        {
+            int pos = bijection(x, y);
+            if (threats.count(pos) > 0)
+            {
+                int dist = manhattanDistance(myPos.first, myPos.second, x, y);
+
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    bestTarget = {x, y};
+                }
+            }
+        }
     }
+    return (bestTarget.first == -1) ? std::pair<int, int>{0, 0} : bestTarget;
+}
+
+std::vector<std::pair<int, int>> MyTankAlgorithm::getPath(std::pair<int, int> start, std::pair<int, int> target)
+{
+    std::queue<std::pair<int, int>> queue;
+    std::unordered_map<std::pair<int, int>, bool, pair_hash> visited;
+    std::unordered_map<std::pair<int, int>, std::pair<int, int>, pair_hash> parent;
+
+    queue.push(start);
+    visited[start] = true;
+
+    int step = 0;
+
+    while (!queue.empty())
+    {
+        auto current = queue.front();
+        queue.pop();
+
+        if (current == target)
+        {
+            std::vector<std::pair<int, int>> path;
+            while (current != start)
+            {
+                path.push_back(current);
+                current = parent[current];
+            }
+            std::reverse(path.begin(), path.end());
+
+            return path;
+        }
+
+        for (const auto &dir : directions)
+        {
+            auto next = moveTank(current, dir);
+            if (!visited[next] && isSquareValid(next.first, next.second, step))
+            {
+                visited[next] = true;
+                parent[next] = current;
+                queue.push(next);
+            }
+        }
+        step++;
+    }
+
+    return {};
+}
+
+int MyTankAlgorithm::manhattanDistance(int x1, int y1, int x2, int y2) const
+{
+    return std::abs(x1 - x2) + std::abs(y1 - y2);
+}
+
+bool MyTankAlgorithm::isInOpen(std::pair<int, int> pos) const
+{
+    int wallCount = 0;
+    int x = pos.first;
+    int y = pos.second;
+
+    for (int dy = -1; dy <= 1; ++dy)
+    {
+        for (int dx = -1; dx <= 1; ++dx)
+        {
+            if (dx == 0 && dy == 0)
+                continue;
+
+            int nx = (x + dx + gameWidth) % gameWidth;
+            int ny = (y + dy + gameHeight) % gameHeight;
+
+            if (walls.count(bijection(nx, ny)) > 0)
+                wallCount++;
+        }
+    }
+
+    return wallCount <= 3;
+}
+
+bool MyTankAlgorithm::isThreatWithinRange(int range) const
+{
+    for (int id : threats)
+    {
+        std::pair<int, int> enemyPos = inverseBijection(id);
+        int dx = std::abs(enemyPos.first - currentPos.first);
+        int dy = std::abs(enemyPos.second - currentPos.second);
+
+        // Apply toroidal wrapping
+        dx = std::min(dx, static_cast<int>(gameWidth) - dx);
+        dy = std::min(dy, static_cast<int>(gameHeight) - dy);
+
+        if (dx + dy <= range)
+            return true;
+    }
+    return false;
+}
+
+std::pair<int, int> MyTankAlgorithm::findNearestFriendlyTank(std::pair<int, int> from) const
+{
+    int bestDist = INT_MAX;
+    std::pair<int, int> bestPos = from;
+
+    for (int id : nearbyFriendlies)
+    {
+        std::pair<int, int> pos = inverseBijection(id);
+        int dx = std::abs(pos.first - from.first);
+        int dy = std::abs(pos.second - from.second);
+
+        // Toroidal wrapping
+        dx = std::min(dx, static_cast<int>(gameWidth) - dx);
+        dy = std::min(dy, static_cast<int>(gameHeight) - dy);
+
+        int dist = dx + dy;
+        if (dist < bestDist)
+        {
+            bestDist = dist;
+            bestPos = pos;
+        }
+    }
+
+    return bestPos;
+}
+
+void MyTankAlgorithm::setRole(std::unique_ptr<Role> newRole)
+{
+    role = std::move(newRole);
 }

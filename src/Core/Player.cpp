@@ -3,6 +3,9 @@
 #include <stack>
 #include <unordered_map>
 #include <unordered_set>
+#include "Algorithms/Roles/ChaserRole.h"
+#include "Algorithms/Roles/DecoyRole.h"
+#include "Algorithms/Roles/SniperRole.h"
 #include "Core/MyPlayer.h"
 #include "Core/MyBattleInfo.h"
 #include "Algorithms/MyTankAlgorithm.h"
@@ -14,6 +17,7 @@ MyPlayer::MyPlayer(int player_index, size_t x, size_t y, size_t max_steps, size_
 
 void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &satellite_view)
 {
+
     std::set<int> friendlyTanks, enemyTanks, mines, walls, shells;
 
     int myX = -1, myY = -1;
@@ -32,29 +36,19 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
                 myY = i;
             }
             else if (object == '@')
-            {
                 mines.insert(id);
-            }
             else if (object == '#')
-            {
                 walls.insert(id);
-            }
             else if (object == '*')
-            {
                 shells.insert(id);
-            }
             else if (object >= '0' && object <= '9')
             {
                 int tankOwner = object - '0';
 
                 if (tankOwner == player_index)
-                {
                     friendlyTanks.insert(id);
-                }
                 else
-                {
                     enemyTanks.insert(id);
-                }
             }
         }
     }
@@ -66,178 +60,185 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
 
     MyTankAlgorithm *algo = dynamic_cast<MyTankAlgorithm *>(&tank);
     int tankId = algo ? algo->getTankId() : 0;
-
-    std::string role = assignRole(tankId);
-    info.setRole(role);
-
-    std::pair<int, int> myPos = {myX , myY };
-    std::pair<int, int> target = getTargetForTank(tankId);
-    std::vector<std::pair<int, int>> path = getPath(myPos, target);
-    info.setBFSPath(path);
-    
-
-    plannedPositions[tankId] = path;
+    EnemyScanResult scan = assignRole(tankId, algo->getCurrentDirection(), {myX, myY});
+    if (!scan.ShouldKeepRole)
+    {
+        info.setRole(createRole(tankId, algo->getCurrentDirection(), {myX, myY}, scan));
+        info.setShouldKeepRole(false);
+    }
+    else
+    {
+        info.setShouldKeepRole(true);
+    }
 
     tank.updateBattleInfo(info);
+
+    tanksPlannedPaths[tankId] = info.getPath();
 }
 
-void MyPlayer::updatePlannedPositions()
+void MyPlayer::updatePlannedMoves()
 {
-    for (auto &[_, path] : plannedPositions)
+    for (auto &[_, moves] : tanksPlannedPaths)
     {
-        if (!path.empty())
-            path.erase(path.begin());
+        if (!moves.empty())
+            moves.erase(moves.begin());
     }
 }
 
-bool MyPlayer::isSquareValid(int x, int y, int step)
+EnemyScanResult MyPlayer::assignRole(int tankId, Direction currDir, std::pair<int, int> pos)
 {
-    if (x < 0 || y < 0 || x >= static_cast<int>(playerGameWidth) || y >= static_cast<int>(playerGameHeight))
-        return false;
-    char cell = lastSatellite[y][x];
-    if (cell == '#' || cell == '@')
-        return false;
 
-    int idx = bijection(x, y);
-    for (const auto &[_, positions] : plannedPositions)
+    EnemyScanResult scan = scanVisibleEnemies(pos.first, pos.second);
+
+    auto it = tankRoles.find(tankId);
+    if (it != tankRoles.end())
     {
-        if (step < static_cast<int>(positions.size()) &&
-            bijection(positions[step].first, positions[step].second) == idx)
+
+        if (shouldKeepRole(tankId, pos, it->second, scan))
+        {
+            tankPositions[tankId] = pos;
+            scan.ShouldKeepRole = true;
+        }
+    }
+
+    return scan;
+}
+
+std::unique_ptr<Role> MyPlayer::createRole(int tankId, Direction currDir, std::pair<int, int> pos, EnemyScanResult scan)
+{
+
+    int chaserCount = 0, sniperCount = 0, decoyCount = 0;
+    for (const auto &[_, roleName] : tankRoles)
+    {
+        if (roleName == "Chaser")
+            chaserCount++;
+        else if (roleName == "Sniper")
+            sniperCount++;
+        else if (roleName == "Decoy")
+            decoyCount++;
+    }
+
+    std::unique_ptr<Role> newRole;
+
+    if (scan.closestDistance <= 2 && chaserCount < 2)
+    {
+        newRole = std::make_unique<ChaserRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
+        tankRoles[tankId] = "Chaser";
+    }
+    else if (scan.hasLineOfSight && sniperCount < 1)
+    {
+        newRole = std::make_unique<SniperRole>(2, currDir, pos, playerGameWidth, playerGameHeight);
+        tankRoles[tankId] = "Sniper";
+    }
+    else
+    {
+        newRole = std::make_unique<DecoyRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
+        tankRoles[tankId] = "Decoy";
+    }
+
+    tankPositions[tankId] = pos;
+    return std::move(newRole);
+}
+bool MyPlayer::shouldKeepRole(int tankId, const std::pair<int, int> &pos, const std::string &role, EnemyScanResult scan)
+{
+    int x0 = pos.first;
+    int y0 = pos.second;
+
+    if (role == "Sniper")
+    {
+        return scan.closestDistance >= 3 && scan.hasLineOfSight;
+    }
+
+    if (role == "Chaser")
+    {
+        return scan.closestDistance <= 5;
+    }
+
+    if (role == "Decoy")
+    {
+        return isInOpen(x0, y0) && scan.closestDistance != INT_MAX;
+    }
+
+    return false;
+}
+
+EnemyScanResult MyPlayer::scanVisibleEnemies(int x0, int y0) const
+{
+    const char enemyChar = (player_index == 1) ? '2' : '1';
+    EnemyScanResult result;
+    for (int y = 0; y < (int)lastSatellite.size(); ++y)
+    {
+        for (int x = 0; x < (int)lastSatellite[0].size(); ++x)
+        {
+            if (lastSatellite[y][x] == enemyChar)
+            {
+                int dist = manhattanDistance(x0, y0, x, y);
+                if (dist < result.closestDistance)
+                    result.closestDistance = dist;
+                if ((x == x0 || y == y0) && isClearLine(x0, y0, x, y))
+                    result.hasLineOfSight = true;
+            }
+        }
+    }
+    return result;
+}
+
+int MyPlayer::manhattanDistance(int x1, int y1, int x2, int y2) const
+{
+    return std::abs(x1 - x2) + std::abs(y1 - y2);
+}
+
+bool MyPlayer::isClearLine(int x1, int y1, int x2, int y2) const
+{
+    int dx = x2 - x1;
+    int dy = y2 - y1;
+
+    // Normalize direction to one of 8 (if not aligned, return false)
+    if (dx != 0)
+        dx /= std::abs(dx);
+    if (dy != 0)
+        dy /= std::abs(dy);
+
+    if ((x1 + dx + playerGameWidth) % playerGameWidth == x2 &&
+        (y1 + dy + playerGameHeight) % playerGameHeight == y2)
+    {
+        return true; // adjacent cell
+    }
+
+    int x = (x1 + dx + playerGameWidth) % playerGameWidth;
+    int y = (y1 + dy + playerGameHeight) % playerGameHeight;
+
+    while (x != x2 || y != y2)
+    {
+        if (lastSatellite[y][x] == '#')
             return false;
+
+        x = (x + dx + playerGameWidth) % playerGameWidth;
+        y = (y + dy + playerGameHeight) % playerGameHeight;
     }
     return true;
 }
 
-std::pair<int, int> MyPlayer::findFirstLegalLocationToFlee(int x, int y)
+bool MyPlayer::isInOpen(int x, int y) const
 {
-    for (Direction dir : directions)
+    int wallCount = 0;
+    for (int dy = -1; dy <= 1; ++dy)
     {
-        int nx = (x + stringToIntDirection[dir][0] + playerGameWidth) % playerGameWidth;
-        int ny = (y + stringToIntDirection[dir][1] + playerGameHeight) % playerGameHeight;
-        if (isSquareValid(nx, ny, 0))
-            return {nx, ny};
-    }
-    return {x, y};
-}
-
-std::pair<int, int> MyPlayer::moveTank(std::pair<int, int> pos, Direction dir)
-{
-    auto offset = stringToIntDirection[dir];
-    return {
-        (pos.first + offset[0] + static_cast<int>(playerGameWidth)) % static_cast<int>(playerGameWidth),
-        (pos.second + offset[1] + static_cast<int>(playerGameHeight)) % static_cast<int>(playerGameHeight)};
-}
-
-std::string MyPlayer::assignRole(int tankId)
-{
-    if (tankRoles.count(tankId))
-        return tankRoles[tankId];
-    std::string role = (tankId % 2 == 0) ? "chaser" : "chaser";
-    tankRoles[tankId] = role;
-    return role;
-}
-
-std::pair<int, int> MyPlayer::getTargetForTank(int /*tankId*/)
-{
-    for (int i = 0; i < static_cast<int>(playerGameWidth); ++i)
-    {
-        for (int j = 0; j < static_cast<int>(playerGameHeight); ++j)
+        for (int dx = -1; dx <= 1; ++dx)
         {
-            char obj = lastSatellite[j][i];
-            if (obj >= '0' && obj <= '9' && (obj - '0') != player_index)
-                return {i, j};
+            if (dx == 0 && dy == 0)
+                continue;
+
+            int nx = (x + dx + playerGameWidth) % playerGameWidth;
+            int ny = (y + dy + playerGameHeight) % playerGameHeight;
+
+            if (lastSatellite[ny][nx] == '#')
+                wallCount++;
         }
     }
-    return {0, 0}; // fallback
+    return wallCount <= 3;
 }
 
 // ------------------------ Player 1 ------------------------
-std::vector<std::pair<int, int>> Player1::getPath(std::pair<int, int> start, std::pair<int, int> target)
-{
-    std::queue<std::pair<int, int>> queue;
-    std::unordered_map<std::pair<int, int>, bool, pair_hash> visited;
-    std::unordered_map<std::pair<int, int>, std::pair<int, int>, pair_hash> parent;
-
-    queue.push(start);
-    visited[start] = true;
-
-    int step = 0;
-
-    while (!queue.empty())
-    {
-        auto current = queue.front();
-        queue.pop();
-
-        if (current == target)
-        {
-            std::vector<std::pair<int, int>> path;
-            while (current != start)
-            {
-                path.push_back(current);
-                current = parent[current];
-            }
-            std::reverse(path.begin(), path.end());
-
-            return path;
-        }
-
-        for (const auto &dir : directions)
-        {
-            auto next = moveTank(current, dir);
-            if (!visited[next] && isSquareValid(next.first, next.second, step))
-            {
-                visited[next] = true;
-                parent[next] = current;
-                queue.push(next);
-            }
-        }
-        step++;
-    }
-
-    return {};
-}
 
 // ------------------------ Player 2 ------------------------
-std::vector<std::pair<int, int>> Player2::getPath(std::pair<int, int> start, std::pair<int, int> /*target*/)
-{
-    std::stack<std::pair<int, int>> stack;
-    std::unordered_set<std::pair<int, int>, pair_hash> visited;
-    std::unordered_map<std::pair<int, int>, std::pair<int, int>, pair_hash> parent;
-
-    stack.push(start);
-    visited.insert(start);
-
-    std::pair<int, int> fallback = findFirstLegalLocationToFlee(start.first, start.second);
-
-    while (!stack.empty())
-    {
-        auto current = stack.top();
-        stack.pop();
-
-        if (current == fallback)
-        {
-            std::vector<std::pair<int, int>> path;
-            while (current != start)
-            {
-                path.push_back(current);
-                current = parent[current];
-            }
-            std::reverse(path.begin(), path.end());
-
-            return path;
-        }
-
-        for (const auto &dir : directions)
-        {
-            auto next = moveTank(current, dir);
-            if (!visited.count(next) && isSquareValid(next.first, next.second, 0))
-            {
-                visited.insert(next);
-                parent[next] = current;
-                stack.push(next);
-            }
-        }
-    }
-
-    return {};
-}

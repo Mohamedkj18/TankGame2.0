@@ -2,27 +2,45 @@
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall -Wextra -pedantic -Iinclude
 
-# Source file discovery
-SRC = $(wildcard src/Common/*.cpp src/Core/*.cpp src/utils/*.cpp src/Algorithms/*.cpp) main.cpp
+# Platform detection
+ifeq ($(OS),Windows_NT)
+    RM = del /Q /F
+    MKDIR_P = if not exist "$(subst /,\,$(dir $@))" mkdir "$(subst /,\,$(dir $@))"
+    EXEC = $(TARGET).exe
+else
+    RM = rm -rf
+    MKDIR_P = mkdir -p $(dir $@)
+    EXEC = $(TARGET)
+endif
 
-# Object file mapping
+# Source files
+SRC = $(wildcard src/Common/*.cpp src/Core/*.cpp src/utils/*.cpp src/Algorithms/*.cpp src/Algorithms/Roles/*.cpp) main.cpp
 OBJ = $(SRC:%.cpp=obj/%.o)
 
 # Final executable name
 TARGET = tanks_game
 
 # Default target
-all: $(TARGET)
+all: $(EXEC)
 
-# Link object files into executable
-$(TARGET): $(OBJ)
+# Link all object files
+$(EXEC): $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-# Compile .cpp to .o with automatic folder creation (POSIX-compatible)
+# Compile source to object files
 obj/%.o: %.cpp
-	@mkdir -p $(dir $@)
+	@$(MKDIR_P)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean target
+.PHONY: all clean
+
 clean:
-	rm -rf obj $(TARGET)
+ifeq ($(OS),Windows_NT)
+	@if exist obj rmdir /S /Q obj
+	@if exist $(TARGET).exe del /Q /F $(TARGET).exe
+	@if exist tanks_game del /Q /F tanks_game
+else
+	$(RM) obj $(TARGET) $(TARGET).exe
+endif
+
+

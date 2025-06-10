@@ -29,6 +29,7 @@ int main(int argc, char **argv)
     }
     std::cout << "Game initialized successfully." << std::endl;
     game.runGame();
+    std::cout << "Game finished successfully." << std::endl;
 
     return 0;
 }
