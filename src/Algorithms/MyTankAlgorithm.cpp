@@ -206,32 +206,54 @@ bool MyTankAlgorithm::isInOpen(std::pair<int, int> pos) const
                 wallCount++;
         }
     }
+    std::cout << "[DEBUG ISINOPEN] PlayerID: " << playerId << " TankID: " << tankId << " Wall count: " << wallCount << std::endl;
 
     return wallCount <= 3;
 }
 
 bool MyTankAlgorithm::isThreatWithinRange(int range) const
 {
-    for (int id : threats)
+    for(int i = currentPos.first - range; i <= currentPos.first + range; ++i)
     {
-        std::pair<int, int> enemyPos = inverseBijection(id);
-        int dx = std::abs(enemyPos.first - currentPos.first);
-        int dy = std::abs(enemyPos.second - currentPos.second);
+        for(int j = currentPos.second - range; j <= currentPos.second + range; ++j)
+        {
+            int x = (i + gameWidth) % gameWidth;
+            int y = (j + gameHeight) % gameHeight;
+            int pos = bijection(x, y);
 
-        // Apply toroidal wrapping
-        dx = std::min(dx, static_cast<int>(gameWidth) - dx);
-        dy = std::min(dy, static_cast<int>(gameHeight) - dy);
-
-        if (dx + dy <= range)
-            return true;
+            if(threats.count(pos) > 0)
+            {
+                std::cout << "[DEBUG THREATRANGE] PlayerID: " << playerId << " TankId: " << tankId << " Threat is in Range at (" << x << ", " << y << ")" << std::endl;
+                return true;
+            }
+        }
     }
+
+
+    // for (int id : threats)
+    // {
+    //     std::pair<int, int> enemyPos = inverseBijection(id);
+    //     int dx = std::abs(enemyPos.first - currentPos.first);
+    //     int dy = std::abs(enemyPos.second - currentPos.second);
+
+    //     // Apply toroidal wrapping
+    //     dx = std::min(dx, static_cast<int>(gameWidth) - dx);
+    //     dy = std::min(dy, static_cast<int>(gameHeight) - dy);
+
+    //     if (dx + dy <= range){
+    //         return true;
+    //     }
+    // }
+
+    std::cout << "[DEBUG THREATRANGE] PlayerID: " << playerId << " TankId: " << tankId << "Threat IS NOT in Range" <<std::endl;
+
     return false;
 }
 
 std::pair<int, int> MyTankAlgorithm::findNearestFriendlyTank(std::pair<int, int> from) const
 {
     int bestDist = INT_MAX;
-    std::pair<int, int> bestPos = from;
+    std::pair<int, int> bestPos = {-1,-1};
 
     for (int id : nearbyFriendlies)
     {

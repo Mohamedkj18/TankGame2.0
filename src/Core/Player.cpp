@@ -130,10 +130,14 @@ std::unique_ptr<Role> MyPlayer::createRole(int tankId, Direction currDir, std::p
         newRole = std::make_unique<SniperRole>(2, currDir, pos, playerGameWidth, playerGameHeight);
         tankRoles[tankId] = "Sniper";
     }
-    else
+    else if (decoyCount < 1)
     {
         newRole = std::make_unique<DecoyRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
         tankRoles[tankId] = "Decoy";
+    }
+    else{
+        newRole = std::make_unique<ChaserRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
+        tankRoles[tankId] = "Chaser";
     }
 
     tankPositions[tankId] = pos;

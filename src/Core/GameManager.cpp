@@ -558,15 +558,19 @@ void GameManager::runGame()
     while (true)
     {
         outputFile << "Game step: " << gameStep << std::endl;
+        std::cout << "Game step: " << gameStep << std::endl;
 
         for (const auto &pair : tanks)
         {
+
             Tank *tank = pair.second.get();
             TankAlgorithm *algo = tank->getTankAlgorithm();
             ActionRequest move = algo->getAction();
             tank->setLastMove(move);
             outputTankMove(tank->getPlayerId(), move, tank->getTankId());
+            std::cout << "Player " << tank->getPlayerId() << " tank " << tank->getTankId() << " Role: "  << dynamic_cast<MyPlayer *>(players[tank->getPlayerId()].get())->getRoleName(tank->getTankId())<< std::endl;
         }
+    
         executeBattleInfoRequests();
 
         advanceShells();

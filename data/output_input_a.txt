@@ -1,171 +1,362 @@
 Game step: 0
-Player 1 tank 0 moved: GetBattleInfo
 Player 2 tank 1 moved: GetBattleInfo
 Player 1 tank 2 moved: GetBattleInfo
-Player 1 tank 4 moved: GetBattleInfo
-Player 2 tank 2 moved: GetBattleInfo
 Player 2 tank 0 moved: GetBattleInfo
-Player 2 tank 3 moved: GetBattleInfo
-Player 1 tank 5 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
 Player 1 tank 1 moved: GetBattleInfo
-Player 1 tank 3 moved: GetBattleInfo
-Player 2 tank 4 moved: GetBattleInfo
+Player 2 tank 2 moved: GetBattleInfo
 Game step: 1
-Player 1 tank 0 moved: Shoot
-Player 2 tank 1 moved: RotateRight45
-Player 1 tank 2 moved: RotateRight45
-Player 1 tank 4 moved: RotateRight45
-Player 2 tank 2 moved: Shoot
-Player 2 tank 0 moved: RotateRight90
-Player 2 tank 3 moved: RotateLeft90
-Player 1 tank 5 moved: MoveForward
-Player 1 tank 1 moved: GetBattleInfo
-Player 1 tank 3 moved: GetBattleInfo
-Player 2 tank 4 moved: RotateLeft90
-Shell at 0, 2hit a wall!
-Unknown Shell hit a wall at unknown position.
-Game step: 2
-Player 1 tank 0 moved: GetBattleInfo
-Player 2 tank 1 moved: RotateRight90
-Player 1 tank 2 moved: RotateRight90
-Player 1 tank 4 moved: RotateRight90
-Player 2 tank 2 moved: GetBattleInfo
-Player 2 tank 0 moved: MoveForward
-Player 2 tank 3 moved: MoveForward
-Player 1 tank 5 moved: MoveForward
-Player 1 tank 1 moved: GetBattleInfo
-Player 1 tank 3 moved: GetBattleInfo
-Player 2 tank 4 moved: MoveForward
-Game step: 3
-Player 1 tank 0 moved: Shoot
-Player 2 tank 1 moved: Shoot
+Player 2 tank 1 moved: GetBattleInfo
 Player 1 tank 2 moved: Shoot
-Player 1 tank 4 moved: MoveForward
+Player 2 tank 0 moved: RotateRight45
+Player 1 tank 0 moved: GetBattleInfo
+Player 1 tank 1 moved: RotateLeft90
 Player 2 tank 2 moved: Shoot
-Player 2 tank 3 moved: GetBattleInfo
-Player 1 tank 5 moved: RotateRight45
-Player 2 tank 0 moved: RotateRight45
-Player 1 tank 3 moved: GetBattleInfo
-Player 2 tank 4 moved: RotateLeft90
-Bad step: Tank 0 can't shoot!
-shells collided at (3, 3) !
+Game step: 2
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Player 1 tank 0 moved: GetBattleInfo
+Player 1 tank 1 moved: Shoot
+Player 2 tank 2 moved: GetBattleInfo
+Game step: 3
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 2 tank 0 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 1 tank 1 moved: MoveForward
+Player 2 tank 2 moved: Shoot
+Shell at 30, 18hit a wall!
+Unknown Shell hit a wall at unknown position.
+Shell at 0, 16hit a wall!
+Unknown Shell hit a wall at unknown position.
 Bad step: Tank 2 can't shoot!
-Shell hit tank 1 at (4, 3)
+Bad step: Tank 2 can't shoot!
+Shell at 0, 16hit a wall!
+Unknown Shell hit a wall at unknown position.
+Shell at 36, 10hit a wall!
+Unknown Shell hit a wall at unknown position.
 Game step: 4
-Player 1 tank 0 moved: GetBattleInfo
-Player 1 tank 2 moved: MoveForward
-Player 1 tank 4 moved: MoveForward
-Player 2 tank 2 moved: GetBattleInfo
-Player 2 tank 3 moved: GetBattleInfo
-Player 1 tank 5 moved: MoveForward
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: GetBattleInfo
 Player 2 tank 0 moved: RotateRight90
-Player 1 tank 3 moved: GetBattleInfo
-Player 2 tank 4 moved: RotateLeft45
+Player 1 tank 0 moved: GetBattleInfo
+Player 1 tank 1 moved: RotateLeft45
+Player 2 tank 2 moved: GetBattleInfo
 Game step: 5
-Player 1 tank 0 moved: RotateRight90
-Player 1 tank 2 moved: GetBattleInfo
-Player 1 tank 4 moved: MoveForward
-Player 1 tank 5 moved: RotateRight45
-Player 2 tank 2 moved: RotateRight45
-Player 2 tank 3 moved: GetBattleInfo
-Player 2 tank 0 moved: MoveForward
-Player 1 tank 3 moved: GetBattleInfo
-Player 2 tank 4 moved: MoveForward
-Game step: 6
-Player 1 tank 0 moved: RotateRight90
-Player 1 tank 2 moved: GetBattleInfo
-Player 1 tank 4 moved: MoveForward
-Player 1 tank 5 moved: RotateRight90
-Player 2 tank 0 moved: RotateRight90
-Player 2 tank 2 moved: RotateRight90
-Player 2 tank 3 moved: GetBattleInfo
-Player 1 tank 3 moved: GetBattleInfo
-Player 2 tank 4 moved: RotateRight90
-Game step: 7
-Player 1 tank 0 moved: MoveForward
-Player 1 tank 2 moved: GetBattleInfo
-Player 1 tank 4 moved: RotateLeft90
-Player 1 tank 5 moved: MoveForward
-Player 2 tank 0 moved: RotateRight90
-Player 2 tank 2 moved: MoveForward
-Player 2 tank 3 moved: GetBattleInfo
-Player 1 tank 3 moved: GetBattleInfo
-Player 2 tank 4 moved: RotateRight90
-Player 1: Tank 5 hit a wall at 7, 7!
-Game step: 8
-Player 1 tank 0 moved: MoveForward
-Player 1 tank 2 moved: GetBattleInfo
-Player 1 tank 4 moved: MoveForward
-Player 1 tank 5 moved: MoveForward
-Player 2 tank 0 moved: MoveForward
-Player 2 tank 2 moved: RotateRight90
-Player 2 tank 3 moved: GetBattleInfo
-Player 1 tank 3 moved: GetBattleInfo
-Player 2 tank 4 moved: MoveForward
-Player 1: Tank 4 hit a wall at 8, 3!
-Player 1: Tank 5 hit a wall at 7, 7!
-Game step: 9
-Player 1 tank 0 moved: MoveForward
-Player 1 tank 2 moved: GetBattleInfo
-Player 1 tank 4 moved: GetBattleInfo
-Player 1 tank 5 moved: MoveForward
-Player 2 tank 2 moved: MoveForward
-Player 2 tank 3 moved: GetBattleInfo
-Player 2 tank 0 moved: MoveForward
-Player 1 tank 3 moved: GetBattleInfo
-Player 2 tank 4 moved: MoveForward
-Player 1: Tank 5 hit a wall at 7, 7!
-Losing step: Tank 3 hit a tank at 15, 6!
-Game step: 10
-Player 1 tank 0 moved: RotateLeft90
-Player 1 tank 2 moved: GetBattleInfo
-Player 2 tank 2 moved: GetBattleInfo
-Player 1 tank 4 moved: GetBattleInfo
-Player 1 tank 5 moved: RotateLeft90
-Player 2 tank 3 moved: GetBattleInfo
-Player 2 tank 0 moved: RotateRight45
-Game step: 11
-Player 1 tank 0 moved: MoveForward
-Player 1 tank 2 moved: GetBattleInfo
-Player 2 tank 2 moved: GetBattleInfo
-Player 1 tank 4 moved: GetBattleInfo
-Player 1 tank 5 moved: GetBattleInfo
-Player 2 tank 3 moved: GetBattleInfo
-Player 2 tank 0 moved: MoveForward
-Player 1: Tank 0 hit a wall at 5, 0!
-Game step: 12
-Player 1 tank 0 moved: MoveForward
-Player 1 tank 2 moved: GetBattleInfo
-Player 2 tank 2 moved: GetBattleInfo
-Player 1 tank 4 moved: GetBattleInfo
-Player 1 tank 5 moved: GetBattleInfo
-Player 2 tank 3 moved: GetBattleInfo
-Player 2 tank 0 moved: GetBattleInfo
-Player 1: Tank 0 hit a wall at 5, 0!
-Game step: 13
-Player 1 tank 0 moved: MoveForward
-Player 1 tank 2 moved: GetBattleInfo
-Player 2 tank 2 moved: GetBattleInfo
-Player 1 tank 4 moved: GetBattleInfo
-Player 1 tank 5 moved: GetBattleInfo
-Player 2 tank 3 moved: GetBattleInfo
-Player 2 tank 0 moved: GetBattleInfo
-Player 1: Tank 0 hit a wall at 5, 0!
-Game step: 14
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 2 tank 0 moved: Shoot
 Player 1 tank 0 moved: GetBattleInfo
+Player 1 tank 1 moved: Shoot
+Player 2 tank 2 moved: RotateLeft45
+Bad step: Tank 0 can't shoot!
+Bad step: Tank 1 can't shoot!
+Game step: 6
+Player 2 tank 1 moved: GetBattleInfo
 Player 1 tank 2 moved: GetBattleInfo
-Player 2 tank 2 moved: GetBattleInfo
-Player 1 tank 4 moved: GetBattleInfo
-Player 1 tank 5 moved: GetBattleInfo
-Player 2 tank 3 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 1 tank 1 moved: MoveForward
+Player 2 tank 2 moved: Shoot
+Game step: 7
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
 Player 2 tank 0 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 2 moved: MoveForward
+Player 1 tank 1 moved: GetBattleInfo
+Shell at 34, 10hit a wall!
+Unknown Shell hit a wall at unknown position.
+Bad step: Tank 2 can't shoot!
+Game step: 8
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: GetBattleInfo
+Player 2 tank 0 moved: DoNothing
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 2 moved: GetBattleInfo
+Player 1 tank 1 moved: RotateRight45
+Game step: 9
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: RotateRight90
+Player 2 tank 0 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 2 moved: RotateRight45
+Player 1 tank 1 moved: Shoot
+Game step: 10
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 2 tank 0 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 2 moved: Shoot
+Shell at 32, 14hit a wall!
+Shell at 34, 14hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 11
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: MoveForward
+Player 2 tank 0 moved: RotateLeft45
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 2 moved: MoveForward
+Shell at 10, 10hit a wall!
+Unknown Shell hit a wall at unknown position.
+Player 2: Tank 2 hit a wall at 16, 7!
+Game step: 12
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 2 tank 0 moved: Shoot
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 2 moved: GetBattleInfo
+Bad step: Tank 2 can't shoot!
+Game step: 13
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: MoveForward
+Player 2 tank 0 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 2 moved: RotateLeft90
+Shell at 26, 14hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 14
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: RotateRight45
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: DoNothing
+Player 2 tank 2 moved: Shoot
+Shell at 30, 10hit a wall!
+Unknown Shell hit a wall at unknown position.
 Game step: 15
-Player 1 tank 0 moved: MoveForward
-Player 1 tank 2 moved: GetBattleInfo
-Player 2 tank 2 moved: GetBattleInfo
-Player 1 tank 4 moved: GetBattleInfo
-Player 1 tank 5 moved: GetBattleInfo
-Player 2 tank 3 moved: GetBattleInfo
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Player 2 tank 2 moved: MoveForward
+Bad step: Tank 0 can't shoot!
+Shell at 14, 8hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 16
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 2 tank 2 moved: RotateLeft90
+Game step: 17
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: RotateRight45
+Player 1 tank 0 moved: GetBattleInfo
 Player 2 tank 0 moved: GetBattleInfo
-Player 1: Tank 0 hit a wall at 5, 0!
+Player 2 tank 2 moved: RotateLeft45
+Game step: 18
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: RotateLeft90
+Player 2 tank 2 moved: Shoot
+Bad step: Tank 2 can't shoot!
+Game step: 19
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 2 tank 2 moved: MoveForward
+Shell at 24, 18hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 20
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: RotateLeft45
+Player 2 tank 2 moved: RotateLeft90
+Game step: 21
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 2 tank 2 moved: Shoot
+Player 2: Tank 0 hit a wall at 15, 5!
+Bad step: Tank 2 can't shoot!
+Game step: 22
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 2 tank 2 moved: MoveForward
+Shell at 22, 10hit a wall!
+Unknown Shell hit a wall at unknown position.
+Bad step: Tank 2 can't shoot!
+Player 2: Tank 0 hit a wall at 15, 5!
+Losing step: Tank 2 hit a mine at 15, 8!
+Game step: 23
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: GetBattleInfo
+Game step: 24
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: RotateLeft90
+Game step: 25
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: RotateLeft90
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Shell at 24, 8hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 26
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Shell at 16, 6hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 27
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Bad step: Tank 0 can't shoot!
+Game step: 28
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: DoNothing
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 2: Tank 0 hit a wall at 12, 4!
+Game step: 29
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: RotateLeft45
+Bad step: Tank 2 can't shoot!
+Game step: 30
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Player 1: Tank 2 hit a wall at 8, 3!
+Shell at 24, 10hit a wall!
+Shell at 22, 10hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 31
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 2: Tank 0 hit a wall at 12, 5!
+Shell at 16, 6hit a wall!
+Game step: 32
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: GetBattleInfo
+Player 1: Tank 2 hit a wall at 8, 3!
+Shell at 16, 0hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 33
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Bad step: Tank 2 can't shoot!
+Bad step: Tank 0 can't shoot!
+Game step: 34
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 1: Tank 2 hit a wall at 8, 3!
+Player 2: Tank 0 hit a wall at 12, 5!
+Game step: 35
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Shell at 24, 10hit a wall!
+Game step: 36
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: RotateLeft90
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 2: Tank 0 hit a wall at 12, 5!
+Game step: 37
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: GetBattleInfo
+Shell at 14, 8hit a wall!
+Game step: 38
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Player 1: Tank 2 hit a wall at 7, 4!
+Bad step: Tank 0 can't shoot!
+Shell at 10, 10hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 39
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: RotateLeft45
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 2: Tank 0 hit a wall at 12, 5!
+Game step: 40
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: Shoot
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Bad step: Tank 2 can't shoot!
+Shell at 24, 10hit a wall!
+Shell at 0, 8hit a wall!
+Unknown Shell hit a wall at unknown position.
+Game step: 41
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: MoveForward
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 2: Tank 0 hit a wall at 12, 5!
+Game step: 42
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 2 moved: DoNothing
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: GetBattleInfo
+Game step: 43
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Bad step: Tank 0 can't shoot!
+Game step: 44
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 2: Tank 0 hit a wall at 12, 5!
+Game step: 45
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Shell at 24, 10hit a wall!
+Game step: 46
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Player 2: Tank 0 hit a wall at 12, 5!
+Game step: 47
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: GetBattleInfo
+Game step: 48
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Bad step: Tank 0 can't shoot!
+Game step: 49
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: MoveForward
+Shell at 8, 10hit a wall!
+Unknown Shell hit a wall at unknown position.
+Player 2: Tank 0 hit a wall at 12, 5!
+Game step: 50
+Player 2 tank 1 moved: GetBattleInfo
+Player 1 tank 0 moved: GetBattleInfo
+Player 2 tank 0 moved: Shoot
+Shell at 24, 10hit a wall!
 Game Over! It's a tie due to max steps reached!
