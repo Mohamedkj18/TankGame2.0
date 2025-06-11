@@ -1,6 +1,6 @@
 #include "Algorithms/Roles/Role.h"
 
-int Role::rotateTowards(Direction desiredDir, int step)
+int Role::rotateTowards(Direction currentDirection, Direction desiredDir, int step)
 {
     double angle = getAngleFromDirections(currentDirection, desiredDir);
 
@@ -41,16 +41,24 @@ int Role::rotateTowards(Direction desiredDir, int step)
     else
         nextMoves.push_back(ActionRequest::DoNothing);
 
-    return step++;
+    return ++step;
 }
 
 Direction Role::getDirectionFromPosition(std::pair<int, int> current, std::pair<int, int> target)
 {
-    int xDiff = target.first - current.first;
-    xDiff = xDiff > 1 || xDiff == -1 ? -1 : (xDiff + gameWidth) % gameWidth;
-    int yDiff = target.second - current.second;
-    yDiff = yDiff > 1 || yDiff == -1 ? -1 : (yDiff + gameHeight) % gameHeight;
-    return pairToDirections[{xDiff, yDiff}];
+    // int xDiff = target.first - current.first;
+    // xDiff = xDiff > 1 || xDiff == -1 ? -1 : (xDiff + gameWidth) % gameWidth;
+    // int yDiff = target.second - current.second;
+    // yDiff = yDiff > 1 || yDiff == -1 ? -1 : (yDiff + gameHeight) % gameHeight;
+    // return pairToDirections[{xDiff, yDiff}];
+    int dx = target.first - current.first;
+    int dy = target.second - current.second;
+
+    // Normalize to [-1, 0, 1]
+    dx = (dx == 0) ? 0 : (dx > 0 ? 1 : -1);
+    dy = (dy == 0) ? 0 : (dy > 0 ? 1 : -1);
+
+    return pairToDirections[{dx, dy}];
 }
 
 double Role::getAngleFromDirections(Direction &orgDir, Direction &desiredDir)

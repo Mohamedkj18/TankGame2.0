@@ -64,17 +64,20 @@ bool MyTankAlgorithm::isFriendlyTooClose()
     return false;
 }
 
-bool MyTankAlgorithm::shouldShoot()
+bool MyTankAlgorithm::shouldShoot(Direction currDir, std::pair<int, int> currPos)
 {
     std::pair<int, int> look = currentPos;
-    for (int i = 0; i < range; ++i)
+    for (int i = 1; i < range + 1; ++i)
     {
-        look = move(look, currentDirection);
+        look = {(currPos.first + stringToIntDirection[currDir][0] * i + gameWidth) % gameWidth,
+                (currPos.second + stringToIntDirection[currDir][1] * i + gameHeight) % gameHeight};
         int id = bijection(look.first, look.second);
-        if (nearbyFriendlies.count(id))
+        if (nearbyFriendlies.count(id) || walls.count(id))
             return false; // don't friendly fire
+        if (threats.count(id))
+            return true;
     }
-    return true;
+    return false;
 }
 
 bool MyTankAlgorithm::isSquareValid(int x, int y, int step)
@@ -206,29 +209,26 @@ bool MyTankAlgorithm::isInOpen(std::pair<int, int> pos) const
                 wallCount++;
         }
     }
-    std::cout << "[DEBUG ISINOPEN] PlayerID: " << playerId << " TankID: " << tankId << " Wall count: " << wallCount << std::endl;
 
     return wallCount <= 3;
 }
 
 bool MyTankAlgorithm::isThreatWithinRange(int range) const
 {
-    for(int i = currentPos.first - range; i <= currentPos.first + range; ++i)
+    for (int i = currentPos.first - range; i <= currentPos.first + range; ++i)
     {
-        for(int j = currentPos.second - range; j <= currentPos.second + range; ++j)
+        for (int j = currentPos.second - range; j <= currentPos.second + range; ++j)
         {
             int x = (i + gameWidth) % gameWidth;
             int y = (j + gameHeight) % gameHeight;
             int pos = bijection(x, y);
 
-            if(threats.count(pos) > 0)
+            if (threats.count(pos) > 0)
             {
-                std::cout << "[DEBUG THREATRANGE] PlayerID: " << playerId << " TankId: " << tankId << " Threat is in Range at (" << x << ", " << y << ")" << std::endl;
                 return true;
             }
         }
     }
-
 
     // for (int id : threats)
     // {
@@ -245,38 +245,56 @@ bool MyTankAlgorithm::isThreatWithinRange(int range) const
     //     }
     // }
 
-    std::cout << "[DEBUG THREATRANGE] PlayerID: " << playerId << " TankId: " << tankId << "Threat IS NOT in Range" <<std::endl;
-
     return false;
 }
 
-std::pair<int, int> MyTankAlgorithm::findNearestFriendlyTank(std::pair<int, int> from) const
+std::pair<int, int> MyTankAlgorithm::findNearestFriendlyTank(std::pair<int, int> from)
 {
-    int bestDist = INT_MAX;
-    std::pair<int, int> bestPos = {-1,-1};
+    int minPath = INT_MAX;
+    std::pair<int, int> candidate = {-1, -1};
 
     for (int id : nearbyFriendlies)
     {
+        if (id == bijection(from.first, from.second))
+            continue;
         std::pair<int, int> pos = inverseBijection(id);
-        int dx = std::abs(pos.first - from.first);
-        int dy = std::abs(pos.second - from.second);
+        size_t pathLength = getPath(from, pos).size();
 
-        // Toroidal wrapping
-        dx = std::min(dx, static_cast<int>(gameWidth) - dx);
-        dy = std::min(dy, static_cast<int>(gameHeight) - dy);
-
-        int dist = dx + dy;
-        if (dist < bestDist)
+        if (pathLength < minPath)
         {
-            bestDist = dist;
-            bestPos = pos;
+            minPath = pathLength;
+            candidate = pos;
         }
     }
 
-    return bestPos;
+    if (candidate.first == -1)
+        return {gameWidth / 2, gameHeight / 2};
+
+    return candidate;
 }
 
 void MyTankAlgorithm::setRole(std::unique_ptr<Role> newRole)
 {
     role = std::move(newRole);
+}
+
+std::optional<std::pair<int, int>> MyTankAlgorithm::findEnemyInRange(std::pair<int, int> position, int range)
+{
+
+    for (int i = 0; i < 8; ++i)
+    {
+        for (int j = 1; j <= range; ++j)
+        {
+
+            int x = (position.first + stringToIntDirection[directions[i]][0] * j + gameWidth * j) % gameWidth;
+            int y = (position.second + stringToIntDirection[directions[i]][1] * j + gameHeight * j) % gameHeight;
+            int pos = bijection(x, y);
+
+            if (threats.count(pos) > 0)
+            {
+                return std::make_pair(x, y);
+            }
+        }
+    }
+    return std::nullopt;
 }

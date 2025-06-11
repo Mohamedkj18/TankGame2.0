@@ -33,7 +33,7 @@ std::vector<std::pair<int, int>> ChaserRole::prepareActions(MyTankAlgorithm &alg
         // If not facing desired direction, rotate first
         if (currentDirection != desiredDir)
         {
-            step = rotateTowards(desiredDir, step);
+            step = rotateTowards(currentDirection, desiredDir, step);
             if (step >= maxMovesPerUpdate)
                 break;
 
@@ -41,7 +41,7 @@ std::vector<std::pair<int, int>> ChaserRole::prepareActions(MyTankAlgorithm &alg
         }
 
         // Check for shooting opportunity at this direction
-        if (algo.shouldShoot())
+        if (algo.shouldShoot(currentDirection, pathStep))
         {
             nextMoves.push_back(ActionRequest::Shoot);
             step++;

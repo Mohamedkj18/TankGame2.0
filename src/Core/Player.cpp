@@ -6,6 +6,7 @@
 #include "Algorithms/Roles/ChaserRole.h"
 #include "Algorithms/Roles/DecoyRole.h"
 #include "Algorithms/Roles/SniperRole.h"
+#include "Algorithms/Roles/DefenderRole.h"
 #include "Core/MyPlayer.h"
 #include "Core/MyBattleInfo.h"
 #include "Algorithms/MyTankAlgorithm.h"
@@ -107,7 +108,7 @@ EnemyScanResult MyPlayer::assignRole(int tankId, Direction currDir, std::pair<in
 std::unique_ptr<Role> MyPlayer::createRole(int tankId, Direction currDir, std::pair<int, int> pos, EnemyScanResult scan)
 {
 
-    int chaserCount = 0, sniperCount = 0, decoyCount = 0;
+    int chaserCount = 0, sniperCount = 0, decoyCount = 0, defenderCount = 0;
     for (const auto &[_, roleName] : tankRoles)
     {
         if (roleName == "Chaser")
@@ -116,6 +117,8 @@ std::unique_ptr<Role> MyPlayer::createRole(int tankId, Direction currDir, std::p
             sniperCount++;
         else if (roleName == "Decoy")
             decoyCount++;
+        else
+            defenderCount++;
     }
 
     std::unique_ptr<Role> newRole;
@@ -125,17 +128,18 @@ std::unique_ptr<Role> MyPlayer::createRole(int tankId, Direction currDir, std::p
         newRole = std::make_unique<ChaserRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
         tankRoles[tankId] = "Chaser";
     }
-    else if (scan.hasLineOfSight && sniperCount < 1)
+    else if (scan.hasLineOfSight && defenderCount < 1)
     {
-        newRole = std::make_unique<SniperRole>(2, currDir, pos, playerGameWidth, playerGameHeight);
-        tankRoles[tankId] = "Sniper";
+        newRole = std::make_unique<DefenderRole>(2, currDir, pos, playerGameWidth, playerGameHeight);
+        tankRoles[tankId] = "Defender";
     }
     else if (decoyCount < 1)
     {
         newRole = std::make_unique<DecoyRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
         tankRoles[tankId] = "Decoy";
     }
-    else{
+    else
+    {
         newRole = std::make_unique<ChaserRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
         tankRoles[tankId] = "Chaser";
     }
@@ -148,7 +152,7 @@ bool MyPlayer::shouldKeepRole(int tankId, const std::pair<int, int> &pos, const 
     int x0 = pos.first;
     int y0 = pos.second;
 
-    if (role == "Sniper")
+    if (role == "Defender")
     {
         return scan.closestDistance >= 3 && scan.hasLineOfSight;
     }

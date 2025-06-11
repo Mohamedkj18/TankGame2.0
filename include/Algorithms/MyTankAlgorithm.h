@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <optional>
 #include <memory>
 #include <set>
 #include <unordered_map>
@@ -59,7 +60,7 @@ public:
 
     bool isThreatAhead();
     bool isFriendlyTooClose();
-    bool shouldShoot();
+    bool shouldShoot(Direction currDir, std::pair<int, int> currPos);
     void setTankId(int id) { tankId = id; };
     int getTankId() const { return tankId; };
     void setPlayerId(int id) { playerId = id; };
@@ -83,10 +84,11 @@ public:
     int getGameWidth() const { return gameWidth; }
     int getGameHeight() const { return gameHeight; }
     bool isInOpen(std::pair<int, int> pos) const;
-    std::pair<int, int> findNearestFriendlyTank(std::pair<int, int> myPos) const;
+    std::pair<int, int> findNearestFriendlyTank(std::pair<int, int> myPos);
     bool isThreatWithinRange(int range) const;
 
     void setRole(std::unique_ptr<Role> newRole);
+    std::optional<std::pair<int, int>> findEnemyInRange(std::pair<int, int> position, int range);
 
 private:
     int range;

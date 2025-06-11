@@ -1,0 +1,16 @@
+Epic Battle Map
+MaxSteps=100
+NumShells=50
+Rows=10
+Cols=20
+
+     @   2    2   @#
+#  2           1  
+#          ##     #
+   
+#             1 @ #
+# @ 1         2@  1 
+
+
+
+####################

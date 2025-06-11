@@ -12,9 +12,8 @@ std::vector<std::pair<int, int>> DecoyRole::prepareActions(MyTankAlgorithm &algo
     int maxMovesPerUpdate = algo.getMaxMovesPerUpdate();
     int step = 0;
     bool isInOpenArea = algo.isInOpen(myPos);
-    bool threatIsClose = algo.isThreatWithinRange(2); // use Manhattan distance
+    bool threatIsClose = algo.findEnemyInRange(myPos, 2) != std::nullopt;
 
-    std::cout << "[DEBBUGGING DECOY ROLE] Player ID: " << algo.getPlayerId() << " Tank ID: " << algo.getTankId() << "IsInOpen- " << isInOpenArea << " Threat - " << threatIsClose <<std::endl;
     if (isInOpenArea && !threatIsClose)
     {
         // Stay visible, don't move
@@ -24,22 +23,25 @@ std::vector<std::pair<int, int>> DecoyRole::prepareActions(MyTankAlgorithm &algo
     }
     else
     {
-        std::pair<int, int> center = {algo.getGameWidth() / 2, algo.getGameHeight() / 2};
-        std::pair<int, int> target = threatIsClose ? algo.findNearestFriendlyTank(myPos) : center;
-         std::cout << "[DEBBUGGING DECOY ROLE]" << " Player ID: "<< algo.getPlayerId() << ", Tank ID: "<< algo.getTankId() << " Target - " << target.first << ', ' << targe<< std::endl;
+        std::pair<int, int> target;
+        if (threatIsClose)
+        {
+            target = algo.findNearestFriendlyTank(myPos);
+        }
+        else
+        {
+            target = {algo.getGameWidth() / 2, algo.getGameHeight() / 2};
+        }
+
         path = algo.getPath(myPos, target);
-        std::cout << "[DEBBUGGING DECOY ROLE]" << " Player ID: "<< algo.getPlayerId() << ", Tank ID: "<< algo.getTankId() << std::endl;
-        std::cout << "[DEBBUGGING DECOY ROLE]" << "Decoy role: Current position: " << myPos.first << ", " << myPos.second << std::endl;
-        for(const auto &pathStep :path){
-            std::cout << "[DEBBUGGING DECOY ROLE]" << "Decoy role: Path step: " << pathStep.first << ", " << pathStep.second << std::endl;
+        if (!path.empty())
+            path.pop_back();
+        for (const auto &pathStep : path)
+        {
         }
         nextMoves = getNextMoves(path, target, algo);
     }
 
-    // for (const auto &move : nextMoves)
-    // {
-    //     std::cout << "Decoy role: Planned move: " << to_string(move) << std::endl;
-    // }
     algo.setNextMoves(nextMoves);
     return path;
 }
@@ -47,7 +49,7 @@ std::vector<std::pair<int, int>> DecoyRole::prepareActions(MyTankAlgorithm &algo
 std::vector<ActionRequest> DecoyRole::getNextMoves(std::vector<std::pair<int, int>> path, std::pair<int, int> target, MyTankAlgorithm &algo)
 {
     std::pair<int, int> pos = algo.getCurrentPosition();
-    Direction currDir = algo.getCurrentDirection();
+    Direction currentDirection = algo.getCurrentDirection();
     int maxMovesPerUpdate = algo.getMaxMovesPerUpdate();
     int step = 0;
 
@@ -60,13 +62,13 @@ std::vector<ActionRequest> DecoyRole::getNextMoves(std::vector<std::pair<int, in
         Direction desiredDir = getDirectionFromPosition(pos, pathStep);
 
         // If not facing desired direction, rotate first
-        if (currDir != desiredDir)
+        if (currentDirection != desiredDir)
         {
-            step = rotateTowards(desiredDir, step);
+            step = rotateTowards(currentDirection, desiredDir, step);
             if (step >= maxMovesPerUpdate)
                 break;
 
-            currDir = desiredDir;
+            currentDirection = desiredDir;
         }
         if (step < maxMovesPerUpdate)
         {
@@ -76,8 +78,9 @@ std::vector<ActionRequest> DecoyRole::getNextMoves(std::vector<std::pair<int, in
 
         pos = pathStep;
     }
+
     nextMoves.push_back(ActionRequest::GetBattleInfo);
     algo.setCurrentPosition(pos);
-    algo.setCurrentDirection(currDir);
+    algo.setCurrentDirection(currentDirection);
     return nextMoves;
 }

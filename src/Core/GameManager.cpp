@@ -401,6 +401,7 @@ void GameManager::checkForTankCollision(Tank &tank)
     int currTankPos = bijection(tank.getX(), tank.getY());
     if (secondaryTanks.count(currTankPos))
     {
+        playerTanksCount[secondaryTanks[currTankPos]->getPlayerId()]--;
         outputFile << "Losing step: Tank " << secondaryTanks[currTankPos]->getTankId() << " hit a tank at " << (int)tank.getX() / 2 << ", " << (int)tank.getY() / 2 << "!\n";
         tanksToRemove.insert(currTankPos);
     }
@@ -518,6 +519,8 @@ void GameManager::removeObjectsFromTheBoard()
 
 bool GameManager::checkForAWinner()
 {
+    // std::cout << "Player 1 tanks count: " << playerTanksCount[1] << std::endl;
+    // std::cout << "Player 2 tanks count: " << playerTanksCount[2] << std::endl;
     if (playerTanksCount[1] == 0 && playerTanksCount[2] > 0)
     {
         outputFile << "Game Over! Player 2 wins!\n";
@@ -540,7 +543,7 @@ bool GameManager::checkForAWinner()
 void GameManager::outputTankMove(int playerNum, ActionRequest move, int tankId)
 {
 
-    outputFile << "Player " << playerNum << " tank " << tankId <<" moved: " << to_string(move) << std::endl;
+    outputFile << "Player " << playerNum << " tank " << tankId << " moved: " << to_string(move) << std::endl;
 }
 
 void GameManager::runGame()
@@ -558,7 +561,7 @@ void GameManager::runGame()
     while (true)
     {
         outputFile << "Game step: " << gameStep << std::endl;
-        std::cout << "Game step: " << gameStep << std::endl;
+        // std::cout << "Game step: " << gameStep << std::endl;
 
         for (const auto &pair : tanks)
         {
@@ -568,9 +571,9 @@ void GameManager::runGame()
             ActionRequest move = algo->getAction();
             tank->setLastMove(move);
             outputTankMove(tank->getPlayerId(), move, tank->getTankId());
-            std::cout << "Player " << tank->getPlayerId() << " tank " << tank->getTankId() << " Role: "  << dynamic_cast<MyPlayer *>(players[tank->getPlayerId()].get())->getRoleName(tank->getTankId())<< std::endl;
+            std::cout << "Player " << tank->getPlayerId() << " tank " << tank->getTankId() << " Role: " << dynamic_cast<MyPlayer *>(players[tank->getPlayerId()].get())->getRoleName(tank->getTankId()) << std::endl;
         }
-    
+
         executeBattleInfoRequests();
 
         advanceShells();
