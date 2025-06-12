@@ -9,7 +9,7 @@ std::vector<std::pair<int, int>> ChaserRole::prepareActions(MyTankAlgorithm &alg
     Direction currentDirection = algo.getCurrentDirection();
     int maxMovesPerUpdate = algo.getMaxMovesPerUpdate();
     std::pair<int, int> target = algo.getTargetForTank();
-    std::vector<std::pair<int, int>> path = algo.getPath(myPos, target);
+    std::vector<std::pair<int, int>> path = algo.getPath(myPos, target, algo.getBannedPositionsForTank());
     algo.setBFSPath(path);
 
     if (path.empty())

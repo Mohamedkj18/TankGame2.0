@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <set>
 #include "Common/ActionRequest.h"
 #include "Algorithms/MyTankAlgorithm.h"
 #include "utils/DirectionUtils.h"

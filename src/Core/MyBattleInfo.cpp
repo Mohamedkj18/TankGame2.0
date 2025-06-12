@@ -26,7 +26,7 @@ void MyBattleInfo::setMyYPosition(int y) { myY = y; }
 int MyBattleInfo::getMyXPosition() const { return myX; }
 int MyBattleInfo::getMyYPosition() const { return myY; }
 
-void MyBattleInfo::setPath(int tankId, const std::vector<std::pair<int, int>> &path)
+void MyBattleInfo::setPath(const std::vector<std::pair<int, int>> &path)
 {
     this->path = path; // Store moves for the tank
 }

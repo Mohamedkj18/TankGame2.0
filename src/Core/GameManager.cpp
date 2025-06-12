@@ -593,6 +593,8 @@ void GameManager::runGame()
         advanceShells();
         removeObjectsFromTheBoard();
 
+        gameStep++;
+        printBoard();
         if (checkForAWinner())
         {
             outputFile.close();
@@ -602,12 +604,16 @@ void GameManager::runGame()
         {
             outputFile << "Game Over! It's a tie due to max steps reached!\n";
             outputFile.close();
+            visualizationFile << "Game Over! It's a tie due to max steps reached!\n";
+            visualizationFile.close();
             return;
         }
         else if (totalShellsRemaining <= 0 && gameStep >= maxSteps / 2)
         {
             outputFile << "Game Over! It's a tie due to no shells remaining!\n";
             outputFile.close();
+            visualizationFile << "Game Over! It's a tie due to no shells remaining!\n";
+            visualizationFile.close();
             return;
         }
         else if (totalShellsRemaining <= 0)
@@ -617,11 +623,14 @@ void GameManager::runGame()
             {
                 outputFile << "Game Over! It's a tie due to time out!\n";
                 outputFile.close();
+                visualizationFile << "Game Over! It's a tie due to time out!\n";
+                visualizationFile.close();
                 return;
             }
         }
-        gameStep++;
-        printBoard();
+
+        dynamic_cast<MyPlayer *>(players[1].get())->updatePlannedPaths();
+        dynamic_cast<MyPlayer *>(players[2].get())->updatePlannedPaths();
     }
 }
 

@@ -26,6 +26,8 @@ private:
     std::set<int> walls;
     std::set<int> shells;
     std::vector<std::pair<int, int>> path;
+    std::vector<ActionRequest> planedActions;
+    std::set<std::pair<int, int>> plannedPositions;
 
 public:
     MyBattleInfo(int width, int height,
@@ -49,7 +51,7 @@ public:
     int getMyXPosition() const;
     int getMyYPosition() const;
     std::vector<std::pair<int, int>> getPath();
-    void setPath(int tankId, const std::vector<std::pair<int, int>> &path);
+    void setPath(const std::vector<std::pair<int, int>> &path);
 
     void setRole(std::unique_ptr<Role> &&newRole);
     const Role &getRole() const;
@@ -66,6 +68,12 @@ public:
     std::unique_ptr<Role> extractRole();
     bool getShouldKeepRole() const { return shouldKeepRole; }
     void setShouldKeepRole(bool value) { shouldKeepRole = value; }
+
+    std::vector<ActionRequest> getPlannedActions() { return planedActions; }
+    void setPlannedActions(std::vector<ActionRequest> actions) { planedActions = actions; }
+
+    std::set<std::pair<int, int>> getPlannedPositions() { return plannedPositions; }
+    void setPlannedPositions(std::set<std::pair<int, int>> positions) { plannedPositions = positions; }
 };
 
 #endif

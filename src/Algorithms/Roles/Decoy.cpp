@@ -33,7 +33,7 @@ std::vector<std::pair<int, int>> DecoyRole::prepareActions(MyTankAlgorithm &algo
             target = {algo.getGameWidth() / 2, algo.getGameHeight() / 2};
         }
 
-        path = algo.getPath(myPos, target);
+        path = algo.getPath(myPos, target, algo.getBannedPositionsForTank());
         if (!path.empty())
             path.pop_back();
         for (const auto &pathStep : path)

@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include "Algorithms/Roles/ChaserRole.h"
 #include "Algorithms/Roles/DecoyRole.h"
+#include "Algorithms/Roles/EvasiorRole.h"
 #include "Algorithms/Roles/SniperRole.h"
 #include "Algorithms/Roles/DefenderRole.h"
 #include "Core/MyPlayer.h"
@@ -19,6 +20,7 @@ MyPlayer::MyPlayer(int player_index, size_t x, size_t y, size_t max_steps, size_
 void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &satellite_view)
 {
 
+    std::cout << "[DEBUG PLAYER] PlayerId: " << player_index << std::endl;
     std::set<int> friendlyTanks, enemyTanks, mines, walls, shells;
 
     int myX = -1, myY = -1;
@@ -71,19 +73,43 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
     {
         info.setShouldKeepRole(true);
     }
+    std::cout << "[DEBUG PLAYER] BattleInfo was created successfully.\n";
 
+    std::set<std::pair<int, int>> planned = getCalculatedPathsSet();
+    std::cout << "[DEBUG PLAYER] merged paths successfully with " << planned.size() << " positions.\n";
+    info.setPlannedPositions(planned);
+    std::cout << "[DEBUG PLAYER] Planned Positions.\n";
     tank.updateBattleInfo(info);
-
+    std::cout << "[DEBUG PLAYER] BattleInfo updated successfully.\n";
+    tanksPlannedActions[tankId] = info.getPlannedActions();
     tanksPlannedPaths[tankId] = info.getPath();
 }
 
-void MyPlayer::updatePlannedMoves()
+void MyPlayer::updatePlannedPaths()
 {
-    for (auto &[_, moves] : tanksPlannedPaths)
+    std::cout << "[DEBUG UPDATE PLANNED PATHS] now updating paths" << std::endl;
+    for (auto pair : tanksPlannedActions)
     {
-        if (!moves.empty())
-            moves.erase(moves.begin());
+        int tankId = pair.first;
+        std::cout << "[DEBUG UPDATE PLANNED PATHS] updating paths for tank: " << tankId << std::endl;
+        if (pair.second.empty())
+        {
+            continue;
+        }
+        ActionRequest action = pair.second.front();
+        pair.second.erase(pair.second.begin());
+        std::cout << "[DEBUG UPDATE PLANNED PATHS] Move removed successfully" << std::endl;
+        if (action == ActionRequest::MoveBackward || action == ActionRequest::MoveForward)
+        {
+            if (tanksPlannedPaths[tankId].empty())
+            {
+                continue;
+            }
+            tanksPlannedPaths[tankId].erase(tanksPlannedPaths[tankId].begin());
+            std::cout << "[DEBUG UPDATE PLANNED PATHS] position removed successfully" << std::endl;
+        }
     }
+    std::cout << "[DEBUG UPDATE PLANNED PATHS] update finished successfully" << std::endl;
 }
 
 EnemyScanResult MyPlayer::assignRole(int tankId, Direction currDir, std::pair<int, int> pos)
@@ -105,10 +131,26 @@ EnemyScanResult MyPlayer::assignRole(int tankId, Direction currDir, std::pair<in
     return scan;
 }
 
+std::set<std::pair<int, int>> MyPlayer::getCalculatedPathsSet()
+{
+    std::set<std::pair<int, int>> bannedPositionsSet;
+    for (const auto &entry : tanksPlannedPaths)
+    {
+        std::cerr << "[DEBUG] Tank " << entry.first << " path size = " << entry.second.size() << '\n';
+        const auto &path = entry.second;
+        for (const auto &pos : path)
+        {
+            bannedPositionsSet.insert(pos);
+        }
+    }
+
+    return bannedPositionsSet;
+}
+
 std::unique_ptr<Role> MyPlayer::createRole(int tankId, Direction currDir, std::pair<int, int> pos, EnemyScanResult scan)
 {
 
-    int chaserCount = 0, sniperCount = 0, decoyCount = 0, defenderCount = 0;
+    int chaserCount = 0, sniperCount = 0, decoyCount = 0, defenderCount = 0, evasiorCount;
     for (const auto &[_, roleName] : tankRoles)
     {
         if (roleName == "Chaser")
@@ -117,26 +159,28 @@ std::unique_ptr<Role> MyPlayer::createRole(int tankId, Direction currDir, std::p
             sniperCount++;
         else if (roleName == "Decoy")
             decoyCount++;
-        else
+        else if (roleName == "Defender")
             defenderCount++;
+        else
+            evasiorCount++;
     }
 
     std::unique_ptr<Role> newRole;
-
-    if (scan.closestDistance <= 2 && chaserCount < 2)
+    std::cout << "[DEBUG] CreateRole: closestDistance- " << scan.closestDistance << " hasLineOfSight " << scan.hasLineOfSight << std::endl;
+    if (scan.closestDistance <= 2 && chaserCount < 1)
     {
         newRole = std::make_unique<ChaserRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
         tankRoles[tankId] = "Chaser";
+    }
+    else if (scan.closestDistance <= 2 && evasiorCount < 1)
+    {
+        newRole = std::make_unique<EvasiorRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
+        tankRoles[tankId] = "Evasior";
     }
     else if (scan.hasLineOfSight && defenderCount < 1)
     {
         newRole = std::make_unique<DefenderRole>(2, currDir, pos, playerGameWidth, playerGameHeight);
         tankRoles[tankId] = "Defender";
-    }
-    else if (decoyCount < 1)
-    {
-        newRole = std::make_unique<DecoyRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
-        tankRoles[tankId] = "Decoy";
     }
     else
     {
@@ -162,9 +206,9 @@ bool MyPlayer::shouldKeepRole(int tankId, const std::pair<int, int> &pos, const 
         return scan.closestDistance <= 5;
     }
 
-    if (role == "Decoy")
+    if (role == "Evasior")
     {
-        return isInOpen(x0, y0) && scan.closestDistance != INT_MAX;
+        return !isInOpen(x0, y0) && scan.closestDistance != INT_MAX;
     }
 
     return false;

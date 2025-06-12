@@ -18,14 +18,17 @@ void MyTankAlgorithm::updateBattleInfo(BattleInfo &info)
     nearbyFriendlies = myInfo.getFriendlyTanks();
     mines = myInfo.getMines();
     walls = myInfo.getWalls();
-
+    bannedPositionsForTank = myInfo.getPlannedPositions();
     gameWidth = myInfo.getWidth();
     gameHeight = myInfo.getHeight();
+    shells = myInfo.getShells();
     currentPos = {myInfo.getMyXPosition(), myInfo.getMyYPosition()};
     std::pair<int, int> target = getTargetForTank();
 
     bfsPath = role->prepareActions(*this);
-    myInfo.setPath(tankId, bfsPath);
+    // send data back to player
+    myInfo.setPath(bfsPath);
+    myInfo.setPlannedActions(plannedMoves);
     moveIndex = 0;
 }
 
@@ -80,28 +83,69 @@ bool MyTankAlgorithm::shouldShoot(Direction currDir, std::pair<int, int> currPos
     return false;
 }
 
-bool MyTankAlgorithm::isSquareValid(int x, int y, int step)
+bool MyTankAlgorithm::isSquareValid(int x, int y, std::set<std::pair<int, int>> cellsToAvoid, int step)
 {
     if (x < 0 || y < 0 || x >= static_cast<int>(gameWidth) || y >= static_cast<int>(gameHeight))
         return false;
 
     int pos = bijection(x, y);
-    if (mines.count(pos) > 0 || walls.count(pos) > 0)
+    if (mines.count(pos) > 0 || walls.count(pos) > 0 || cellsToAvoid.count(std::make_pair(x, y)))
         return false;
 
     return true;
 }
 
-std::pair<int, int> MyTankAlgorithm::findFirstLegalLocationToFlee(int x, int y)
+std::optional<std::pair<int, int>> MyTankAlgorithm::findFirstLegalLocationToFlee(std::pair<int, int> from, std::set<std::pair<int, int>> redZone)
 {
-    for (Direction dir : directions)
+    using Pos = std::pair<int, int>;
+    using Entry = std::pair<int, Pos>; // cost, position
+
+    auto isAdjacentToEnemy = [&](const Pos &pos) -> bool
     {
-        int nx = (x + stringToIntDirection[dir][0] + gameWidth) % gameWidth;
-        int ny = (y + stringToIntDirection[dir][1] + gameHeight) % gameHeight;
-        if (isSquareValid(nx, ny, 0))
-            return {nx, ny};
+        for (const auto &enemy : threats)
+        {
+            std::pair<int, int> enemyPos = inverseBijection(enemy);
+            if (manhattanDistance(pos.first, pos.second, enemyPos.first, enemyPos.second) <= 1)
+                return true;
+        }
+        return false;
+    };
+
+    auto isSafe = [&](const Pos &pos) -> bool
+    {
+        return redZone.count(pos) == 0 &&
+               !isAdjacentToEnemy(pos);
+    };
+
+    std::priority_queue<Entry, std::vector<Entry>, std::greater<>> pq;
+    std::set<Pos> visited;
+
+    pq.push({0, from});
+    visited.insert(from);
+
+    while (!pq.empty())
+    {
+        auto [cost, pos] = pq.top();
+        pq.pop();
+
+        if (pos != from && isSafe(pos))
+            return pos;
+
+        for (const auto &dir : directions)
+        {
+            int nx = (pos.first + stringToIntDirection[dir][0] + gameWidth) % gameWidth;
+            int ny = (pos.second + stringToIntDirection[dir][1] + gameHeight) % gameHeight;
+            Pos next = {nx, ny};
+
+            if (visited.count(next))
+                continue;
+
+            visited.insert(next);
+            pq.push({cost + 1, next});
+        }
     }
-    return {x, y};
+
+    return std::nullopt;
 }
 
 std::pair<int, int> MyTankAlgorithm::moveTank(std::pair<int, int> pos, Direction dir)
@@ -139,7 +183,7 @@ std::pair<int, int> MyTankAlgorithm::getTargetForTank()
     return (bestTarget.first == -1) ? std::pair<int, int>{0, 0} : bestTarget;
 }
 
-std::vector<std::pair<int, int>> MyTankAlgorithm::getPath(std::pair<int, int> start, std::pair<int, int> target)
+std::vector<std::pair<int, int>> MyTankAlgorithm::getPath(std::pair<int, int> start, std::pair<int, int> target, std::set<std::pair<int, int>> avoidCells)
 {
     std::queue<std::pair<int, int>> queue;
     std::unordered_map<std::pair<int, int>, bool, pair_hash> visited;
@@ -171,7 +215,7 @@ std::vector<std::pair<int, int>> MyTankAlgorithm::getPath(std::pair<int, int> st
         for (const auto &dir : directions)
         {
             auto next = moveTank(current, dir);
-            if (!visited[next] && isSquareValid(next.first, next.second, step))
+            if (!visited[next] && isSquareValid(next.first, next.second, avoidCells, step))
             {
                 visited[next] = true;
                 parent[next] = current;
@@ -230,21 +274,6 @@ bool MyTankAlgorithm::isThreatWithinRange(int range) const
         }
     }
 
-    // for (int id : threats)
-    // {
-    //     std::pair<int, int> enemyPos = inverseBijection(id);
-    //     int dx = std::abs(enemyPos.first - currentPos.first);
-    //     int dy = std::abs(enemyPos.second - currentPos.second);
-
-    //     // Apply toroidal wrapping
-    //     dx = std::min(dx, static_cast<int>(gameWidth) - dx);
-    //     dy = std::min(dy, static_cast<int>(gameHeight) - dy);
-
-    //     if (dx + dy <= range){
-    //         return true;
-    //     }
-    // }
-
     return false;
 }
 
@@ -258,7 +287,7 @@ std::pair<int, int> MyTankAlgorithm::findNearestFriendlyTank(std::pair<int, int>
         if (id == bijection(from.first, from.second))
             continue;
         std::pair<int, int> pos = inverseBijection(id);
-        size_t pathLength = getPath(from, pos).size();
+        size_t pathLength = getPath(from, pos, bannedPositionsForTank).size();
 
         if (pathLength < minPath)
         {
@@ -298,3 +327,29 @@ std::optional<std::pair<int, int>> MyTankAlgorithm::findEnemyInRange(std::pair<i
     }
     return std::nullopt;
 }
+
+std::set<std::pair<int, int>> MyTankAlgorithm::getShells()
+{
+    std::set<std::pair<int, int>> shellsXY;
+    for (const auto pos : shells)
+    {
+        shellsXY.insert(inverseBijection(pos));
+    }
+    return shellsXY;
+}
+
+// std::set<std::pair<int, int>> MyTankAlgorithm::isShellsInRange(std::pair<int, int> currPos, int range)
+// {
+//     std::set<std::pair<int, int>> shellsInRange;
+//     for (int i = -1 * range; i < range; i++)
+//     {
+//         for (int j = -1 * range; j < range; j++)
+//         {
+//             int x = (currPos.first + range + gameWidth) % gameWidth;
+//             int y = (currPos.first + range + gameHeight) % gameHeight;
+//             if (shells.count(bijection(x, y)))
+//                 shellsInRange.insert(std::make_pair(x, y));
+//         }
+//     }
+//     return shellsInRange;
+// }

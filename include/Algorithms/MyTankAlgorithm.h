@@ -31,7 +31,9 @@ private:
     std::set<int> threats;
     std::set<int> mines;
     std::set<int> walls;
+    std::set<int> shells;
     std::vector<std::vector<char>> lastSatellite;
+    std::set<std::pair<int, int>> bannedPositionsForTank;
 
     bool movePending;
     int gameWidth;
@@ -52,12 +54,13 @@ public:
     double getAngleFromDirections(const std::string &directionStr, const std::string &desiredDir);
 
     // BFS pathfinding
-    std::vector<std::pair<int, int>> getPath(std::pair<int, int> start, std::pair<int, int> target);
-    bool isSquareValid(int x, int y, int step);
-    std::pair<int, int> findFirstLegalLocationToFlee(int x, int y);
+    std::vector<std::pair<int, int>> getPath(std::pair<int, int> start, std::pair<int, int> target, std::set<std::pair<int, int>> avoidCells);
+    bool isSquareValid(int x, int y, std::set<std::pair<int, int>> cellsToAvoid, int step);
+    std::optional<std::pair<int, int>> findFirstLegalLocationToFlee(std::pair<int, int> from, std::set<std::pair<int, int>> redZone);
     std::pair<int, int> getTargetForTank();
     std::pair<int, int> moveTank(std::pair<int, int> pos, Direction dir);
-
+    std::set<std::pair<int, int>> getBannedPositionsForTank() { return bannedPositionsForTank; };
+    std::set<std::pair<int, int>> getShells();
     bool isThreatAhead();
     bool isFriendlyTooClose();
     bool shouldShoot(Direction currDir, std::pair<int, int> currPos);
@@ -89,6 +92,7 @@ public:
 
     void setRole(std::unique_ptr<Role> newRole);
     std::optional<std::pair<int, int>> findEnemyInRange(std::pair<int, int> position, int range);
+    // std::set<std::pair<int, int>> isShellsInRange(std::pair<int, int> pos, int range);
 
 private:
     int range;
