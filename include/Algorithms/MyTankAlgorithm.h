@@ -5,7 +5,7 @@
 #include "Common/ActionRequest.h"
 #include "Common/BattleInfo.h"
 #include "Core/MyPlayer.h"
-#include "Roles/Role.h"
+#include "Algorithms/Roles/Role.h"
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -56,7 +56,7 @@ public:
     // BFS pathfinding
     std::vector<std::pair<int, int>> getPath(std::pair<int, int> start, std::pair<int, int> target, std::set<std::pair<int, int>> avoidCells);
     bool isSquareValid(int x, int y, std::set<std::pair<int, int>> cellsToAvoid, int step);
-    std::optional<std::pair<int, int>> findFirstLegalLocationToFlee(std::pair<int, int> from, std::set<std::pair<int, int>> redZone);
+    std::pair<int, int> findFirstLegalLocationToFlee(std::pair<int, int> from, std::set<std::pair<int, int>> redZone);
     std::pair<int, int> getTargetForTank();
     std::pair<int, int> moveTank(std::pair<int, int> pos, Direction dir);
     std::set<std::pair<int, int>> getBannedPositionsForTank() { return bannedPositionsForTank; };
@@ -68,6 +68,7 @@ public:
     int getTankId() const { return tankId; };
     void setPlayerId(int id) { playerId = id; };
     int getPlayerId() const { return playerId; };
+    std::set<int> getEnemyTanks() { return threats; };
     Direction getCurrentDirection() const { return currentDirection; }
     void setCurrentDirection(Direction dir) { currentDirection = dir; }
 

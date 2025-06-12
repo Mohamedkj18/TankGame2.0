@@ -47,6 +47,8 @@ std::vector<std::pair<int, int>> ChaserRole::prepareActions(MyTankAlgorithm &alg
             step++;
             if (step >= maxMovesPerUpdate)
                 break;
+            else
+                nextMoves.push_back(ActionRequest::GetBattleInfo);
         }
 
         // Move forward toward target

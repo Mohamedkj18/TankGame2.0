@@ -24,37 +24,10 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
     std::set<int> friendlyTanks, enemyTanks, mines, walls, shells;
 
     int myX = -1, myY = -1;
-    lastSatellite.assign(playerGameHeight, std::vector<char>(playerGameWidth, ' '));
-    for (int i = 0; i < static_cast<int>(playerGameHeight); ++i)
-    {
-        for (int j = 0; j < static_cast<int>(playerGameWidth); ++j)
-        {
-            char object = satellite_view.getObjectAt(2 * j, 2 * i);
-            int id = bijection(j, i);
-            lastSatellite[i][j] = object;
-            if (object == '%')
-            {
-                friendlyTanks.insert(id);
-                myX = j;
-                myY = i;
-            }
-            else if (object == '@')
-                mines.insert(id);
-            else if (object == '#')
-                walls.insert(id);
-            else if (object == '*')
-                shells.insert(id);
-            else if (object >= '0' && object <= '9')
-            {
-                int tankOwner = object - '0';
+    std::pair<int, int> tankPos = prepareInfoForBattleInfo(mines, walls, shells, friendlyTanks, enemyTanks, satellite_view);
 
-                if (tankOwner == player_index)
-                    friendlyTanks.insert(id);
-                else
-                    enemyTanks.insert(id);
-            }
-        }
-    }
+    myX = tankPos.first;
+    myY = tankPos.second;
 
     MyBattleInfo info(playerGameWidth, playerGameHeight, friendlyTanks, enemyTanks, mines, walls, shells);
 
@@ -63,10 +36,10 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
 
     MyTankAlgorithm *algo = dynamic_cast<MyTankAlgorithm *>(&tank);
     int tankId = algo ? algo->getTankId() : 0;
-    EnemyScanResult scan = assignRole(tankId, algo->getCurrentDirection(), {myX, myY});
+    EnemyScanResult scan = assignRole(tankId, algo->getCurrentDirection(), {myX, myY}, shells, enemyTanks);
     if (!scan.ShouldKeepRole)
     {
-        info.setRole(createRole(tankId, algo->getCurrentDirection(), {myX, myY}, scan));
+        info.setRole(createRole(tankId, algo->getCurrentDirection(), {myX, myY}, scan, shells, enemyTanks));
         info.setShouldKeepRole(false);
     }
     else
@@ -112,7 +85,7 @@ void MyPlayer::updatePlannedPaths()
     std::cout << "[DEBUG UPDATE PLANNED PATHS] update finished successfully" << std::endl;
 }
 
-EnemyScanResult MyPlayer::assignRole(int tankId, Direction currDir, std::pair<int, int> pos)
+EnemyScanResult MyPlayer::assignRole(int tankId, Direction currDir, std::pair<int, int> pos, std::set<int> shells, std::set<int> enemyTanks)
 {
 
     EnemyScanResult scan = scanVisibleEnemies(pos.first, pos.second);
@@ -121,7 +94,7 @@ EnemyScanResult MyPlayer::assignRole(int tankId, Direction currDir, std::pair<in
     if (it != tankRoles.end())
     {
 
-        if (shouldKeepRole(tankId, pos, it->second, scan))
+        if (shouldKeepRole(tankId, pos, it->second, scan, shells, enemyTanks))
         {
             tankPositions[tankId] = pos;
             scan.ShouldKeepRole = true;
@@ -145,73 +118,6 @@ std::set<std::pair<int, int>> MyPlayer::getCalculatedPathsSet()
     }
 
     return bannedPositionsSet;
-}
-
-std::unique_ptr<Role> MyPlayer::createRole(int tankId, Direction currDir, std::pair<int, int> pos, EnemyScanResult scan)
-{
-
-    int chaserCount = 0, sniperCount = 0, decoyCount = 0, defenderCount = 0, evasiorCount;
-    for (const auto &[_, roleName] : tankRoles)
-    {
-        if (roleName == "Chaser")
-            chaserCount++;
-        else if (roleName == "Sniper")
-            sniperCount++;
-        else if (roleName == "Decoy")
-            decoyCount++;
-        else if (roleName == "Defender")
-            defenderCount++;
-        else
-            evasiorCount++;
-    }
-
-    std::unique_ptr<Role> newRole;
-    std::cout << "[DEBUG] CreateRole: closestDistance- " << scan.closestDistance << " hasLineOfSight " << scan.hasLineOfSight << std::endl;
-    if (scan.closestDistance <= 2 && chaserCount < 1)
-    {
-        newRole = std::make_unique<ChaserRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
-        tankRoles[tankId] = "Chaser";
-    }
-    else if (scan.closestDistance <= 2 && evasiorCount < 1)
-    {
-        newRole = std::make_unique<EvasiorRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
-        tankRoles[tankId] = "Evasior";
-    }
-    else if (scan.hasLineOfSight && defenderCount < 1)
-    {
-        newRole = std::make_unique<DefenderRole>(2, currDir, pos, playerGameWidth, playerGameHeight);
-        tankRoles[tankId] = "Defender";
-    }
-    else
-    {
-        newRole = std::make_unique<ChaserRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
-        tankRoles[tankId] = "Chaser";
-    }
-
-    tankPositions[tankId] = pos;
-    return std::move(newRole);
-}
-bool MyPlayer::shouldKeepRole(int tankId, const std::pair<int, int> &pos, const std::string &role, EnemyScanResult scan)
-{
-    int x0 = pos.first;
-    int y0 = pos.second;
-
-    if (role == "Defender")
-    {
-        return scan.closestDistance >= 3 && scan.hasLineOfSight;
-    }
-
-    if (role == "Chaser")
-    {
-        return scan.closestDistance <= 5;
-    }
-
-    if (role == "Evasior")
-    {
-        return !isInOpen(x0, y0) && scan.closestDistance != INT_MAX;
-    }
-
-    return false;
 }
 
 EnemyScanResult MyPlayer::scanVisibleEnemies(int x0, int y0) const
@@ -291,7 +197,60 @@ bool MyPlayer::isInOpen(int x, int y) const
     return wallCount <= 3;
 }
 
-// ------------------------ Player 1 ------------------------
-Player1::~Player1() = default;
-Player2::~Player2() = default;
-// ------------------------ Player 2 ------------------------
+std::pair<int, int> MyPlayer::prepareInfoForBattleInfo(std::set<int> mines, std::set<int> walls, std::set<int> shells, std::set<int> friendlyTanks, std::set<int> enemyTanks, SatelliteView &satellite_view)
+{
+    int myX = -1, myY = -1;
+    lastSatellite.assign(playerGameHeight, std::vector<char>(playerGameWidth, ' '));
+    for (int i = 0; i < static_cast<int>(playerGameHeight); ++i)
+    {
+        for (int j = 0; j < static_cast<int>(playerGameWidth); ++j)
+        {
+            char object = satellite_view.getObjectAt(2 * j, 2 * i);
+            int id = bijection(j, i);
+            lastSatellite[i][j] = object;
+            if (object == '%')
+            {
+                friendlyTanks.insert(id);
+                myX = j;
+                myY = i;
+            }
+            else if (object == '@')
+                mines.insert(id);
+            else if (object == '#')
+                walls.insert(id);
+            else if (object == '*')
+                shells.insert(id);
+            else if (object >= '0' && object <= '9')
+            {
+                int tankOwner = object - '0';
+
+                if (tankOwner == player_index)
+                    friendlyTanks.insert(id);
+                else
+                    enemyTanks.insert(id);
+            }
+        }
+    }
+    return std::make_pair(myX, myY);
+}
+
+bool MyPlayer::isInRedZone(int x, int y, std::set<int> shellsPositions, std::set<int> enemies) const
+{
+    std::pair<int, int> pos = {x, y};
+
+    for (const auto &shellPos : shellsPositions)
+    {
+        std::pair<int, int> shell = inverseBijection(shellPos);
+        if (manhattanDistance(pos.first, pos.second, shell.first, shell.second) <= 3)
+            return true;
+    }
+
+    for (const auto &enemyId : enemies)
+    {
+        std::pair<int, int> enemyPos = inverseBijection(enemyId);
+        if (manhattanDistance(x, y, enemyPos.first, enemyPos.second) <= 4)
+            return true;
+    }
+
+    return false;
+}

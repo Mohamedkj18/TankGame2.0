@@ -5,37 +5,29 @@ std::vector<std::pair<int, int>> EvasiorRole::prepareActions(MyTankAlgorithm &al
     std::vector<std::pair<int, int>> path;
     std::pair<int, int> myPos = algo.getCurrentPosition();
     Direction currentDirection = algo.getCurrentDirection();
-    int RANGE = 7; // 14x14 square
+    int RANGE = 7;
 
     std::set<std::pair<int, int>> shells = algo.getShells();
-    if (shells.empty())
-    {
-        nextMoves.push_back(ActionRequest::GetBattleInfo);
-        path = {myPos};
-    }
-    else
-    {
-        std::set<std::pair<int, int>> redZone = createRedZone(shells);
-        concatenateSets(redZone, algo.getBannedPositionsForTank());
-        std::optional<std::pair<int, int>> target = algo.findFirstLegalLocationToFlee(myPos, redZone);
-        if (target.has_value())
-        {
-            path = algo.getPath(myPos, target.value(), redZone);
-            nextMoves = getNextMoves(path, target.value(), algo);
-        }
-    }
+
+    std::set<std::pair<int, int>> redZone = createRedZone(shells, 5);
+    concatenateSets(redZone, algo.getBannedPositionsForTank());
+    concatenateSets(redZone, createRedZone(transformToPairs(algo.getEnemyTanks()), 2));
+    std::pair<int, int> target = algo.findFirstLegalLocationToFlee(myPos, redZone);
+    std::cout << "[DEBUG] target value " << target.first << ", " << target.second << std::endl;
+    path = algo.getPath(myPos, target, redZone);
+    nextMoves = getNextMoves(path, target, algo);
 
     algo.setNextMoves(nextMoves);
     return path;
 }
 
-std::set<std::pair<int, int>> EvasiorRole::createRedZone(std::set<std::pair<int, int>> shells)
+std::set<std::pair<int, int>> EvasiorRole::createRedZone(std::set<std::pair<int, int>> shells, int distFromTarget)
 {
 
     std::set<std::pair<int, int>> redZone;
     for (auto pos : shells)
     {
-        for (int k = 1; k < 5; k++)
+        for (int k = 1; k < distFromTarget; k++)
         {
             for (int i = -1; i <= 1; ++i)
             {
@@ -99,4 +91,14 @@ void EvasiorRole::concatenateSets(std::set<std::pair<int, int>> targetSet, std::
     {
         targetSet.insert(pos);
     }
+}
+
+std::set<std::pair<int, int>> EvasiorRole::transformToPairs(std::set<int> toBeTransformed)
+{
+    std::set<std::pair<int, int>> pairsSet;
+    for (const auto pos : toBeTransformed)
+    {
+        pairsSet.insert(inverseBijection(pos));
+    }
+    return pairsSet;
 }

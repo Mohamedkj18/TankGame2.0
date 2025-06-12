@@ -1,8 +1,8 @@
 #pragma once
 
-#include <optional>
-#include "Role.h"
+#include "Algorithms/Roles/Role.h"
 #include "Algorithms/MyTankAlgorithm.h"
+#include <optional>
 
 class DefenderRole : public Role
 {

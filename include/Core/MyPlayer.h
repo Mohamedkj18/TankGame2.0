@@ -3,6 +3,13 @@
 #include "common/Player.h"
 #include "Core/MyBattleInfo.h"
 #include "Core/MySatelliteView.h"
+#include "Algorithms/Roles/Role.h"
+#include "Algorithms/Roles/ChaserRole.h"
+#include "Algorithms/Roles/EvasiorRole.h"
+#include "Algorithms/Roles/SniperRole.h"
+#include "Algorithms/Roles/DefenderRole.h"
+#include "Algorithms/Roles/DecoyRole.h"
+
 #include <unordered_map>
 #include <vector>
 #include <string>
@@ -43,15 +50,19 @@ public:
     void updatePlannedPaths();
 
 protected:
-    EnemyScanResult assignRole(int tankId, Direction currDir, std::pair<int, int> pos);
-    std::unique_ptr<Role> createRole(int tankId, Direction currDir, std::pair<int, int> pos, EnemyScanResult scan);
+    EnemyScanResult assignRole(int tankId, Direction currDir, std::pair<int, int> pos, std::set<int> shells, std::set<int> enemyTanks);
+    virtual std::unique_ptr<Role> createRole(int tankId, Direction currDir, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks) = 0;
 
-    bool shouldKeepRole(int tankId, const std::pair<int, int> &pos, const std::string &role, EnemyScanResult scan);
+    virtual bool shouldKeepRole(int tankId, const std::pair<int, int> &pos, const std::string &role, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks) = 0;
     EnemyScanResult scanVisibleEnemies(int x0, int y0) const;
     int manhattanDistance(int x1, int y1, int x2, int y2) const;
     bool isClearLine(int x0, int y0, int x1, int y1) const;
     bool isInOpen(int x, int y) const;
     std::set<std::pair<int, int>> getCalculatedPathsSet();
+    bool isInRedZone(int x, int y, std::set<int> shellsPositions, std::set<int> enemies) const;
+
+private:
+    std::pair<int, int> prepareInfoForBattleInfo(std::set<int> mines, std::set<int> walls, std::set<int> shells, std::set<int> friendlyTanks, std::set<int> enemyTanks, SatelliteView &satellite_view);
 };
 
 // ------------------------ Player 1 ------------------------
@@ -60,7 +71,9 @@ class Player1 : public MyPlayer
 public:
     using MyPlayer::MyPlayer;
     virtual ~Player1();
-    // void assignRole(int tankId) override;
+
+    std::unique_ptr<Role> createRole(int tankId, Direction currDir, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks) override;
+    bool shouldKeepRole(int tankId, const std::pair<int, int> &pos, const std::string &role, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks) override;
 };
 
 // ------------------------ Player 2 ------------------------
@@ -69,5 +82,9 @@ class Player2 : public MyPlayer
 public:
     using MyPlayer::MyPlayer;
     virtual ~Player2();
+
+    std::unique_ptr<Role> createRole(int tankId, Direction currDir, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks) override;
+    bool shouldKeepRole(int tankId, const std::pair<int, int> &pos, const std::string &role, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks) override;
+
     // void assignRole(int tankId) override;
 };

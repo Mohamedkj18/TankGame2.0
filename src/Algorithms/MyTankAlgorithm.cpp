@@ -95,7 +95,7 @@ bool MyTankAlgorithm::isSquareValid(int x, int y, std::set<std::pair<int, int>> 
     return true;
 }
 
-std::optional<std::pair<int, int>> MyTankAlgorithm::findFirstLegalLocationToFlee(std::pair<int, int> from, std::set<std::pair<int, int>> redZone)
+std::pair<int, int> MyTankAlgorithm::findFirstLegalLocationToFlee(std::pair<int, int> from, std::set<std::pair<int, int>> redZone)
 {
     using Pos = std::pair<int, int>;
     using Entry = std::pair<int, Pos>; // cost, position
@@ -114,6 +114,8 @@ std::optional<std::pair<int, int>> MyTankAlgorithm::findFirstLegalLocationToFlee
     auto isSafe = [&](const Pos &pos) -> bool
     {
         return redZone.count(pos) == 0 &&
+               mines.count(bijection(pos.first, pos.second)) == 0 &&
+               walls.count(bijection(pos.first, pos.second)) == 0 &&
                !isAdjacentToEnemy(pos);
     };
 
@@ -128,7 +130,7 @@ std::optional<std::pair<int, int>> MyTankAlgorithm::findFirstLegalLocationToFlee
         auto [cost, pos] = pq.top();
         pq.pop();
 
-        if (pos != from && isSafe(pos))
+        if (pos != from && cost >= 5 && isSafe(pos))
             return pos;
 
         for (const auto &dir : directions)
@@ -145,7 +147,7 @@ std::optional<std::pair<int, int>> MyTankAlgorithm::findFirstLegalLocationToFlee
         }
     }
 
-    return std::nullopt;
+    return std::make_pair(-1, -1);
 }
 
 std::pair<int, int> MyTankAlgorithm::moveTank(std::pair<int, int> pos, Direction dir)
