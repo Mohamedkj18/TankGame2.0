@@ -36,6 +36,7 @@ protected:
     std::unordered_map<int, std::vector<std::pair<int, int>>> tanksPlannedPaths;
     std::unordered_map<int, std::vector<ActionRequest>> tanksPlannedActions;
     std::unordered_map<int, std::pair<int, int>> tankPositions;
+    std::unordered_map<int, int> tanksRemainingShells;
     std::unordered_map<int, std::string> tankRoles;
     std::vector<std::vector<char>> lastSatellite;
 
@@ -62,7 +63,7 @@ protected:
     bool isInRedZone(int x, int y, std::set<int> shellsPositions, std::set<int> enemies) const;
 
 private:
-    std::pair<int, int> prepareInfoForBattleInfo(std::set<int> mines, std::set<int> walls, std::set<int> shells, std::set<int> friendlyTanks, std::set<int> enemyTanks, SatelliteView &satellite_view);
+    std::pair<int, int> prepareInfoForBattleInfo(std::set<int> &mines, std::set<int> &walls, std::set<int> &shells, std::set<int> &friendlyTanks, std::set<int> &enemyTanks, SatelliteView &satellite_view);
 };
 
 // ------------------------ Player 1 ------------------------

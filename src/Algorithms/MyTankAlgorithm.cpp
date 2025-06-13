@@ -143,6 +143,8 @@ std::pair<int, int> MyTankAlgorithm::findFirstLegalLocationToFlee(std::pair<int,
                 continue;
 
             visited.insert(next);
+            if (!isSafe(next))
+                continue;
             pq.push({cost + 1, next});
         }
     }

@@ -1,6 +1,7 @@
 #include "Algorithms/Roles/Role.h"
+#include "Algorithms/MyTankAlgorithm.h"
 
-int Role::rotateTowards(Direction currentDirection, Direction desiredDir, int step)
+int Role::rotateTowards(Direction &currentDirection, Direction desiredDir, int step)
 {
     double angle = getAngleFromDirections(currentDirection, desiredDir);
 
@@ -14,6 +15,7 @@ int Role::rotateTowards(Direction currentDirection, Direction desiredDir, int st
     {
         nextMoves.push_back(ActionRequest::RotateRight45);
         step++;
+        currentDirection += 0.125;
         if (step >= maxMovesPerUpdate)
             return step;
         nextMoves.push_back(ActionRequest::RotateRight90);
@@ -22,6 +24,7 @@ int Role::rotateTowards(Direction currentDirection, Direction desiredDir, int st
     {
         nextMoves.push_back(ActionRequest::RotateRight90);
         step++;
+        currentDirection += 0.25;
         if (step >= maxMovesPerUpdate)
             return step;
         nextMoves.push_back(ActionRequest::RotateRight90);
@@ -29,6 +32,7 @@ int Role::rotateTowards(Direction currentDirection, Direction desiredDir, int st
     else if (angle == 0.625)
     {
         nextMoves.push_back(ActionRequest::RotateLeft90);
+        currentDirection += 0.75;
         step++;
         if (step >= maxMovesPerUpdate)
             return step;
@@ -41,6 +45,7 @@ int Role::rotateTowards(Direction currentDirection, Direction desiredDir, int st
     else
         nextMoves.push_back(ActionRequest::DoNothing);
 
+    currentDirection = desiredDir;
     return ++step;
 }
 

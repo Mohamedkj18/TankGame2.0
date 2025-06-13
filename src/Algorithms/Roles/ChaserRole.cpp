@@ -9,6 +9,7 @@ std::vector<std::pair<int, int>> ChaserRole::prepareActions(MyTankAlgorithm &alg
     Direction currentDirection = algo.getCurrentDirection();
     int maxMovesPerUpdate = algo.getMaxMovesPerUpdate();
     std::pair<int, int> target = algo.getTargetForTank();
+    std::cout << "[DEBUG - ChaserRole]" << std::endl;
     std::vector<std::pair<int, int>> path = algo.getPath(myPos, target, algo.getBannedPositionsForTank());
     algo.setBFSPath(path);
 
@@ -24,6 +25,7 @@ std::vector<std::pair<int, int>> ChaserRole::prepareActions(MyTankAlgorithm &alg
 
     for (const auto &pathStep : path)
     {
+        std::cout << "[DEBUG - ChaseRole Path] (" << pathStep.first << ", " << pathStep.second << std::endl;
         if (step >= maxMovesPerUpdate)
             break;
 
@@ -36,8 +38,6 @@ std::vector<std::pair<int, int>> ChaserRole::prepareActions(MyTankAlgorithm &alg
             step = rotateTowards(currentDirection, desiredDir, step);
             if (step >= maxMovesPerUpdate)
                 break;
-
-            currentDirection = desiredDir;
         }
 
         // Check for shooting opportunity at this direction
@@ -53,12 +53,11 @@ std::vector<std::pair<int, int>> ChaserRole::prepareActions(MyTankAlgorithm &alg
 
         // Move forward toward target
         nextMoves.push_back(ActionRequest::MoveForward);
+        currentPos = pathStep;
         step++;
 
         if (step >= maxMovesPerUpdate)
             break;
-
-        currentPos = pathStep;
     }
 
     // If no moves planned, do nothing

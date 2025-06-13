@@ -222,7 +222,7 @@ int GameManager::readFile(std::string fileName)
               << ", Shells per Tank: " << numShellsPerTank << std::endl;
 
     int y = 0;
-    std::string tankChars = "0123456789";
+    std::string tankChars = "123456789";
 
     while (std::getline(file, line) && y < height)
     {
@@ -561,7 +561,7 @@ void GameManager::runGame()
     while (true)
     {
         outputFile << "Game step: " << gameStep << std::endl;
-        // std::cout << "Game step: " << gameStep << std::endl;
+        std::cout << "Game step: " << gameStep << std::endl;
 
         for (const auto &pair : tanks)
         {

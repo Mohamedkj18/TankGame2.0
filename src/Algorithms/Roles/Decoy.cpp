@@ -67,8 +67,6 @@ std::vector<ActionRequest> DecoyRole::getNextMoves(std::vector<std::pair<int, in
             step = rotateTowards(currentDirection, desiredDir, step);
             if (step >= maxMovesPerUpdate)
                 break;
-
-            currentDirection = desiredDir;
         }
         if (step < maxMovesPerUpdate)
         {

@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Common/ActionRequest.h"
-#include "Algorithms/MyTankAlgorithm.h"
 #include "utils/DirectionUtils.h"
 #include <string>
 #include <set>
+#include <memory>
 
 class MyTankAlgorithm;
 
@@ -28,7 +28,7 @@ protected:
     int gameWidth;
     int gameHeight;
 
-    int rotateTowards(Direction currentDirection, Direction desiredDir, int step);
+    int rotateTowards(Direction &currentDirection, Direction desiredDir, int step);
     Direction getDirectionFromPosition(std::pair<int, int> current, std::pair<int, int> target);
     double getAngleFromDirections(Direction &directionStr, Direction &desiredDir);
 };

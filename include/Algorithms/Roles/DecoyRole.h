@@ -1,6 +1,7 @@
 #pragma once
 #include "Algorithms/Roles/Role.h"
-#include "Algorithms/MyTankAlgorithm.h"
+
+class MyTankAlgorithm;
 
 class DecoyRole : public Role
 {

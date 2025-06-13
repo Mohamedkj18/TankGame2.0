@@ -20,7 +20,6 @@ std::vector<std::pair<int, int>> DefenderRole::prepareActions(MyTankAlgorithm &a
         if (desiredDir != currentDirection)
         {
             rotateTowards(currentDirection, desiredDir, 0);
-            currentDirection = desiredDir;
         }
         if (algo.shouldShoot(currentDirection, myPos))
         {

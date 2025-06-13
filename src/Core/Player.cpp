@@ -46,32 +46,34 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
     {
         info.setShouldKeepRole(true);
     }
-    std::cout << "[DEBUG PLAYER] BattleInfo was created successfully.\n";
 
     std::set<std::pair<int, int>> planned = getCalculatedPathsSet();
-    std::cout << "[DEBUG PLAYER] merged paths successfully with " << planned.size() << " positions.\n";
     info.setPlannedPositions(planned);
-    std::cout << "[DEBUG PLAYER] Planned Positions.\n";
     tank.updateBattleInfo(info);
-    std::cout << "[DEBUG PLAYER] BattleInfo updated successfully.\n";
     tanksPlannedActions[tankId] = info.getPlannedActions();
     tanksPlannedPaths[tankId] = info.getPath();
+
+    if (tanksRemainingShells.count(tankId) == 0)
+    {
+        tanksRemainingShells[tankId] = num_shells;
+    }
 }
 
 void MyPlayer::updatePlannedPaths()
 {
-    std::cout << "[DEBUG UPDATE PLANNED PATHS] now updating paths" << std::endl;
     for (auto pair : tanksPlannedActions)
     {
         int tankId = pair.first;
-        std::cout << "[DEBUG UPDATE PLANNED PATHS] updating paths for tank: " << tankId << std::endl;
         if (pair.second.empty())
         {
             continue;
         }
         ActionRequest action = pair.second.front();
         pair.second.erase(pair.second.begin());
-        std::cout << "[DEBUG UPDATE PLANNED PATHS] Move removed successfully" << std::endl;
+        if (action == ActionRequest::Shoot)
+        {
+            tanksRemainingShells[tankId]--;
+        }
         if (action == ActionRequest::MoveBackward || action == ActionRequest::MoveForward)
         {
             if (tanksPlannedPaths[tankId].empty())
@@ -79,10 +81,8 @@ void MyPlayer::updatePlannedPaths()
                 continue;
             }
             tanksPlannedPaths[tankId].erase(tanksPlannedPaths[tankId].begin());
-            std::cout << "[DEBUG UPDATE PLANNED PATHS] position removed successfully" << std::endl;
         }
     }
-    std::cout << "[DEBUG UPDATE PLANNED PATHS] update finished successfully" << std::endl;
 }
 
 EnemyScanResult MyPlayer::assignRole(int tankId, Direction currDir, std::pair<int, int> pos, std::set<int> shells, std::set<int> enemyTanks)
@@ -109,7 +109,6 @@ std::set<std::pair<int, int>> MyPlayer::getCalculatedPathsSet()
     std::set<std::pair<int, int>> bannedPositionsSet;
     for (const auto &entry : tanksPlannedPaths)
     {
-        std::cerr << "[DEBUG] Tank " << entry.first << " path size = " << entry.second.size() << '\n';
         const auto &path = entry.second;
         for (const auto &pos : path)
         {
@@ -197,7 +196,7 @@ bool MyPlayer::isInOpen(int x, int y) const
     return wallCount <= 3;
 }
 
-std::pair<int, int> MyPlayer::prepareInfoForBattleInfo(std::set<int> mines, std::set<int> walls, std::set<int> shells, std::set<int> friendlyTanks, std::set<int> enemyTanks, SatelliteView &satellite_view)
+std::pair<int, int> MyPlayer::prepareInfoForBattleInfo(std::set<int> &mines, std::set<int> &walls, std::set<int> &shells, std::set<int> &friendlyTanks, std::set<int> &enemyTanks, SatelliteView &satellite_view)
 {
     int myX = -1, myY = -1;
     lastSatellite.assign(playerGameHeight, std::vector<char>(playerGameWidth, ' '));

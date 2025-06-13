@@ -1,5 +1,6 @@
 
 #include "Algorithms/Roles/SniperRole.h"
+#include "Algorithms/MyTankAlgorithm.h"
 
 std::vector<std::pair<int, int>> SniperRole::prepareActions(MyTankAlgorithm &algo)
 {
