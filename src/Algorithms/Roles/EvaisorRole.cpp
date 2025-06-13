@@ -14,9 +14,9 @@ std::vector<std::pair<int, int>> EvasiorRole::prepareActions(MyTankAlgorithm &al
     concatenateSets(redZone, algo.getBannedPositionsForTank());
     concatenateSets(redZone, createRedZone(transformToPairs(algo.getEnemyTanks()), 2));
     std::pair<int, int> target = algo.findFirstLegalLocationToFlee(myPos, redZone);
-    std::cout << "[DEBUG TARGET] PlayerID: " << algo.getPlayerId() << ", Target: (" << target.first << ", " << target.second << ")\n";
     path = algo.getPath(myPos, target, redZone);
     nextMoves = getNextMoves(path, target, algo);
+
     algo.setNextMoves(nextMoves);
     return path;
 }
@@ -50,7 +50,6 @@ std::vector<ActionRequest> EvasiorRole::getNextMoves(std::vector<std::pair<int, 
 {
     std::pair<int, int> pos = algo.getCurrentPosition();
     Direction currentDirection = algo.getCurrentDirection();
-    int maxMovesPerUpdate = algo.getMaxMovesPerUpdate();
     int step = 0;
 
     for (const auto &pathStep : path)

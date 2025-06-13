@@ -32,7 +32,9 @@ private:
     int totalShellsRemaining;
     int maxSteps;
     int numShellsPerTank;
+    int totalTanks;
 
+    std::vector<std::string> movesOfTanks;
     std::unordered_map<int, std::unique_ptr<Player>> players;
     std::unordered_map<int, int> playerTanksCount;
     std::map<int, std::unique_ptr<Tank>> tanks;
@@ -100,7 +102,8 @@ public:
     void tankHitByAShell(int tankPos);
     void shellHitAWall(int shellPos);
     int bijection(int x, int y);
+    void sortTanks();
+    // void outputTankMoves(std::vector<std::string> copyOfMovesOfTanks);
 
     bool checkForAWinner();
-    void outputTankMove(int playerNum, ActionRequest move, int tankId);
 };

@@ -15,6 +15,7 @@ class Tank : public GameObject
 private:
     int playerId;
     int tankId;
+    int tankGlobalId;
     int artilleryShells;
     bool destroyed;
     int cantShoot;
@@ -25,11 +26,12 @@ private:
     ActionRequest lastMove;
 
 public:
-    Tank(int x, int y, Direction dir, GameManager *game, int playerId, int shells, int tankId);
+    Tank(int x, int y, Direction dir, GameManager *game, int playerId, int shells, int tankId, int tankGlobalId);
 
     // Position and state
     int getPlayerId();
     int getTankId();
+    int getTankGlobalId();
     ActionRequest getLastMove();
     bool checkForAWall();
 

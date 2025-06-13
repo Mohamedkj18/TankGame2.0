@@ -9,7 +9,6 @@ std::vector<std::pair<int, int>> DefenderRole::prepareActions(MyTankAlgorithm &a
 
     Direction currentDirection = algo.getCurrentDirection();
     std::pair<int, int> myPos = algo.getCurrentPosition();
-    int maxMovesPerUpdate = algo.getMaxMovesPerUpdate();
 
     // Look for visible enemy tanks within range 4 (Manhattan distance)
     std::optional<std::pair<int, int>> target = algo.findEnemyInRange(myPos, 6);

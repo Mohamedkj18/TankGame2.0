@@ -1,6 +1,6 @@
 #include "Core/MyPlayer.h"
 
-std::unique_ptr<Role> Player2::createRole(int tankId, Direction currDir, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks)
+std::unique_ptr<Role> Player2::createRole(int tankId, Direction currDir, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks, int numFriendlyTanks)
 {
     int x = pos.first, y = pos.second;
 
@@ -24,9 +24,21 @@ std::unique_ptr<Role> Player2::createRole(int tankId, Direction currDir, std::pa
     return std::make_unique<ChaserRole>(5, currDir, pos, playerGameWidth, playerGameHeight);
 }
 
-bool Player2::shouldKeepRole(int tankId, const std::pair<int, int> &pos, const std::string &role, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks)
+bool Player2::shouldKeepRole(int tankId, const std::pair<int, int> &pos, const std::string &role, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks, int numFriendlyTanks)
 {
     int remainingShells = tanksRemainingShells[tankId];
+    int numOfChasers = 0;
+
+    for (const auto role : tankRoles)
+    {
+        if (role.second == "Chaser")
+            numOfChasers++;
+    }
+    if (numOfChasers == 0 && numFriendlyTanks >= tankRoles.size() - 1)
+        return false;
+
+    if (isInRedZone(pos.first, pos.second, shells, enemyTanks) || scan.closestDistance < 3)
+        return false;
 
     if (role == "Sniper")
         return scan.hasLineOfSight && scan.closestDistance >= 6 && remainingShells > 0;

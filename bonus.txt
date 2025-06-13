@@ -1,0 +1,35 @@
+Smart Role-Based Algorithm
+We designed and implemented a modular, intelligent role system that dynamically assigns strategic behaviors to each tank based on real-time battlefield conditions. The roles include:
+
+Chaser: Aggressively pursues the nearest enemy using pathfinding.
+
+Sniper: Positions strategically to shoot enemies from safe distance.
+
+Evasior: Detects nearby threats and computes escape paths using safe-zone detection and BFS with red-zone avoidance.
+
+Decoy: Distracts enemies by entering threat range intentionally.
+
+Defender: Holds a tactical position or assists nearby tanks.
+
+The Player class analyzes satellite input to assign or reassign roles each turn based on enemy positions, visibility, line-of-sight, and shell presence, also it takes into consideration the ally tanks future movements to avoid collisions. Tanks then execute their roles independently through TankAlgorithm, allowing for adaptive and emergent team behavior.
+
+This architecture not only improves performance and survivability but also showcases intelligent coordination between autonomous units — exceeding the base requirements of simple pathfinding or static behavior.
+
+Visualization Layer
+To support debugging and analysis, we implemented a visualization system that writes the board state to a file (data/visualization.txt) after each game step. This visualization includes:
+
+Tank positions with player IDs
+
+Shell trajectories (*)
+
+Mines (@) and walls (#)
+
+Real-time updates per step for post-game replay
+
+This tool was critical for verifying the correctness of movement, shooting logic, role execution, and toroidal wrapping, especially on complex maps.
+
+Although we did not actually support more than two players due to lack of time, our code is modular and clean enough that adding more players and different roles requires minimal adjustments.
+
+These enhancements were not required by the assignment, but they demonstrate advanced planning, modular AI design, and thoughtful tooling to ensure clarity, correctness, and strategic depth.
+
+We hope you will consider awarding a bonus for these efforts.

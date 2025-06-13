@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Core/MyBattleInfo.h"
-#include "Common/TankAlgorithm.h"
-#include "Common/ActionRequest.h"
-#include "Common/BattleInfo.h"
+#include "common/TankAlgorithm.h"
+#include "common/ActionRequest.h"
+#include "common/BattleInfo.h"
 #include "Core/MyPlayer.h"
 #include "Algorithms/Roles/Role.h"
 #include <vector>

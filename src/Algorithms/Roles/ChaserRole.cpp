@@ -7,9 +7,7 @@ std::vector<std::pair<int, int>> ChaserRole::prepareActions(MyTankAlgorithm &alg
 
     std::pair<int, int> myPos = algo.getCurrentPosition();
     Direction currentDirection = algo.getCurrentDirection();
-    int maxMovesPerUpdate = algo.getMaxMovesPerUpdate();
     std::pair<int, int> target = algo.getTargetForTank();
-    std::cout << "[DEBUG - ChaserRole]" << std::endl;
     std::vector<std::pair<int, int>> path = algo.getPath(myPos, target, algo.getBannedPositionsForTank());
     algo.setBFSPath(path);
 
@@ -25,7 +23,6 @@ std::vector<std::pair<int, int>> ChaserRole::prepareActions(MyTankAlgorithm &alg
 
     for (const auto &pathStep : path)
     {
-        std::cout << "[DEBUG - ChaseRole Path] (" << pathStep.first << ", " << pathStep.second << std::endl;
         if (step >= maxMovesPerUpdate)
             break;
 

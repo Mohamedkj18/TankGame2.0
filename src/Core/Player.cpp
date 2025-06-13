@@ -20,11 +20,15 @@ MyPlayer::MyPlayer(int player_index, size_t x, size_t y, size_t max_steps, size_
 void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &satellite_view)
 {
 
-    std::cout << "[DEBUG PLAYER] PlayerId: " << player_index << std::endl;
     std::set<int> friendlyTanks, enemyTanks, mines, walls, shells;
 
     int myX = -1, myY = -1;
     std::pair<int, int> tankPos = prepareInfoForBattleInfo(mines, walls, shells, friendlyTanks, enemyTanks, satellite_view);
+
+    if (!gotBattleInfo)
+    {
+        initializeTanksData();
+        }
 
     myX = tankPos.first;
     myY = tankPos.second;
@@ -34,12 +38,13 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
     info.setMyXPosition(myX);
     info.setMyYPosition(myY);
 
-    MyTankAlgorithm *algo = dynamic_cast<MyTankAlgorithm *>(&tank);
-    int tankId = algo ? algo->getTankId() : 0;
-    EnemyScanResult scan = assignRole(tankId, algo->getCurrentDirection(), {myX, myY}, shells, enemyTanks);
+    int tankId = getTankId({myX, myY});
+    Direction currentDirection = updateTankDirection(tankId);
+
+    EnemyScanResult scan = assignRole(tankId, {myX, myY}, shells, enemyTanks, friendlyTanks.size());
     if (!scan.ShouldKeepRole)
     {
-        info.setRole(createRole(tankId, algo->getCurrentDirection(), {myX, myY}, scan, shells, enemyTanks));
+        info.setRole(createRole(tankId, currentDirection, {myX, myY}, scan, shells, enemyTanks, friendlyTanks.size()));
         info.setShouldKeepRole(false);
     }
     else
@@ -59,33 +64,36 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
     }
 }
 
-void MyPlayer::updatePlannedPaths()
+void MyPlayer::updateTanksStatus()
 {
-    for (auto pair : tanksPlannedActions)
+
+    for (auto &[id, path] : tanksPlannedPaths)
     {
-        int tankId = pair.first;
-        if (pair.second.empty())
+        bool tankAlive = false;
+        for (auto pos : path)
         {
-            continue;
-        }
-        ActionRequest action = pair.second.front();
-        pair.second.erase(pair.second.begin());
-        if (action == ActionRequest::Shoot)
-        {
-            tanksRemainingShells[tankId]--;
-        }
-        if (action == ActionRequest::MoveBackward || action == ActionRequest::MoveForward)
-        {
-            if (tanksPlannedPaths[tankId].empty())
+            if (lastSatellite[pos.second][pos.first] - '0' == id)
             {
-                continue;
+                tankAlive = true;
+                break;
             }
-            tanksPlannedPaths[tankId].erase(tanksPlannedPaths[tankId].begin());
+        }
+        if (!tankAlive)
+        {
+            deleteTankData(id);
         }
     }
 }
 
-EnemyScanResult MyPlayer::assignRole(int tankId, Direction currDir, std::pair<int, int> pos, std::set<int> shells, std::set<int> enemyTanks)
+void MyPlayer::deleteTankData(int tankId)
+{
+    tanksPlannedActions.erase(tankId);
+    tanksPlannedPaths.erase(tankId);
+    tanksRemainingShells.erase(tankId);
+    tankRoles.erase(tankId);
+}
+
+EnemyScanResult MyPlayer::assignRole(int tankId, std::pair<int, int> pos, std::set<int> shells, std::set<int> enemyTanks, int numFriendlyTanks)
 {
 
     EnemyScanResult scan = scanVisibleEnemies(pos.first, pos.second);
@@ -94,9 +102,8 @@ EnemyScanResult MyPlayer::assignRole(int tankId, Direction currDir, std::pair<in
     if (it != tankRoles.end())
     {
 
-        if (shouldKeepRole(tankId, pos, it->second, scan, shells, enemyTanks))
+        if (shouldKeepRole(tankId, pos, it->second, scan, shells, enemyTanks, numFriendlyTanks))
         {
-            tankPositions[tankId] = pos;
             scan.ShouldKeepRole = true;
         }
     }
@@ -199,6 +206,7 @@ bool MyPlayer::isInOpen(int x, int y) const
 std::pair<int, int> MyPlayer::prepareInfoForBattleInfo(std::set<int> &mines, std::set<int> &walls, std::set<int> &shells, std::set<int> &friendlyTanks, std::set<int> &enemyTanks, SatelliteView &satellite_view)
 {
     int myX = -1, myY = -1;
+
     lastSatellite.assign(playerGameHeight, std::vector<char>(playerGameWidth, ' '));
     for (int i = 0; i < static_cast<int>(playerGameHeight); ++i)
     {
@@ -252,4 +260,66 @@ bool MyPlayer::isInRedZone(int x, int y, std::set<int> shellsPositions, std::set
     }
 
     return false;
+}
+
+int MyPlayer::getTankId(std::pair<int, int> tankPos)
+{
+    for (auto &[id, path] : tanksPlannedPaths)
+    {
+        for (auto pos : path)
+        {
+            if (pos.first == tankPos.first && pos.second == tankPos.second)
+            {
+                return id;
+            }
+        }
+    }
+    return 0; // shouldn't get here
+}
+
+void MyPlayer::initializeTanksData()
+{
+    int tankId = 0;
+    for (int i = 0; i < playerGameHeight; ++i)
+    {
+        for (int j = 0; j < playerGameWidth; ++j)
+        {
+            if (lastSatellite[i][j] == '%' || lastSatellite[i][j] - '0' == player_index)
+            {
+                tankRoles[tankId] = "Unknown";
+                tanksPlannedPaths[tankId] = {std::make_pair(j, i)};
+                tanksPlannedActions[tankId] = {ActionRequest::GetBattleInfo};
+                tanksRemainingShells[tankId] = num_shells;
+                tanksDirection[tankId] = (player_index == 1) ? Direction::L : Direction::R;
+                tankId++;
+            }
+        }
+    }
+    gotBattleInfo = true;
+}
+
+Direction MyPlayer::updateTankDirection(int tankId)
+{
+
+    Direction lastDir = tanksDirection[tankId];
+    for (auto action : tanksPlannedActions[tankId])
+    {
+        if (action == ActionRequest::RotateLeft45)
+        {
+            lastDir += 0.875;
+        }
+        else if (action == ActionRequest::RotateLeft90)
+        {
+            lastDir += 0.75;
+        }
+        else if (action == ActionRequest::RotateRight90)
+        {
+            lastDir += 0.25;
+        }
+        else if (action == ActionRequest::RotateRight45)
+        {
+            lastDir += 0.125;
+        }
+    }
+    return lastDir;
 }

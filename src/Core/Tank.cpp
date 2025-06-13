@@ -3,12 +3,12 @@
 #include "Core/Tank.h"
 #include "Core/Shell.h"
 #include "Core/GameManager.h"
-#include "Common/ActionRequest.h"
+#include "common/ActionRequest.h"
 
 // ------------------------ Tank ------------------------
 
-Tank::Tank(int x, int y, Direction dir, GameManager *game, int playerId, int shells, int tankId)
-    : GameObject(x, y, dir, game), playerId(playerId), artilleryShells(shells), tankId(tankId)
+Tank::Tank(int x, int y, Direction dir, GameManager *game, int playerId, int shells, int tankId, int tankGlobalId)
+    : GameObject(x, y, dir, game), playerId(playerId), artilleryShells(shells), tankId(tankId), tankGlobalId(tankGlobalId)
 {
     cantShoot = 0;
     destroyed = false;
@@ -32,6 +32,11 @@ void Tank::setLastMove(ActionRequest currentMove)
 void Tank::ignoreMove()
 {
     lastMove = ActionRequest::DoNothing;
+}
+
+int Tank::getTankGlobalId()
+{
+    return tankGlobalId;
 }
 
 void Tank::setDirection(std::string directionStr)

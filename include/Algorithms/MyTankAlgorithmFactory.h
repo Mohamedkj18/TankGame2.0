@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-#include "Common/TankAlgorithm.h"
-#include "Common/TankAlgorithmFactory.h"
+#include "common/TankAlgorithm.h"
+#include "common/TankAlgorithmFactory.h"
 
 class MyTankAlgorithmFactory : public TankAlgorithmFactory
 {

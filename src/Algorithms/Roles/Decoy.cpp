@@ -9,7 +9,6 @@ std::vector<std::pair<int, int>> DecoyRole::prepareActions(MyTankAlgorithm &algo
     std::vector<std::pair<int, int>> path;
     std::pair<int, int> myPos = algo.getCurrentPosition();
     Direction currentDirection = algo.getCurrentDirection();
-    int maxMovesPerUpdate = algo.getMaxMovesPerUpdate();
     int step = 0;
     bool isInOpenArea = algo.isInOpen(myPos);
     bool threatIsClose = algo.findEnemyInRange(myPos, 2) != std::nullopt;

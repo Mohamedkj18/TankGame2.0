@@ -1,0 +1,48 @@
+Board Name: Simple Open Field
+MaxSteps = 1000
+NumShells = 10
+Rows = 60
+Cols = 50
+
+
+
+
+
+                1 
+                1  1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                2               2
+                                            2
+

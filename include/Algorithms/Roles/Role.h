@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Common/ActionRequest.h"
+#include "common/ActionRequest.h"
 #include "utils/DirectionUtils.h"
 #include <string>
 #include <set>

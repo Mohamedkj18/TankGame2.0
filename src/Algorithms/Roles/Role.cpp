@@ -59,7 +59,18 @@ Direction Role::getDirectionFromPosition(std::pair<int, int> current, std::pair<
     int dx = target.first - current.first;
     int dy = target.second - current.second;
 
-    // Normalize to [-1, 0, 1]
+    // Handle wrap-around (toroidal logic)
+    if (dx > gameWidth / 2)
+        dx -= gameWidth;
+    if (dx < -gameWidth / 2)
+        dx += gameWidth;
+
+    if (dy > gameHeight / 2)
+        dy -= gameHeight;
+    if (dy < -gameHeight / 2)
+        dy += gameHeight;
+
+    // Normalize
     dx = (dx == 0) ? 0 : (dx > 0 ? 1 : -1);
     dy = (dy == 0) ? 0 : (dy > 0 ? 1 : -1);
 

@@ -9,7 +9,7 @@
 // #include "TankAlgorithm/TankChase.h"
 // #include "TankAlgorithm/TankEvasion.h"
 #include "Core/MySatelliteView.h"
-#include "Common/ActionRequest.h"
+#include "common/ActionRequest.h"
 #include "Core/MyPlayer.h"
 
 std::ofstream visualizationFile("data/visualization.txt");
@@ -136,6 +136,7 @@ void GameManager::removeWall(int x)
 void GameManager::removeTank(int tankPos)
 {
     playerTanksCount[tanks[tankPos]->getPlayerId()]--;
+    movesOfTanks[tanks[tankPos].get()->getTankGlobalId()] += " (killed)";
     tanks.erase(tankPos);
 }
 
@@ -173,7 +174,7 @@ int GameManager::readFile(std::string fileName)
 {
     int tankId1 = 0;
     int tankId2 = 0;
-
+    int globalTankId = 0;
     std::ifstream file(fileName);
     if (!file.is_open())
     {
@@ -242,7 +243,7 @@ int GameManager::readFile(std::string fileName)
                 int playerId = (c == '1') ? 1 : 2; // use 1/2 logic or infer player from symbol set
                 auto tank = std::make_unique<Tank>(x * 2, y * 2,
                                                    (playerId == 1) ? stringToDirection["L"] : stringToDirection["R"],
-                                                   this, playerId, numShellsPerTank, (playerId == 1) ? tankId1++ : tankId2++);
+                                                   this, playerId, numShellsPerTank, (playerId == 1) ? tankId1++ : tankId2++, globalTankId++);
 
                 playerTanksCount[playerId]++;
                 totalShellsRemaining += numShellsPerTank;
@@ -263,6 +264,11 @@ int GameManager::readFile(std::string fileName)
 
     players[1] = playerFactory.create(1, width, height, maxSteps, numShellsPerTank);
     players[2] = playerFactory.create(2, width, height, maxSteps, numShellsPerTank);
+    totalTanks = tankId1 + tankId2;
+    for (int k = 0; k < totalTanks; k++)
+    {
+        movesOfTanks.push_back(" ");
+    }
 
     return 0;
 }
@@ -329,28 +335,35 @@ void GameManager::advanceShells()
 
 void GameManager::reverseHandler(Tank &tank, ActionRequest move)
 {
+
     if (move == ActionRequest::MoveForward)
     {
         outputFile << "Tank " << tank.getTankId() << " canceled reverse!\n";
         tank.resetReverseState();
+        movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove()) + " (ignored)";
         tank.setLastMove(ActionRequest::DoNothing);
     }
     else if (tank.isReverseQueued())
     {
         outputFile << "Bad step: Tank " << tank.getTankId() << " waiting to move backwards - move ignored!\n";
+        movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove()) + " (ignored)";
         tank.incrementReverseCharge();
         if (tank.isReverseReady())
+        {
+            movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove());
             tank.executeReverse();
+        }
     }
-
     else if (move == ActionRequest::MoveBackward)
     {
         tank.queueReverse();
+        movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove()) + " (ignored)";
         tank.incrementReverseCharge();
         outputFile << "Tank " << tank.getTankId() << " queued reverse!\n";
         if (tank.isReverseReady())
         {
             outputFile << "Tank " << tank.getX() << " moved backwards!\n";
+            movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove());
             tank.executeReverse();
         }
     }
@@ -360,7 +373,10 @@ void GameManager::reverseHandler(Tank &tank, ActionRequest move)
 void GameManager::advanceTank(Tank &tank)
 {
     tank.resetReverseState();
-    tank.moveForward();
+    if (tank.moveForward())
+        movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove());
+    else
+        movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove()) + " (ignored)";
     checkForAMine(tank.getX(), tank.getY(), tank.getTankId());
 }
 
@@ -401,6 +417,7 @@ void GameManager::checkForTankCollision(Tank &tank)
     int currTankPos = bijection(tank.getX(), tank.getY());
     if (secondaryTanks.count(currTankPos))
     {
+        movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove()) + " (ignored)";
         playerTanksCount[secondaryTanks[currTankPos]->getPlayerId()]--;
         outputFile << "Losing step: Tank " << secondaryTanks[currTankPos]->getTankId() << " hit a tank at " << (int)tank.getX() / 2 << ", " << (int)tank.getY() / 2 << "!\n";
         tanksToRemove.insert(currTankPos);
@@ -425,6 +442,7 @@ void GameManager::checkForShellCollision(Shell &shell)
 void GameManager::executeTanksMoves()
 {
     ActionRequest move;
+
     for (const auto &pair : tanks)
     {
 
@@ -432,6 +450,7 @@ void GameManager::executeTanksMoves()
         move = tank->getLastMove();
         if (tank->getCantShoot())
         {
+            movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove()) + " (ignored)";
             tank->incrementCantShoot();
             if (tank->getCantShoot() == 8)
                 tank->resetCantShoot();
@@ -447,10 +466,12 @@ void GameManager::executeTanksMoves()
         }
         else if (move == ActionRequest::Shoot)
         {
+            movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove());
             tankShootingShells(*tank);
         }
         else
         {
+            movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove());
             rotate(*tank);
         }
 
@@ -463,6 +484,7 @@ void GameManager::executeTanksMoves()
 
 void GameManager::executeBattleInfoRequests()
 {
+    sortTanks();
     for (const auto &pair : tanks)
     {
         Tank *tank = pair.second.get();
@@ -519,8 +541,7 @@ void GameManager::removeObjectsFromTheBoard()
 
 bool GameManager::checkForAWinner()
 {
-    // std::cout << "Player 1 tanks count: " << playerTanksCount[1] << std::endl;
-    // std::cout << "Player 2 tanks count: " << playerTanksCount[2] << std::endl;
+
     if (playerTanksCount[1] == 0 && playerTanksCount[2] > 0)
     {
         outputFile << "Game Over! Player 2 wins!\n";
@@ -540,17 +561,30 @@ bool GameManager::checkForAWinner()
     return false;
 }
 
-void GameManager::outputTankMove(int playerNum, ActionRequest move, int tankId)
-{
+// void GameManager::outputTankMove(std::vector<std::string> copyOfMovesOfTanks)
+// {
 
-    outputFile << "Player " << playerNum << " tank " << tankId << " moved: " << to_string(move) << std::endl;
+//     outputFile << to_string(move) << ", " << std::endl;
+// }
+
+void GameManager::sortTanks()
+{
+    std::vector<std::pair<int, Tank *>> tankVec;
+
+    for (auto &pair : tanks)
+        tankVec.emplace_back(pair.first, pair.second.get());
+
+    std::sort(tankVec.begin(), tankVec.end(),
+              [](const auto &a, const auto &b)
+              {
+                  return a.second->getTankGlobalId() < b.second->getTankGlobalId();
+              });
 }
 
 void GameManager::runGame()
 {
 
     int count = 0;
-    std::string move;
 
     for (const auto &pair : tanks)
     {
@@ -561,17 +595,14 @@ void GameManager::runGame()
     while (true)
     {
         outputFile << "Game step: " << gameStep << std::endl;
-        std::cout << "Game step: " << gameStep << std::endl;
-
+        std::cout << "Game Step " << gameStep << std::endl;
         for (const auto &pair : tanks)
         {
-
             Tank *tank = pair.second.get();
             TankAlgorithm *algo = tank->getTankAlgorithm();
             ActionRequest move = algo->getAction();
             tank->setLastMove(move);
-            outputTankMove(tank->getPlayerId(), move, tank->getTankId());
-            std::cout << "Player " << tank->getPlayerId() << " tank " << tank->getTankId() << " Role: " << dynamic_cast<MyPlayer *>(players[tank->getPlayerId()].get())->getRoleName(tank->getTankId()) << std::endl;
+            std::cout << "PlayerId: " << tank->getPlayerId() << " TankId: " << tank->getTankId() << " move: " << to_string(move) << std::endl;
         }
 
         executeBattleInfoRequests();
@@ -582,6 +613,7 @@ void GameManager::runGame()
         removeObjectsFromTheBoard();
 
         executeTanksMoves();
+        std::vector<std::string> copyOfMovesOfTanks = movesOfTanks;
         advanceShellsRecentlyFired();
         removeTanks();
         removeShells();
@@ -593,6 +625,7 @@ void GameManager::runGame()
         advanceShells();
         removeObjectsFromTheBoard();
 
+        // outputTankMoves(copyOfMovesOfTanks);
         gameStep++;
         printBoard();
         if (checkForAWinner())
@@ -628,9 +661,6 @@ void GameManager::runGame()
                 return;
             }
         }
-
-        dynamic_cast<MyPlayer *>(players[1].get())->updatePlannedPaths();
-        dynamic_cast<MyPlayer *>(players[2].get())->updatePlannedPaths();
     }
 }
 
@@ -682,3 +712,14 @@ void GameManager::printBoard(bool final)
     }
     visualizationFile << std::endl;
 }
+
+// void GameManager::outputTankMoves(std::vector<std::string> copyOfMovesOfTanks)
+// {
+//     for (int i = 0; i < totalTanks; i++)
+//     {
+//         outputFile << movesOfTanks[i];
+//         if (i != totalTanks - 1)
+//             outputFile << ", ";
+//     }
+//     outputFile << "\n";
+// }
