@@ -5,14 +5,14 @@
 #include "Algorithms/Roles/ChaserRole.h"
 
 MyTankAlgorithm::MyTankAlgorithm(int player_index, int tank_index, int numMovesPerUpdate, int range, Direction initialDirection)
-    : playerId(player_index), tankId(tank_index), moveIndex(0), range(range), maxMovesPerUpdate(numMovesPerUpdate), currentDirection(initialDirection) {}
+    : moveIndex(0), tankId(tank_index), playerId(player_index), currentDirection(initialDirection),range(range), maxMovesPerUpdate(numMovesPerUpdate) {}
 
 void MyTankAlgorithm::updateBattleInfo(BattleInfo &info)
 {
     auto &myInfo = static_cast<MyBattleInfo &>(info);
 
     if (!myInfo.getShouldKeepRole() || !role)
-        setRole(std::move(myInfo.extractRole()));
+        setRole(myInfo.extractRole());
 
     threats = myInfo.getEnemyTanks();
     nearbyFriendlies = myInfo.getFriendlyTanks();
@@ -23,7 +23,6 @@ void MyTankAlgorithm::updateBattleInfo(BattleInfo &info)
     gameHeight = myInfo.getHeight();
     shells = myInfo.getShells();
     currentPos = {myInfo.getMyXPosition(), myInfo.getMyYPosition()};
-    std::pair<int, int> target = getTargetForTank();
 
     bfsPath = role->prepareActions(*this);
     // send data back to player
@@ -83,7 +82,7 @@ bool MyTankAlgorithm::shouldShoot(Direction currDir, std::pair<int, int> currPos
     return false;
 }
 
-bool MyTankAlgorithm::isSquareValid(int x, int y, std::set<std::pair<int, int>> cellsToAvoid, int step)
+bool MyTankAlgorithm::isSquareValid(int x, int y, std::set<std::pair<int, int>> cellsToAvoid)
 {
     if (x < 0 || y < 0 || x >= static_cast<int>(gameWidth) || y >= static_cast<int>(gameHeight))
         return false;
@@ -196,7 +195,6 @@ std::vector<std::pair<int, int>> MyTankAlgorithm::getPath(std::pair<int, int> st
     queue.push(start);
     visited[start] = true;
 
-    int step = 0;
 
     while (!queue.empty())
     {
@@ -219,14 +217,13 @@ std::vector<std::pair<int, int>> MyTankAlgorithm::getPath(std::pair<int, int> st
         for (const auto &dir : directions)
         {
             auto next = moveTank(current, dir);
-            if (!visited[next] && isSquareValid(next.first, next.second, avoidCells, step))
+            if (!visited[next] && isSquareValid(next.first, next.second, avoidCells))
             {
                 visited[next] = true;
                 parent[next] = current;
                 queue.push(next);
             }
         }
-        step++;
     }
 
     return {};
@@ -293,7 +290,7 @@ std::pair<int, int> MyTankAlgorithm::findNearestFriendlyTank(std::pair<int, int>
         std::pair<int, int> pos = inverseBijection(id);
         size_t pathLength = getPath(from, pos, bannedPositionsForTank).size();
 
-        if (pathLength < minPath)
+        if (pathLength < (size_t)minPath)
         {
             minPath = pathLength;
             candidate = pos;

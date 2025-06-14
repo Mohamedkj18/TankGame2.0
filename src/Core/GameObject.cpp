@@ -6,7 +6,7 @@
 // ------------------------ MovingGameObject ------------------------
 
 GameObject::GameObject(int x, int y, Direction dir, GameManager *game)
-    : x(x), y(y), direction(dir), game(game) {}
+    : x(x), y(y), direction(dir) , game(game){}
 
 int GameObject::getX()
 {
@@ -20,7 +20,6 @@ int GameObject::getY()
 
 bool GameObject::moveForward()
 {
-    std::string n;
     updatePosition(direction);
     if (checkForAWall())
     {

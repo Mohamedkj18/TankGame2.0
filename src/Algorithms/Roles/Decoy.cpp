@@ -8,8 +8,6 @@ std::vector<std::pair<int, int>> DecoyRole::prepareActions(MyTankAlgorithm &algo
 
     std::vector<std::pair<int, int>> path;
     std::pair<int, int> myPos = algo.getCurrentPosition();
-    Direction currentDirection = algo.getCurrentDirection();
-    int step = 0;
     bool isInOpenArea = algo.isInOpen(myPos);
     bool threatIsClose = algo.findEnemyInRange(myPos, 2) != std::nullopt;
 
@@ -17,7 +15,6 @@ std::vector<std::pair<int, int>> DecoyRole::prepareActions(MyTankAlgorithm &algo
     {
         // Stay visible, don't move
         nextMoves.push_back(ActionRequest::GetBattleInfo);
-        step++;
         path = {myPos};
     }
     else
@@ -35,17 +32,15 @@ std::vector<std::pair<int, int>> DecoyRole::prepareActions(MyTankAlgorithm &algo
         path = algo.getPath(myPos, target, algo.getBannedPositionsForTank());
         if (!path.empty())
             path.pop_back();
-        for (const auto &pathStep : path)
-        {
-        }
-        nextMoves = getNextMoves(path, target, algo);
+        
+        nextMoves = getNextMoves(path, algo);
     }
 
     algo.setNextMoves(nextMoves);
     return path;
 }
 
-std::vector<ActionRequest> DecoyRole::getNextMoves(std::vector<std::pair<int, int>> path, std::pair<int, int> target, MyTankAlgorithm &algo)
+std::vector<ActionRequest> DecoyRole::getNextMoves(std::vector<std::pair<int, int>> path, MyTankAlgorithm &algo)
 {
     std::pair<int, int> pos = algo.getCurrentPosition();
     Direction currentDirection = algo.getCurrentDirection();

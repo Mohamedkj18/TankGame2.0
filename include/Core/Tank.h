@@ -4,8 +4,8 @@
 #include <set>
 #include "Core/GameObject.h"
 #include "Core/GameManager.h"
-#include "Common/ActionRequest.h"
-#include "Common/TankAlgorithm.h"
+#include "common/ActionRequest.h"
+#include "common/TankAlgorithm.h"
 
 class GameManager;
 // ========================= CLASS: Tank =========================
@@ -14,9 +14,9 @@ class Tank : public GameObject
 {
 private:
     int playerId;
-    int tankId;
-    int tankGlobalId;
     int artilleryShells;
+    int tankId;
+    int tankGlobalId;  
     bool destroyed;
     int cantShoot;
     int reverseCharge = 0;

@@ -1,7 +1,7 @@
 #include <cstddef>
 #include <memory>
-#include "Common/Player.h"
-#include "Common/PlayerFactory.h"
+#include "common/Player.h"
+#include "common/PlayerFactory.h"
 
 class MyPlayerFactory : public PlayerFactory
 {

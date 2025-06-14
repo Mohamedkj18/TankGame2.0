@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 #include <memory>
-#include "Common/BattleInfo.h"
+#include "common/BattleInfo.h"
 #include "utils/DirectionUtils.h"
 #include "Algorithms/Roles/Role.h"
 

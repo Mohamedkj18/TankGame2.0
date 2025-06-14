@@ -5,9 +5,6 @@ std::vector<std::pair<int, int>> EvasiorRole::prepareActions(MyTankAlgorithm &al
 {
     std::vector<std::pair<int, int>> path;
     std::pair<int, int> myPos = algo.getCurrentPosition();
-    Direction currentDirection = algo.getCurrentDirection();
-    int RANGE = 7;
-
     std::set<std::pair<int, int>> shells = algo.getShells();
 
     std::set<std::pair<int, int>> redZone = createRedZone(shells, 5);
@@ -15,7 +12,7 @@ std::vector<std::pair<int, int>> EvasiorRole::prepareActions(MyTankAlgorithm &al
     concatenateSets(redZone, createRedZone(transformToPairs(algo.getEnemyTanks()), 2));
     std::pair<int, int> target = algo.findFirstLegalLocationToFlee(myPos, redZone);
     path = algo.getPath(myPos, target, redZone);
-    nextMoves = getNextMoves(path, target, algo);
+    nextMoves = getNextMoves(path, algo);
 
     algo.setNextMoves(nextMoves);
     return path;
@@ -46,7 +43,7 @@ std::set<std::pair<int, int>> EvasiorRole::createRedZone(std::set<std::pair<int,
     return redZone;
 }
 
-std::vector<ActionRequest> EvasiorRole::getNextMoves(std::vector<std::pair<int, int>> path, std::pair<int, int> target, MyTankAlgorithm &algo)
+std::vector<ActionRequest> EvasiorRole::getNextMoves(std::vector<std::pair<int, int>> path, MyTankAlgorithm &algo)
 {
     std::pair<int, int> pos = algo.getCurrentPosition();
     Direction currentDirection = algo.getCurrentDirection();
@@ -84,7 +81,7 @@ std::vector<ActionRequest> EvasiorRole::getNextMoves(std::vector<std::pair<int, 
 
 void EvasiorRole::concatenateSets(std::set<std::pair<int, int>> targetSet, std::set<std::pair<int, int>> setToBeAdded)
 {
-    for (const auto pos : setToBeAdded)
+    for (const auto &pos : setToBeAdded)
     {
         targetSet.insert(pos);
     }

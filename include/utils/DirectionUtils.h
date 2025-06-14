@@ -8,7 +8,7 @@
 #include <set>
 #include <iostream>
 #include <fstream>
-#include "Common/ActionRequest.h"
+#include "common/ActionRequest.h"
 
 // ========================= ENUMS & STRUCTS =========================
 

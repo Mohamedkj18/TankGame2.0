@@ -6,10 +6,10 @@ MyBattleInfo::MyBattleInfo(int width, int height,
                            const std::set<int> &mines,
                            const std::set<int> &walls,
                            const std::set<int> &shells)
-    : width(width), height(height),
+    :width(width), height(height), myX(0), myY(0),
       friendlyTanks(friendlyTanks), enemyTanks(enemyTanks),
-      mines(mines), walls(walls), shells(shells),
-      myX(0), myY(0) {}
+      mines(mines), walls(walls), shells(shells)
+       {}
 
 int MyBattleInfo::getWidth() const { return width; }
 int MyBattleInfo::getHeight() const { return height; }

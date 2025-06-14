@@ -91,6 +91,7 @@ double Role::getAngleFromDirections(Direction &orgDir, Direction &desiredDir)
             return angle;
         }
     }
+    return 0.0; // Should not happen, but just in case
 }
 
 ActionRequest Role::getNextAction()

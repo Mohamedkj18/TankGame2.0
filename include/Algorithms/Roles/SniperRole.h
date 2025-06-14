@@ -6,8 +6,7 @@ class MyTankAlgorithm;
 
 class SniperRole : public Role
 {
-private:
-    bool fleeingMode = false;
+
 
 public:
     using Role::Role;

@@ -415,17 +415,19 @@ void GameManager::rotate(Tank &tank)
 void GameManager::checkForTankCollision(Tank &tank)
 {
     int currTankPos = bijection(tank.getX(), tank.getY());
-    if (secondaryTanks.count(currTankPos))
+    if (shells.count(currTankPos))
+    {
+        movesOfTanks[secondaryTanks[currTankPos].get()->getTankGlobalId()] = to_string(tank.getLastMove()) + " (killed)";
+        tankHitByAShell(currTankPos);
+    }
+    else if (secondaryTanks.count(currTankPos))
     {
         movesOfTanks[secondaryTanks[currTankPos].get()->getTankGlobalId()] = to_string(tank.getLastMove()) + " (killed)";
         playerTanksCount[secondaryTanks[currTankPos]->getPlayerId()]--;
         outputFile << "Losing step: Tank " << secondaryTanks[currTankPos]->getTankId() << " hit a tank at " << (int)tank.getX() / 2 << ", " << (int)tank.getY() / 2 << "!\n";
         tanksToRemove.insert(currTankPos);
     }
-    if (shells.count(currTankPos))
-    {
-        tankHitByAShell(currTankPos);
-    }
+    
     secondaryTanks[currTankPos] = std::make_unique<Tank>(std::move(tank));
 }
 
@@ -664,7 +666,7 @@ void GameManager::runGame()
     }
 }
 
-void GameManager::printBoard(bool final)
+void GameManager::printBoard()
 {
     std::vector<std::vector<char>> board(height, std::vector<char>(width, '.'));
     std::pair<int, int> xy;

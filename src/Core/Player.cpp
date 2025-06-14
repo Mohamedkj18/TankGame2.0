@@ -13,13 +13,14 @@
 #include "Algorithms/MyTankAlgorithm.h"
 #include "utils/DirectionUtils.h"
 
+
+
 MyPlayer::MyPlayer(int player_index, size_t x, size_t y, size_t max_steps, size_t num_shells)
     : Player(player_index, x, y, max_steps, num_shells),
       player_index(player_index), playerGameWidth(x), playerGameHeight(y), max_steps(max_steps), num_shells(num_shells) {}
 
 void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &satellite_view)
-{
-
+{;
     std::set<int> friendlyTanks, enemyTanks, mines, walls, shells;
 
     int myX = -1, myY = -1;
@@ -39,12 +40,11 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
     info.setMyYPosition(myY);
 
     int tankId = getTankId({myX, myY});
-    Direction currentDirection = updateTankDirection(tankId);
 
     EnemyScanResult scan = assignRole(tankId, {myX, myY}, shells, enemyTanks, friendlyTanks.size());
     if (!scan.ShouldKeepRole)
     {
-        info.setRole(createRole(tankId, currentDirection, {myX, myY}, scan, shells, enemyTanks, friendlyTanks.size()));
+        info.setRole(createRole(tankId, {myX, myY}, scan, shells, enemyTanks));
         info.setShouldKeepRole(false);
     }
     else
@@ -163,14 +163,14 @@ bool MyPlayer::isClearLine(int x1, int y1, int x2, int y2) const
     if (dy != 0)
         dy /= std::abs(dy);
 
-    if ((x1 + dx + playerGameWidth) % playerGameWidth == x2 &&
-        (y1 + dy + playerGameHeight) % playerGameHeight == y2)
+    if ((x1 + dx + (int)playerGameWidth) % (int)playerGameWidth == x2 &&
+        (y1 + dy + (int)playerGameHeight) % (int)playerGameHeight == y2)
     {
         return true; // adjacent cell
     }
 
-    int x = (x1 + dx + playerGameWidth) % playerGameWidth;
-    int y = (y1 + dy + playerGameHeight) % playerGameHeight;
+    int x = (x1 + dx + (int)playerGameWidth) % (int)playerGameWidth;
+    int y = (y1 + dy + (int)playerGameHeight) % (int)playerGameHeight;
 
     while (x != x2 || y != y2)
     {
@@ -208,9 +208,9 @@ std::pair<int, int> MyPlayer::prepareInfoForBattleInfo(std::set<int> &mines, std
     int myX = -1, myY = -1;
 
     lastSatellite.assign(playerGameHeight, std::vector<char>(playerGameWidth, ' '));
-    for (int i = 0; i < static_cast<int>(playerGameHeight); ++i)
+    for (size_t i = 0; i <playerGameHeight; ++i)
     {
-        for (int j = 0; j < static_cast<int>(playerGameWidth); ++j)
+        for (size_t j = 0; j < playerGameWidth; ++j)
         {
             char object = satellite_view.getObjectAt(2 * j, 2 * i);
             int id = bijection(j, i);
@@ -280,9 +280,9 @@ int MyPlayer::getTankId(std::pair<int, int> tankPos)
 void MyPlayer::initializeTanksData()
 {
     int tankId = 0;
-    for (int i = 0; i < playerGameHeight; ++i)
+    for (size_t i = 0; i < playerGameHeight; ++i)
     {
-        for (int j = 0; j < playerGameWidth; ++j)
+        for (size_t j = 0; j < playerGameWidth; ++j)
         {
             if (lastSatellite[i][j] == '%' || lastSatellite[i][j] - '0' == player_index)
             {

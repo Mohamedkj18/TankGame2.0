@@ -15,5 +15,5 @@ public:
     {
         return std::make_unique<DecoyRole>(*this);
     }
-    std::vector<ActionRequest> getNextMoves(std::vector<std::pair<int, int>> path, std::pair<int, int> target, MyTankAlgorithm &algo);
+    std::vector<ActionRequest> getNextMoves(std::vector<std::pair<int, int>> path, MyTankAlgorithm &algo);
 };

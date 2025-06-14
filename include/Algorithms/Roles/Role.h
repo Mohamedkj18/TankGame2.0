@@ -13,7 +13,7 @@ class Role
 
 public:
     virtual ~Role() = default;
-    Role(int maxMovesPerUpdate, Direction initialDirection, std::pair<int, int> initialPosition, int gameWidth = 0, int gameHeight = 0)
+    Role(int maxMovesPerUpdate,int gameWidth = 0, int gameHeight = 0)
         : maxMovesPerUpdate(maxMovesPerUpdate), gameWidth(gameWidth), gameHeight(gameHeight) {}
     virtual std::vector<std::pair<int, int>> prepareActions(MyTankAlgorithm &algo) = 0;
 

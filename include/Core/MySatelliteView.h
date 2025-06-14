@@ -1,5 +1,5 @@
 #pragma once
-#include "Common/SatelliteView.h"
+#include "common/SatelliteView.h"
 #include "Core/Tank.h"
 #include "Core/Shell.h"
 #include "Core/GameManager.h"

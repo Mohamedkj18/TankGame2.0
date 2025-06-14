@@ -8,8 +8,9 @@ class GameObject
 protected:
     int x;
     int y;
-    GameManager *game;
     Direction direction;
+    GameManager *game;
+    
 
 public:
     GameObject(int x, int y, Direction dir, GameManager *game);

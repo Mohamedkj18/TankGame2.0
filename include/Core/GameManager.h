@@ -14,9 +14,9 @@
 #include <memory>
 #include "Core/Tank.h"
 #include "Core/Shell.h"
-#include "Common/PlayerFactory.h"
-#include "Common/TankAlgorithmFactory.h"
-#include "Common/ActionRequest.h"
+#include "common/PlayerFactory.h"
+#include "common/TankAlgorithmFactory.h"
+#include "common/ActionRequest.h"
 
 class Tank;
 class Shell;
@@ -87,7 +87,7 @@ public:
     std::vector<std::string> splitByComma(const std::string &input);
     void checkForAMine(int x, int y, int tankId);
     void runGame();
-    void printBoard(bool final = false);
+    void printBoard();
     void advanceShells();
     void advanceShellsRecentlyFired();
     void executeTanksMoves(bool firstPass);
