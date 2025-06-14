@@ -90,7 +90,7 @@ public:
     void printBoard(bool final = false);
     void advanceShells();
     void advanceShellsRecentlyFired();
-    void executeTanksMoves();
+    void executeTanksMoves(bool firstPass);
     void executeBattleInfoRequests();
     void removeObjectsFromTheBoard();
     void reverseHandler(Tank &tank, ActionRequest move);
@@ -103,7 +103,7 @@ public:
     void shellHitAWall(int shellPos);
     int bijection(int x, int y);
     void sortTanks();
-    // void outputTankMoves(std::vector<std::string> copyOfMovesOfTanks);
+    void outputTankMoves();
 
     bool checkForAWinner();
 };

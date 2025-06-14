@@ -417,7 +417,7 @@ void GameManager::checkForTankCollision(Tank &tank)
     int currTankPos = bijection(tank.getX(), tank.getY());
     if (secondaryTanks.count(currTankPos))
     {
-        movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove()) + " (ignored)";
+        movesOfTanks[secondaryTanks[currTankPos].get()->getTankGlobalId()] = to_string(tank.getLastMove()) + " (killed)";
         playerTanksCount[secondaryTanks[currTankPos]->getPlayerId()]--;
         outputFile << "Losing step: Tank " << secondaryTanks[currTankPos]->getTankId() << " hit a tank at " << (int)tank.getX() / 2 << ", " << (int)tank.getY() / 2 << "!\n";
         tanksToRemove.insert(currTankPos);
@@ -439,7 +439,7 @@ void GameManager::checkForShellCollision(Shell &shell)
     secondaryShells[shellPos] = std::make_unique<Shell>(shell);
 }
 
-void GameManager::executeTanksMoves()
+void GameManager::executeTanksMoves(bool firstPass)
 {
     ActionRequest move;
 
@@ -450,7 +450,7 @@ void GameManager::executeTanksMoves()
         move = tank->getLastMove();
         if (tank->getCantShoot())
         {
-            movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove()) + " (ignored)";
+            if(firstPass && move == ActionRequest::Shoot)movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove()) + " (ignored)";
             tank->incrementCantShoot();
             if (tank->getCantShoot() == 8)
                 tank->resetCantShoot();
@@ -469,9 +469,9 @@ void GameManager::executeTanksMoves()
             movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove());
             tankShootingShells(*tank);
         }
-        else
+        else if(move != ActionRequest::GetBattleInfo)
         {
-            movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove());
+            if(firstPass)movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove());
             rotate(*tank);
         }
 
@@ -495,7 +495,8 @@ void GameManager::executeBattleInfoRequests()
             int pos = bijection(tank->getX(), tank->getY());
             MySatelliteView satelliteView(pos, tanks, shells, mines, walls);
             players[tank->getPlayerId()]->updateTankWithBattleInfo(*tankAlgorithm, satelliteView);
-            tank->setLastMove(ActionRequest::DoNothing);
+            movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove());
+
         }
     }
 }
@@ -544,12 +545,12 @@ bool GameManager::checkForAWinner()
 
     if (playerTanksCount[1] == 0 && playerTanksCount[2] > 0)
     {
-        outputFile << "Game Over! Player 2 wins!\n";
+        outputFile << "Player 2 wins with "<< playerTanksCount[2] <<" tanks still alive\n";
         return true;
     }
     else if (playerTanksCount[2] == 0 && playerTanksCount[1] > 0)
     {
-        outputFile << "Game Over! Player 1 wins!\n";
+        outputFile << "Player 1 wins with "<< playerTanksCount[1] <<" tanks still alive\n";
         return true;
     }
     else if (playerTanksCount[1] == 0 && playerTanksCount[2] == 0)
@@ -612,12 +613,11 @@ void GameManager::runGame()
         advanceShells();
         removeObjectsFromTheBoard();
 
-        executeTanksMoves();
-        std::vector<std::string> copyOfMovesOfTanks = movesOfTanks;
+        executeTanksMoves(true);
         advanceShellsRecentlyFired();
         removeTanks();
         removeShells();
-        executeTanksMoves();
+        executeTanksMoves(false);
         removeObjectsFromTheBoard();
 
         advanceShells();
@@ -625,7 +625,7 @@ void GameManager::runGame()
         advanceShells();
         removeObjectsFromTheBoard();
 
-        // outputTankMoves(copyOfMovesOfTanks);
+        outputTankMoves();
         gameStep++;
         printBoard();
         if (checkForAWinner())
@@ -713,13 +713,17 @@ void GameManager::printBoard(bool final)
     visualizationFile << std::endl;
 }
 
-// void GameManager::outputTankMoves(std::vector<std::string> copyOfMovesOfTanks)
-// {
-//     for (int i = 0; i < totalTanks; i++)
-//     {
-//         outputFile << movesOfTanks[i];
-//         if (i != totalTanks - 1)
-//             outputFile << ", ";
-//     }
-//     outputFile << "\n";
-// }
+void GameManager::outputTankMoves()
+{
+    int wordSize = 0;
+    for (int i = 0; i < totalTanks; i++)
+    {
+        wordSize = movesOfTanks[i].size();
+        outputFile << movesOfTanks[i];
+        if(movesOfTanks[i][wordSize-1] == ')' && movesOfTanks[i].substr(wordSize - 9, 9) == " (killed)") 
+            movesOfTanks[i] = "killed";
+        if (i != totalTanks - 1)
+            outputFile << ", ";
+    }
+    outputFile << "\n";
+}
