@@ -27,7 +27,6 @@ private:
 
 public:
     Tank(int x, int y, Direction dir, std::shared_ptr<GameManager> game, int playerId, int shells, int tankId, int tankGlobalId);
-    Tank(const Tank &other); // Copy constructor
 
     // Position and state
     int getPlayerId();

@@ -1,39 +1,104 @@
-Game step: 0
-Game step: 1
-Game step: 2
-Game step: 3
-Game step: 4
-Game step: 5
-Game step: 6
-Game step: 7
-Game step: 8
-Game step: 9
-Game step: 10
-Game step: 11
-Game step: 12
-Game step: 13
-Game step: 14
-Game step: 15
-Game step: 16
-Game step: 17
-Game step: 18
-Game step: 19
-Game step: 20
-Game step: 21
-Game step: 22
-Game step: 23
-Game step: 24
-Game step: 25
-Game step: 26
-Game step: 27
-Game step: 28
-Game step: 29
-Game step: 30
-Game step: 31
-Bad step: Tank 0 can't shoot!
-Game step: 32
-Bad step: Tank 2 can't shoot!
-Game step: 33
-Game step: 34
-Losing step: Tank 0 hit a tank at 15, 5!
-Game Over! Player 2 wins!
+GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, RotateRight45, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, RotateRight90, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, RotateRight90, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft90, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, RotateLeft45, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft90, GetBattleInfo
+GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, RotateLeft45, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft45, GetBattleInfo
+GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, RotateRight45, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft90, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+RotateRight90, MoveForward, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+RotateRight90, RotateRight45, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+MoveForward, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, MoveForward, GetBattleInfo, RotateRight90, RotateLeft45, GetBattleInfo, RotateRight45, RotateLeft45, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, RotateRight45, GetBattleInfo, RotateRight90, MoveForward, GetBattleInfo, RotateRight90, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft90, GetBattleInfo
+RotateRight45, MoveForward, GetBattleInfo, GetBattleInfo, RotateRight45, MoveForward, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+MoveForward, RotateLeft90, GetBattleInfo, GetBattleInfo, MoveForward, MoveForward, GetBattleInfo, MoveForward, RotateRight45, GetBattleInfo, RotateLeft90, RotateLeft90, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+MoveForward, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, MoveForward, GetBattleInfo, MoveForward, MoveForward, GetBattleInfo, MoveForward, MoveForward, GetBattleInfo, GetBattleInfo, RotateLeft90, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+RotateLeft45, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, RotateLeft45, MoveForward, GetBattleInfo, GetBattleInfo, RotateLeft45, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo
+GetBattleInfo, RotateRight45, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, RotateLeft45, GetBattleInfo, RotateLeft45, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, RotateRight90, GetBattleInfo, MoveForward, MoveForward, GetBattleInfo, MoveForward, RotateRight45, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, RotateRight90, RotateRight90, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft90, GetBattleInfo
+GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, MoveForward, GetBattleInfo, RotateLeft90, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, MoveForward, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, RotateRight45, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, RotateRight45, RotateRight90, GetBattleInfo, RotateLeft45, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo, GetBattleInfo, RotateLeft90, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo
+GetBattleInfo, RotateRight45 (killed), GetBattleInfo, GetBattleInfo, GetBattleInfo, DoNothing (killed), GetBattleInfo, MoveForward, RotateLeft45, GetBattleInfo, RotateLeft45, MoveForward, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, MoveForward, MoveForward, GetBattleInfo, MoveForward, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateRight45, killed, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo, RotateLeft45, MoveForward, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo, RotateRight45, RotateRight90, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateLeft45, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward (killed), GetBattleInfo, GetBattleInfo, MoveForward (killed), GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward (killed), GetBattleInfo, MoveForward (killed), killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateLeft90, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateLeft45, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateRight90, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft90, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateLeft90, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, Shoot, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo (killed), killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateRight45, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateRight90, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateRight45, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateLeft45, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateLeft45, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateRight45, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, RotateRight45, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, MoveForward, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft45, GetBattleInfo
+MoveForward (killed), killed, GetBattleInfo, GetBattleInfo, MoveForward (killed), killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+killed, killed, GetBattleInfo, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo
+killed, killed, GetBattleInfo, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+killed, killed, GetBattleInfo, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+killed, killed, GetBattleInfo, GetBattleInfo, killed, killed, RotateLeft90, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+killed, killed, GetBattleInfo, GetBattleInfo, killed, killed, MoveForward, killed, killed, RotateRight45, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight90, GetBattleInfo
+killed, killed, GetBattleInfo, GetBattleInfo, killed, killed, RotateRight45, killed, killed, MoveForward, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+killed, killed, GetBattleInfo, GetBattleInfo, killed, killed, MoveForward, killed, killed, MoveForward, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+killed, killed, GetBattleInfo, GetBattleInfo, killed, killed, MoveForward, killed, killed, RotateRight45, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo
+killed, killed, GetBattleInfo, RotateLeft90, killed, killed, GetBattleInfo, killed, killed, MoveForward, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+killed, killed, GetBattleInfo, RotateLeft45, killed, killed, RotateRight45, killed, killed, GetBattleInfo, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+killed, killed, GetBattleInfo, MoveForward, killed, killed, RotateRight90, killed, killed, RotateRight90, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft90, GetBattleInfo
+killed, killed, GetBattleInfo, RotateRight90, killed, killed, MoveForward, killed, killed, RotateRight90, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+killed, killed, GetBattleInfo, MoveForward, killed, killed, MoveForward (killed), killed, killed, MoveForward (killed), killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft90, GetBattleInfo
+killed, killed, GetBattleInfo, GetBattleInfo, killed, killed, killed, killed, killed, killed, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+killed, killed, GetBattleInfo, GetBattleInfo, killed, killed, killed, killed, killed, killed, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, Shoot, GetBattleInfo
+killed, killed, GetBattleInfo, RotateLeft90, killed, killed, killed, killed, killed, killed, killed, killed, GetBattleInfo, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+killed, killed, GetBattleInfo, MoveForward, killed, killed, killed, killed, killed, killed, killed, killed, GetBattleInfo (killed), GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateRight45, GetBattleInfo
+killed, killed, GetBattleInfo, RotateRight90, killed, killed, killed, killed, killed, killed, killed, killed, killed, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+killed, killed, GetBattleInfo, MoveForward, killed, killed, killed, killed, killed, killed, killed, killed, killed, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+killed, killed, RotateLeft90, MoveForward, killed, killed, killed, killed, killed, killed, killed, killed, killed, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft45, GetBattleInfo
+killed, killed, RotateLeft45, GetBattleInfo, killed, killed, killed, killed, killed, killed, killed, killed, killed, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, MoveForward, GetBattleInfo
+killed, killed, MoveForward, RotateRight45, killed, killed, killed, killed, killed, killed, killed, killed, killed, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo, GetBattleInfo
+killed, killed, DoNothing (killed), RotateRight90, killed, killed, killed, killed, killed, killed, killed, killed, killed, GetBattleInfo, killed, GetBattleInfo, GetBattleInfo, GetBattleInfo, RotateLeft45 (killed), GetBattleInfo
+Player 1 wins with 6 tanks still alive

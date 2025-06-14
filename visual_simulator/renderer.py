@@ -26,6 +26,7 @@ ROTATION_ANGLE = {
 
 class GameRenderer:
     def __init__(self, data, output_file_path):
+        import pygame
         self.data = data
         self.output_file_path = output_file_path
         self.step = 0
@@ -37,6 +38,16 @@ class GameRenderer:
         self.replay_paused = False
         self.replay_exit = False
         pygame.init()
+
+        # --- Dynamically adjust TILE_SIZE to fit screen ---
+        info = pygame.display.Info()
+        screen_width, screen_height = info.current_w, info.current_h
+        max_tile_w = screen_width // self.width
+        max_tile_h = (screen_height - 100) // self.height
+        global TILE_SIZE
+        TILE_SIZE = min(TILE_SIZE, max_tile_w, max_tile_h)
+        # --- End dynamic TILE_SIZE ---
+
         self.font = pygame.font.SysFont(None, FONT_SIZE)
         self.input_box = pygame.Rect(200, self.height * TILE_SIZE + 10, 100, 30)
         # Ensure window is tall enough for buttons and input

@@ -395,21 +395,20 @@ void GameManager::rotate(Tank &tank)
 void GameManager::checkForTankCollision(Tank &tank)
 {
     int currTankPos = bijection(tank.getX(), tank.getY());
-    if (shells.count(currTankPos))
-    {
-        movesOfTanks[secondaryTanks[currTankPos].get()->getTankGlobalId()] = to_string(tank.getLastMove()) + " (killed)";
-        tankHitByAShell(currTankPos);
-    }
-    else if (secondaryTanks.count(currTankPos))
+
+    if (secondaryTanks.count(currTankPos))
     {
         movesOfTanks[secondaryTanks[currTankPos].get()->getTankGlobalId()] = to_string(tank.getLastMove()) + " (killed)";
         playerTanksCount[secondaryTanks[currTankPos]->getPlayerId()]--;
         tanksToRemove.insert(currTankPos);
     }
+    if (shells.count(currTankPos))
+    {
+        tankHitByAShell(currTankPos);
+    }
 
     secondaryTanks[currTankPos] = std::make_unique<Tank>(std::move(tank));
 }
-
 void GameManager::checkForShellCollision(Shell &shell)
 {
     int shellPos = bijection(shell.getX(), shell.getY());
@@ -570,34 +569,24 @@ void GameManager::runGame()
     }
     while (true)
     {
-        std::cout << "Game Step " << gameStep << std::endl;
         for (const auto &pair : tanks)
         {
             Tank *tank = pair.second.get();
             TankAlgorithm *algo = tank->getTankAlgorithm();
             ActionRequest move = algo->getAction();
             tank->setLastMove(move);
-            std::cout << "PlayerId: " << tank->getPlayerId() << " TankId: " << tank->getTankId() << " move: " << to_string(move) << std::endl;
         }
-        std::cout << "[DEBUG] 1\n";
         executeBattleInfoRequests();
-        std::cout << "[DEBUG] 2\n";
         advanceShells();
         removeShells();
         advanceShells();
         removeObjectsFromTheBoard();
-        std::cout << "[DEBUG] 3\n";
         executeTanksMoves(true);
-        std::cout << "[DEBUG] 4\n";
         advanceShellsRecentlyFired();
-        std::cout << "[DEBUG] 5\n";
         removeTanks();
-        std::cout << "[DEBUG] 6\n";
         removeShells();
-        std::cout << "[DEBUG] 7\n";
 
         executeTanksMoves(false);
-        std::cout << "[DEBUG] 8\n";
 
         removeObjectsFromTheBoard();
 
