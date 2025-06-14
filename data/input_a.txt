@@ -1,5 +1,5 @@
 Epic Battle Map
-MaxSteps=100
+MaxSteps=1000
 NumShells=50
 Rows=10
 Cols=20

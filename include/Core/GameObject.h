@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "utils/DirectionUtils.h"
 
 class GameManager; // Forward declaration
@@ -9,11 +10,10 @@ protected:
     int x;
     int y;
     Direction direction;
-    GameManager *game;
-    
+    std::shared_ptr<GameManager> game;
 
 public:
-    GameObject(int x, int y, Direction dir, GameManager *game);
+    GameObject(int x, int y, Direction dir, std::shared_ptr<GameManager> game);
     int getX();
     int getY();
     virtual ~GameObject() = default;

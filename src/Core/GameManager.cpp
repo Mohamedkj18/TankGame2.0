@@ -171,7 +171,7 @@ std::vector<std::string> GameManager::splitByComma(const std::string &input)
     return tokens;
 }
 
-int GameManager::readFile(std::string fileName)
+int GameManager::readFile(const std::string &fileName, std::shared_ptr<GameManager> self)
 {
     int tankId1 = 0;
     int tankId2 = 0;
@@ -244,7 +244,7 @@ int GameManager::readFile(std::string fileName)
                 int playerId = (c == '1') ? 1 : 2; // use 1/2 logic or infer player from symbol set
                 auto tank = std::make_unique<Tank>(x * 2, y * 2,
                                                    (playerId == 1) ? stringToDirection["L"] : stringToDirection["R"],
-                                                   this, playerId, numShellsPerTank, (playerId == 1) ? tankId1++ : tankId2++, globalTankId++);
+                                                   self, playerId, numShellsPerTank, (playerId == 1) ? tankId1++ : tankId2++, globalTankId++);
 
                 playerTanksCount[playerId]++;
                 totalShellsRemaining += numShellsPerTank;
@@ -426,7 +426,6 @@ void GameManager::executeTanksMoves(bool firstPass)
 
     for (const auto &pair : tanks)
     {
-
         Tank *tank = pair.second.get(); // pointer from unique_ptr
         move = tank->getLastMove();
         if (tank->getCantShoot())
@@ -580,19 +579,26 @@ void GameManager::runGame()
             tank->setLastMove(move);
             std::cout << "PlayerId: " << tank->getPlayerId() << " TankId: " << tank->getTankId() << " move: " << to_string(move) << std::endl;
         }
-
+        std::cout << "[DEBUG] 1\n";
         executeBattleInfoRequests();
-
+        std::cout << "[DEBUG] 2\n";
         advanceShells();
         removeShells();
         advanceShells();
         removeObjectsFromTheBoard();
-
+        std::cout << "[DEBUG] 3\n";
         executeTanksMoves(true);
+        std::cout << "[DEBUG] 4\n";
         advanceShellsRecentlyFired();
+        std::cout << "[DEBUG] 5\n";
         removeTanks();
+        std::cout << "[DEBUG] 6\n";
         removeShells();
+        std::cout << "[DEBUG] 7\n";
+
         executeTanksMoves(false);
+        std::cout << "[DEBUG] 8\n";
+
         removeObjectsFromTheBoard();
 
         advanceShells();
@@ -603,6 +609,7 @@ void GameManager::runGame()
         outputTankMoves();
         gameStep++;
         printBoard();
+
         if (checkForAWinner())
         {
             outputFile.close();

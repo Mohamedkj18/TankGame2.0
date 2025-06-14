@@ -14,9 +14,9 @@ int main(int argc, char **argv)
     MyTankAlgorithmFactory tankFactory;
     MyPlayerFactory playerFactory;
 
-    GameManager game{tankFactory, playerFactory};
-    game.processInputFile(inputFile);
-    int rval = game.readFile(inputFile);
+    auto game = std::make_shared<GameManager>(tankFactory, playerFactory);
+    game->processInputFile(inputFile);
+    int rval = game->readFile(inputFile, game);
     if (rval == -1)
     {
         std::cerr << "Failed to read board from file: " << inputFile << std::endl;
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
         return 0;
     }
     std::cout << "Game initialized successfully." << std::endl;
-    game.runGame();
+    game->runGame();
     std::cout << "Game finished successfully." << std::endl;
 
     return 0;

@@ -7,7 +7,7 @@
 
 // ------------------------ Tank ------------------------
 
-Tank::Tank(int x, int y, Direction dir, GameManager *game, int playerId, int shells, int tankId, int tankGlobalId)
+Tank::Tank(int x, int y, Direction dir, std::shared_ptr<GameManager> game, int playerId, int shells, int tankId, int tankGlobalId)
     : GameObject(x, y, dir, game), playerId(playerId), artilleryShells(shells), tankId(tankId), tankGlobalId(tankGlobalId)
 {
     cantShoot = 0;

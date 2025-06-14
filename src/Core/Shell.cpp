@@ -6,7 +6,7 @@
 
 // ------------------------ Shell ------------------------
 
-Shell::Shell(int x, int y, Direction dir, GameManager *game)
+Shell::Shell(int x, int y, Direction dir, std::shared_ptr<GameManager> game)
     : GameObject(x, y, dir, game) {}
 
 bool Shell::checkForAWall()

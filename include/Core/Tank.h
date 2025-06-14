@@ -16,7 +16,7 @@ private:
     int playerId;
     int artilleryShells;
     int tankId;
-    int tankGlobalId;  
+    int tankGlobalId;
     bool destroyed;
     int cantShoot;
     int reverseCharge = 0;
@@ -26,7 +26,8 @@ private:
     ActionRequest lastMove;
 
 public:
-    Tank(int x, int y, Direction dir, GameManager *game, int playerId, int shells, int tankId, int tankGlobalId);
+    Tank(int x, int y, Direction dir, std::shared_ptr<GameManager> game, int playerId, int shells, int tankId, int tankGlobalId);
+    Tank(const Tank &other); // Copy constructor
 
     // Position and state
     int getPlayerId();

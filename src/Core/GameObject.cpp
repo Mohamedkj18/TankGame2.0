@@ -5,8 +5,8 @@
 
 // ------------------------ MovingGameObject ------------------------
 
-GameObject::GameObject(int x, int y, Direction dir, GameManager *game)
-    : x(x), y(y), direction(dir) , game(game){}
+GameObject::GameObject(int x, int y, Direction dir, std::shared_ptr<GameManager> game)
+    : x(x), y(y), direction(dir), game(std::move(game)) {}
 
 int GameObject::getX()
 {

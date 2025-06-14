@@ -56,11 +56,20 @@ public:
 
     int getWidth();
     int getHeight();
-    int getGameStep();
-
-    void processInputFile(const std::string &inputFilePath);
+    int bijection(int x, int y);
 
     std::unordered_map<int, Wall> &getWalls() { return walls; }
+    void removeTank(int tankId);
+    void removeShell(int ShellPos);
+    void addShell(std::unique_ptr<Shell> shell);
+
+    int readFile(const std::string &fileName, std::shared_ptr<GameManager> self);
+    void processInputFile(const std::string &inputFilePath);
+    void runGame();
+
+private:
+    int getGameStep();
+
     std::map<int, std::unique_ptr<Tank>> &getTanks() { return tanks; }
     std::unordered_map<int, std::unique_ptr<Shell>> &getShells() { return shells; }
     std::set<int> &getMines() { return mines; }
@@ -68,14 +77,13 @@ public:
     int getWallHealth(int wallPos);
     void incrementGameStep();
     void addTank(std::unique_ptr<Tank> tank);
-    void addShell(std::unique_ptr<Shell> shell);
+
     void addMine(int x, int y);
     void addWall(int x, int y);
 
     void removeMine(int x);
     void removeWall(int x);
-    void removeTank(int tankId);
-    void removeShell(int ShellPos);
+
     void removeTanks();
     void removeShells();
     void removeWalls();
@@ -83,11 +91,9 @@ public:
     void hitWall(int x, int y);
     void hitTank(int tankId);
 
-    int readFile(std::string fileName);
-    std::vector<std::string> splitByComma(const std::string &input);
     void checkForAMine(int x, int y);
-    void runGame();
     void printBoard();
+
     void advanceShells();
     void advanceShellsRecentlyFired();
     void executeTanksMoves(bool firstPass);
@@ -101,9 +107,10 @@ public:
     void checkForShellCollision(Shell &shell);
     void tankHitByAShell(int tankPos);
     void shellHitAWall(int shellPos);
-    int bijection(int x, int y);
-    void sortTanks();
-    void outputTankMoves();
 
     bool checkForAWinner();
+
+    std::vector<std::string> splitByComma(const std::string &input);
+    void sortTanks();
+    void outputTankMoves();
 };

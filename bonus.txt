@@ -28,6 +28,9 @@ Real-time updates per step for post-game replay
 
 This tool was critical for verifying the correctness of movement, shooting logic, role execution, and toroidal wrapping, especially on complex maps.
 
+In addition we have implemented a visual simulator that can be used after running the game, more information about the usage provided at the end of the README.md file. 
+
+
 Although we did not actually support more than two players due to lack of time, our code is modular and clean enough that adding more players and different roles requires minimal adjustments.
 
 These enhancements were not required by the assignment, but they demonstrate advanced planning, modular AI design, and thoughtful tooling to ensure clarity, correctness, and strategic depth.
