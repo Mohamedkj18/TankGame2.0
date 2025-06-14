@@ -18,7 +18,6 @@ bool Shell::checkForAWall()
     wallPos = game->bijection(x, y);
     if (walls.count(wallPos))
     {
-        outputFile << "Shell at " << x << ", " << y << "hit a wall!" << std::endl;
         currWall = &walls[wallPos];
         currWall->health -= 1;
         updatePosition(direction);

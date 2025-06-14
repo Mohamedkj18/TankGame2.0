@@ -14,6 +14,8 @@
 
 std::ofstream visualizationFile("data/visualization.txt");
 std::ofstream outputFile;
+constexpr int MAX_STEPS_WITHOUT_SHELLS = 40;
+
 // ------------------------ GameManager ------------------------
 
 GameManager::GameManager(TankAlgorithmFactory &tank_factory,
@@ -78,7 +80,6 @@ void GameManager::addShell(std::unique_ptr<Shell> shell)
     if (shellsFired.count(newPos))
     {
         shellsToRemove.insert(newPos);
-        outputFile << "shells collided at (" << shells[newPos]->getX() / 2 << ", " << shells[newPos]->getY() / 2 << ") !\n";
     }
 
     shellsFired.insert(newPos);
@@ -273,12 +274,11 @@ int GameManager::readFile(std::string fileName)
     return 0;
 }
 
-void GameManager::checkForAMine(int x, int y, int tankId)
+void GameManager::checkForAMine(int x, int y)
 {
     int currTankPos = bijection(x, y);
     if (mines.count(currTankPos))
     {
-        outputFile << "Losing step: Tank " << tankId << " hit a mine at " << (int)x / 2 << ", " << (int)y / 2 << "!\n";
         removeMine(bijection(x, y));
         tanksToRemove.insert(currTankPos);
     }
@@ -286,27 +286,12 @@ void GameManager::checkForAMine(int x, int y, int tankId)
 
 void GameManager::tankHitByAShell(int tankPos)
 {
-    if (shells.count(tankPos) && tanks.count(tankPos))
-    {
-        outputFile << "Shell hit tank " << tanks[tankPos]->getTankId()
-                   << " at (" << shells[tankPos]->getX() / 2 << ", "
-                   << shells[tankPos]->getY() / 2 << ")\n";
-    }
     shellsToRemove.insert(tankPos);
     tanksToRemove.insert(tankPos);
 }
 
 void GameManager::shellHitAWall(int wallPos)
 {
-    if (shells.count(wallPos))
-    {
-        outputFile << "Shell hit wall at ("
-                   << shells[wallPos]->getX() / 2 << ", " << shells[wallPos]->getY() / 2 << ")\n";
-    }
-    else
-    {
-        outputFile << "Unknown Shell hit a wall at unknown position.\n";
-    }
 
     if (getWallHealth(wallPos) <= 0)
     {
@@ -338,14 +323,12 @@ void GameManager::reverseHandler(Tank &tank, ActionRequest move)
 
     if (move == ActionRequest::MoveForward)
     {
-        outputFile << "Tank " << tank.getTankId() << " canceled reverse!\n";
         tank.resetReverseState();
         movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove()) + " (ignored)";
         tank.setLastMove(ActionRequest::DoNothing);
     }
     else if (tank.isReverseQueued())
     {
-        outputFile << "Bad step: Tank " << tank.getTankId() << " waiting to move backwards - move ignored!\n";
         movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove()) + " (ignored)";
         tank.incrementReverseCharge();
         if (tank.isReverseReady())
@@ -359,15 +342,13 @@ void GameManager::reverseHandler(Tank &tank, ActionRequest move)
         tank.queueReverse();
         movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove()) + " (ignored)";
         tank.incrementReverseCharge();
-        outputFile << "Tank " << tank.getTankId() << " queued reverse!\n";
         if (tank.isReverseReady())
         {
-            outputFile << "Tank " << tank.getX() << " moved backwards!\n";
             movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove());
             tank.executeReverse();
         }
     }
-    checkForAMine(tank.getX(), tank.getY(), tank.getTankId());
+    checkForAMine(tank.getX(), tank.getY());
 }
 
 void GameManager::advanceTank(Tank &tank)
@@ -377,7 +358,7 @@ void GameManager::advanceTank(Tank &tank)
         movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove());
     else
         movesOfTanks[tank.getTankGlobalId()] = to_string(tank.getLastMove()) + " (ignored)";
-    checkForAMine(tank.getX(), tank.getY(), tank.getTankId());
+    checkForAMine(tank.getX(), tank.getY());
 }
 
 void GameManager::tankShootingShells(Tank &tank)
@@ -391,7 +372,6 @@ void GameManager::tankShootingShells(Tank &tank)
     }
     else
     {
-        outputFile << "Bad step: Tank " << tank.getTankId() << " can't shoot!\n";
     }
     tank.setLastMove(ActionRequest::DoNothing);
 }
@@ -424,10 +404,9 @@ void GameManager::checkForTankCollision(Tank &tank)
     {
         movesOfTanks[secondaryTanks[currTankPos].get()->getTankGlobalId()] = to_string(tank.getLastMove()) + " (killed)";
         playerTanksCount[secondaryTanks[currTankPos]->getPlayerId()]--;
-        outputFile << "Losing step: Tank " << secondaryTanks[currTankPos]->getTankId() << " hit a tank at " << (int)tank.getX() / 2 << ", " << (int)tank.getY() / 2 << "!\n";
         tanksToRemove.insert(currTankPos);
     }
-    
+
     secondaryTanks[currTankPos] = std::make_unique<Tank>(std::move(tank));
 }
 
@@ -452,7 +431,8 @@ void GameManager::executeTanksMoves(bool firstPass)
         move = tank->getLastMove();
         if (tank->getCantShoot())
         {
-            if(firstPass && move == ActionRequest::Shoot)movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove()) + " (ignored)";
+            if (firstPass && move == ActionRequest::Shoot)
+                movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove()) + " (ignored)";
             tank->incrementCantShoot();
             if (tank->getCantShoot() == 8)
                 tank->resetCantShoot();
@@ -471,9 +451,10 @@ void GameManager::executeTanksMoves(bool firstPass)
             movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove());
             tankShootingShells(*tank);
         }
-        else if(move != ActionRequest::GetBattleInfo)
+        else if (move != ActionRequest::GetBattleInfo)
         {
-            if(firstPass)movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove());
+            if (firstPass)
+                movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove());
             rotate(*tank);
         }
 
@@ -498,7 +479,6 @@ void GameManager::executeBattleInfoRequests()
             MySatelliteView satelliteView(pos, tanks, shells, mines, walls);
             players[tank->getPlayerId()]->updateTankWithBattleInfo(*tankAlgorithm, satelliteView);
             movesOfTanks[tank->getTankGlobalId()] = to_string(tank->getLastMove());
-
         }
     }
 }
@@ -547,28 +527,22 @@ bool GameManager::checkForAWinner()
 
     if (playerTanksCount[1] == 0 && playerTanksCount[2] > 0)
     {
-        outputFile << "Player 2 wins with "<< playerTanksCount[2] <<" tanks still alive\n";
+        outputFile << "Player 2 wins with " << playerTanksCount[2] << " tanks still alive\n";
         return true;
     }
     else if (playerTanksCount[2] == 0 && playerTanksCount[1] > 0)
     {
-        outputFile << "Player 1 wins with "<< playerTanksCount[1] <<" tanks still alive\n";
+        outputFile << "Player 1 wins with " << playerTanksCount[1] << " tanks still alive\n";
         return true;
     }
     else if (playerTanksCount[1] == 0 && playerTanksCount[2] == 0)
     {
-        outputFile << "Game Over! Both players have no tanks left!\n";
+        outputFile << "Tie, both players have zero tanks\n";
         return true;
     }
 
     return false;
 }
-
-// void GameManager::outputTankMove(std::vector<std::string> copyOfMovesOfTanks)
-// {
-
-//     outputFile << to_string(move) << ", " << std::endl;
-// }
 
 void GameManager::sortTanks()
 {
@@ -597,7 +571,6 @@ void GameManager::runGame()
     }
     while (true)
     {
-        outputFile << "Game step: " << gameStep << std::endl;
         std::cout << "Game Step " << gameStep << std::endl;
         for (const auto &pair : tanks)
         {
@@ -637,28 +610,20 @@ void GameManager::runGame()
         }
         else if (gameStep >= maxSteps)
         {
-            outputFile << "Game Over! It's a tie due to max steps reached!\n";
+            outputFile << "Tie, reached max steps = " << maxSteps << ", player 1 has " << playerTanksCount[1] << " tanks, player 2 has" << playerTanksCount[2] << " tanks\n";
             outputFile.close();
-            visualizationFile << "Game Over! It's a tie due to max steps reached!\n";
-            visualizationFile.close();
-            return;
-        }
-        else if (totalShellsRemaining <= 0 && gameStep >= maxSteps / 2)
-        {
-            outputFile << "Game Over! It's a tie due to no shells remaining!\n";
-            outputFile.close();
-            visualizationFile << "Game Over! It's a tie due to no shells remaining!\n";
+            visualizationFile << "Tie, reached max steps = " << maxSteps << ", player 1 has " << playerTanksCount[1] << " tanks, player 2 has" << playerTanksCount[2] << " tanks\n";
             visualizationFile.close();
             return;
         }
         else if (totalShellsRemaining <= 0)
         {
             count++;
-            if (count == 40)
+            if (count == MAX_STEPS_WITHOUT_SHELLS)
             {
-                outputFile << "Game Over! It's a tie due to time out!\n";
+                outputFile << "Tie, both players have zero shells for " << MAX_STEPS_WITHOUT_SHELLS << " steps\n";
                 outputFile.close();
-                visualizationFile << "Game Over! It's a tie due to time out!\n";
+                visualizationFile << "Tie, both players have zero shells for " << MAX_STEPS_WITHOUT_SHELLS << " steps\n";
                 visualizationFile.close();
                 return;
             }
@@ -675,7 +640,11 @@ void GameManager::printBoard()
     {
         int x = pair.second.x / 2;
         int y = pair.second.y / 2;
-        board[y][x] = '#';
+        short health = pair.second.health;
+        if (health == 2)
+            board[y][x] = '#';
+        else if (health == 1)
+            board[y][x] = '/';
     }
 
     for (const auto &mine : mines)
@@ -722,7 +691,7 @@ void GameManager::outputTankMoves()
     {
         wordSize = movesOfTanks[i].size();
         outputFile << movesOfTanks[i];
-        if(movesOfTanks[i][wordSize-1] == ')' && movesOfTanks[i].substr(wordSize - 9, 9) == " (killed)") 
+        if (movesOfTanks[i][wordSize - 1] == ')' && movesOfTanks[i].substr(wordSize - 9, 9) == " (killed)")
             movesOfTanks[i] = "killed";
         if (i != totalTanks - 1)
             outputFile << ", ";

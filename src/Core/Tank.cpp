@@ -63,7 +63,6 @@ bool Tank::checkForAWall()
     updatePosition(direction);
     if (game->getWalls().count(game->bijection(x, y)) == 1)
     {
-        outputFile << "Player " << playerId << ": Tank " << tankId << " hit a wall at " << (int)x / 2 << ", " << (int)y / 2 << "!\n";
         updatePosition(reverseDirection[direction]);
         lastMove = ActionRequest::DoNothing;
 
@@ -90,10 +89,6 @@ void Tank::fire()
         auto shell = std::make_unique<Shell>(x, y, direction, game);
         shell->moveForward();
         game->addShell(std::move(shell));
-    }
-    else
-    {
-        outputFile << "Bad step: Tank " << tankId << " doesn't have more shells to fire!\n";
     }
 }
 
