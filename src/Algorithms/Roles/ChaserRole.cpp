@@ -13,7 +13,13 @@ std::vector<std::pair<int, int>> ChaserRole::prepareActions(MyTankAlgorithm &alg
 
     if (path.empty())
     {
-        nextMoves.push_back(ActionRequest::GetBattleInfo);
+        target = algo.attackWall(myPos);
+        Direction desiredDir = getDirectionFromPosition(myPos, target);
+        rotateTowards(currentDirection, desiredDir, 0);
+        if (algo.shouldShoot(desiredDir, myPos))
+        {
+            nextMoves.push_back(ActionRequest::Shoot);
+        }
         algo.setNextMoves(nextMoves);
         return path;
     }

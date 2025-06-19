@@ -97,8 +97,17 @@ void GameManager::advanceShellsRecentlyFired()
             continue;
 
         std::unique_ptr<Shell> &shell = it->second;
-        shell->moveForward();
+        bool didItMove = shell->moveForward();
         int newPos = bijection(shell->getX(), shell->getY());
+
+        // Check for wall collision
+        if (!didItMove)
+        {
+            // Shell hit a wall, damage wall and demolish shell
+            shellHitAWall(newPos);
+            shellsToRemove.insert(oldPos);
+            continue; // Do not move shell forward
+        }
 
         if (shells.count(newPos))
         {

@@ -5,7 +5,7 @@
 #include "Algorithms/Roles/ChaserRole.h"
 
 MyTankAlgorithm::MyTankAlgorithm(int player_index, int tank_index, int numMovesPerUpdate, int range, Direction initialDirection)
-    : moveIndex(0), tankId(tank_index), playerId(player_index), currentDirection(initialDirection),range(range), maxMovesPerUpdate(numMovesPerUpdate) {}
+    : moveIndex(0), tankId(tank_index), playerId(player_index), currentDirection(initialDirection), range(range), maxMovesPerUpdate(numMovesPerUpdate) {}
 
 void MyTankAlgorithm::updateBattleInfo(BattleInfo &info)
 {
@@ -74,9 +74,9 @@ bool MyTankAlgorithm::shouldShoot(Direction currDir, std::pair<int, int> currPos
         look = {(currPos.first + DirectionsUtils::stringToIntDirection[currDir][0] * i + gameWidth) % gameWidth,
                 (currPos.second + DirectionsUtils::stringToIntDirection[currDir][1] * i + gameHeight) % gameHeight};
         int id = bijection(look.first, look.second);
-        if (nearbyFriendlies.count(id) || walls.count(id))
+        if (nearbyFriendlies.count(id))
             return false; // don't friendly fire
-        if (threats.count(id))
+        if (threats.count(id) || walls.count(id))
             return true;
     }
     return false;
@@ -194,7 +194,6 @@ std::vector<std::pair<int, int>> MyTankAlgorithm::getPath(std::pair<int, int> st
 
     queue.push(start);
     visited[start] = true;
-
 
     while (!queue.empty())
     {
@@ -339,3 +338,22 @@ std::set<std::pair<int, int>> MyTankAlgorithm::getShells()
     return shellsXY;
 }
 
+std::pair<int, int> MyTankAlgorithm::attackWall(std::pair<int, int> pos)
+{
+
+    std::pair<int, int> closestWall;
+    int dist, minDist = INT_MAX;
+    for (auto &wall : walls)
+    {
+        std::pair<int, int> wallPos = inverseBijection(wall);
+        dist = manhattanDistance(pos.first, pos.second, wallPos.first, wallPos.second);
+
+        if (dist < minDist)
+        {
+            minDist = dist;
+            closestWall = wallPos;
+        }
+    }
+
+    return closestWall;
+}

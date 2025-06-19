@@ -93,6 +93,8 @@ public:
 
     void setRole(std::unique_ptr<Role> newRole);
     std::optional<std::pair<int, int>> findEnemyInRange(std::pair<int, int> position, int range);
+    std::pair<int, int> attackWall(std::pair<int, int> pos);
+
     // std::set<std::pair<int, int>> isShellsInRange(std::pair<int, int> pos, int range);
 
 private:
