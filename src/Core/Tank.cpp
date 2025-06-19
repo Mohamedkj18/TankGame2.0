@@ -41,9 +41,9 @@ int Tank::getTankGlobalId()
 
 void Tank::setDirection(std::string directionStr)
 {
-    if (stringToDirection.find(directionStr) != stringToDirection.end())
+    if (DirectionsUtils::stringToDirection.find(directionStr) != DirectionsUtils::stringToDirection.end())
     {
-        this->direction = stringToDirection[directionStr];
+        this->direction = DirectionsUtils::stringToDirection[directionStr];
     }
     else
     {
@@ -53,9 +53,9 @@ void Tank::setDirection(std::string directionStr)
 
 void Tank::moveBackwards()
 {
-    direction = reverseDirection[direction];
+    direction = DirectionsUtils::reverseDirection[direction];
     moveForward();
-    direction = reverseDirection[direction];
+    direction = DirectionsUtils::reverseDirection[direction];
 }
 
 bool Tank::checkForAWall()
@@ -63,12 +63,12 @@ bool Tank::checkForAWall()
     updatePosition(direction);
     if (game->getWalls().count(game->bijection(x, y)) == 1)
     {
-        updatePosition(reverseDirection[direction]);
+        updatePosition(DirectionsUtils::reverseDirection[direction]);
         lastMove = ActionRequest::DoNothing;
 
         return true;
     }
-    updatePosition(reverseDirection[direction]);
+    updatePosition(DirectionsUtils::reverseDirection[direction]);
     if (reverseReady)
         lastMove = ActionRequest::MoveBackward;
     return false;

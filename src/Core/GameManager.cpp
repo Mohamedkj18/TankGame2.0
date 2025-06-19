@@ -243,7 +243,7 @@ int GameManager::readFile(const std::string &fileName, std::shared_ptr<GameManag
             {
                 int playerId = (c == '1') ? 1 : 2; // use 1/2 logic or infer player from symbol set
                 auto tank = std::make_unique<Tank>(x * 2, y * 2,
-                                                   (playerId == 1) ? stringToDirection["L"] : stringToDirection["R"],
+                                                   (playerId == 1) ? DirectionsUtils::stringToDirection["L"] : DirectionsUtils::stringToDirection["R"],
                                                    self, playerId, numShellsPerTank, (playerId == 1) ? tankId1++ : tankId2++, globalTankId++);
 
                 playerTanksCount[playerId]++;
@@ -606,7 +606,7 @@ void GameManager::runGame()
         }
         else if (gameStep >= maxSteps)
         {
-            outputFile << "Tie, reached max steps = " << maxSteps << ", player 1 has " << playerTanksCount[1] << " tanks, player 2 has" << playerTanksCount[2] << " tanks\n";
+            outputFile << "Tie, reached max steps = " << maxSteps << ", player 1 has " << playerTanksCount[1] << " tanks, player 2 has " << playerTanksCount[2] << " tanks\n";
             outputFile.close();
             visualizationFile << "Tie, reached max steps = " << maxSteps << ", player 1 has " << playerTanksCount[1] << " tanks, player 2 has" << playerTanksCount[2] << " tanks\n";
             visualizationFile.close();

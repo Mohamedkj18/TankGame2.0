@@ -1,11 +1,20 @@
 #include "Core/MyPlayer.h"
 
-std::unique_ptr<Role> Player2::createRole(int tankId, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks)
+std::unique_ptr<Role> Player2::createRole(int tankId, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks, int numOfFriendlyTanks)
 {
     int x = pos.first, y = pos.second;
 
     int remainingShells = tanksRemainingShells[tankId];
+    int numOfChasers = 0;
 
+    for (const auto &role : tankRoles)
+    {
+        if (role.second == "Chaser")
+            numOfChasers++;
+    }
+    if (numOfChasers == 0 && numOfFriendlyTanks >= (int)tankRoles.size() - 1)
+        tankRoles[tankId] = "Chaser";
+        return std::make_unique<ChaserRole>(5, playerGameWidth, playerGameHeight);
     // High threat or trapped → Evasior
     if (isInRedZone(x, y, shells, enemyTanks) || scan.closestDistance <= 2)
     {

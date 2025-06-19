@@ -44,7 +44,7 @@ void MyPlayer::updateTankWithBattleInfo(TankAlgorithm &tank, SatelliteView &sate
     EnemyScanResult scan = assignRole(tankId, {myX, myY}, shells, enemyTanks, friendlyTanks.size());
     if (!scan.ShouldKeepRole)
     {
-        info.setRole(createRole(tankId, {myX, myY}, scan, shells, enemyTanks));
+        info.setRole(createRole(tankId, {myX, myY}, scan, shells, enemyTanks, friendlyTanks.size()));
         info.setShouldKeepRole(false);
     }
     else

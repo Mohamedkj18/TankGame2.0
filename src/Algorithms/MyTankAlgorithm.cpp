@@ -43,7 +43,7 @@ ActionRequest MyTankAlgorithm::getAction()
 
 std::pair<int, int> MyTankAlgorithm::move(std::pair<int, int> pos, Direction dir)
 {
-    auto offset = stringToIntDirection[dir];
+    auto offset = DirectionsUtils::stringToIntDirection[dir];
     return {(pos.first + offset[0] + gameWidth) % gameWidth, (pos.second + offset[1] + gameHeight) % gameHeight};
 }
 
@@ -56,7 +56,7 @@ bool MyTankAlgorithm::isThreatAhead()
 
 bool MyTankAlgorithm::isFriendlyTooClose()
 {
-    for (Direction d : directions)
+    for (Direction d : DirectionsUtils::directions)
     {
         std::pair<int, int> adj = move(currentPos, d);
         int id = bijection(adj.first, adj.second);
@@ -71,8 +71,8 @@ bool MyTankAlgorithm::shouldShoot(Direction currDir, std::pair<int, int> currPos
     std::pair<int, int> look = currentPos;
     for (int i = 1; i < range + 1; ++i)
     {
-        look = {(currPos.first + stringToIntDirection[currDir][0] * i + gameWidth) % gameWidth,
-                (currPos.second + stringToIntDirection[currDir][1] * i + gameHeight) % gameHeight};
+        look = {(currPos.first + DirectionsUtils::stringToIntDirection[currDir][0] * i + gameWidth) % gameWidth,
+                (currPos.second + DirectionsUtils::stringToIntDirection[currDir][1] * i + gameHeight) % gameHeight};
         int id = bijection(look.first, look.second);
         if (nearbyFriendlies.count(id) || walls.count(id))
             return false; // don't friendly fire
@@ -132,10 +132,10 @@ std::pair<int, int> MyTankAlgorithm::findFirstLegalLocationToFlee(std::pair<int,
         if (pos != from && cost >= 5 && isSafe(pos))
             return pos;
 
-        for (const auto &dir : directions)
+        for (const auto &dir : DirectionsUtils::directions)
         {
-            int nx = (pos.first + stringToIntDirection[dir][0] + gameWidth) % gameWidth;
-            int ny = (pos.second + stringToIntDirection[dir][1] + gameHeight) % gameHeight;
+            int nx = (pos.first + DirectionsUtils::stringToIntDirection[dir][0] + gameWidth) % gameWidth;
+            int ny = (pos.second + DirectionsUtils::stringToIntDirection[dir][1] + gameHeight) % gameHeight;
             Pos next = {nx, ny};
 
             if (visited.count(next))
@@ -153,7 +153,7 @@ std::pair<int, int> MyTankAlgorithm::findFirstLegalLocationToFlee(std::pair<int,
 
 std::pair<int, int> MyTankAlgorithm::moveTank(std::pair<int, int> pos, Direction dir)
 {
-    auto offset = stringToIntDirection[dir];
+    auto offset = DirectionsUtils::stringToIntDirection[dir];
     return {
         (pos.first + offset[0] + static_cast<int>(gameWidth)) % static_cast<int>(gameWidth),
         (pos.second + offset[1] + static_cast<int>(gameHeight)) % static_cast<int>(gameHeight)};
@@ -214,7 +214,7 @@ std::vector<std::pair<int, int>> MyTankAlgorithm::getPath(std::pair<int, int> st
             return path;
         }
 
-        for (const auto &dir : directions)
+        for (const auto &dir : DirectionsUtils::directions)
         {
             auto next = moveTank(current, dir);
             if (!visited[next] && isSquareValid(next.first, next.second, avoidCells))
@@ -316,8 +316,8 @@ std::optional<std::pair<int, int>> MyTankAlgorithm::findEnemyInRange(std::pair<i
         for (int j = 1; j <= range; ++j)
         {
 
-            int x = (position.first + stringToIntDirection[directions[i]][0] * j + gameWidth * j) % gameWidth;
-            int y = (position.second + stringToIntDirection[directions[i]][1] * j + gameHeight * j) % gameHeight;
+            int x = (position.first + DirectionsUtils::stringToIntDirection[DirectionsUtils::directions[i]][0] * j + gameWidth * j) % gameWidth;
+            int y = (position.second + DirectionsUtils::stringToIntDirection[DirectionsUtils::directions[i]][1] * j + gameHeight * j) % gameHeight;
             int pos = bijection(x, y);
 
             if (threats.count(pos) > 0)
@@ -339,18 +339,3 @@ std::set<std::pair<int, int>> MyTankAlgorithm::getShells()
     return shellsXY;
 }
 
-// std::set<std::pair<int, int>> MyTankAlgorithm::isShellsInRange(std::pair<int, int> currPos, int range)
-// {
-//     std::set<std::pair<int, int>> shellsInRange;
-//     for (int i = -1 * range; i < range; i++)
-//     {
-//         for (int j = -1 * range; j < range; j++)
-//         {
-//             int x = (currPos.first + range + gameWidth) % gameWidth;
-//             int y = (currPos.first + range + gameHeight) % gameHeight;
-//             if (shells.count(bijection(x, y)))
-//                 shellsInRange.insert(std::make_pair(x, y));
-//         }
-//     }
-//     return shellsInRange;
-// }

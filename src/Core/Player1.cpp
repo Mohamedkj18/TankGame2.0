@@ -1,6 +1,6 @@
 #include "Core/MyPlayer.h"
 
-std::unique_ptr<Role> Player1::createRole(int tankId, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks)
+std::unique_ptr<Role> Player1::createRole(int tankId, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks, int)
 {
     int x = pos.first, y = pos.second;
 

@@ -74,7 +74,7 @@ Direction Role::getDirectionFromPosition(std::pair<int, int> current, std::pair<
     dx = (dx == 0) ? 0 : (dx > 0 ? 1 : -1);
     dy = (dy == 0) ? 0 : (dy > 0 ? 1 : -1);
 
-    return pairToDirections[{dx, dy}];
+    return DirectionsUtils::pairToDirections[{dx, dy}];
 }
 
 double Role::getAngleFromDirections(Direction &orgDir, Direction &desiredDir)

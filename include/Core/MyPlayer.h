@@ -53,7 +53,7 @@ public:
 
 protected:
     EnemyScanResult assignRole(int tankId, std::pair<int, int> pos, std::set<int> shells, std::set<int> enemyTanks, int numFriendlyTanks);
-    virtual std::unique_ptr<Role> createRole(int tankId, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks) = 0;
+    virtual std::unique_ptr<Role> createRole(int tankId, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks, int numOfFriendlyTanks) = 0;
 
     virtual bool shouldKeepRole(int tankId, const std::pair<int, int> &pos, const std::string &role, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks, int numFriendlyTanks) = 0;
     EnemyScanResult scanVisibleEnemies(int x0, int y0) const;
@@ -80,7 +80,7 @@ public:
     using MyPlayer::MyPlayer;
     virtual ~Player1();
 
-    std::unique_ptr<Role> createRole(int tankId, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks) override;
+    std::unique_ptr<Role> createRole(int tankId, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks, int numOfFriendlyTanks) override;
     bool shouldKeepRole(int tankId, const std::pair<int, int> &pos, const std::string &role, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks, int numFriendlyTanks) override;
 };
 
@@ -91,7 +91,7 @@ public:
     using MyPlayer::MyPlayer;
     virtual ~Player2();
 
-    std::unique_ptr<Role> createRole(int tankId, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks) override;
+    std::unique_ptr<Role> createRole(int tankId, std::pair<int, int> pos, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks, int numOfFriendlyTanks) override;
     bool shouldKeepRole(int tankId, const std::pair<int, int> &pos, const std::string &role, EnemyScanResult scan, std::set<int> shells, std::set<int> enemyTanks, int ) override;
 
     // void assignRole(int tankId) override;
